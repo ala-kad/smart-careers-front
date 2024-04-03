@@ -1,0 +1,58 @@
+<nz-layout>
+  <!-- Sidebar -->
+  <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item>
+        <span nz-icon nzType="user" nzTheme="outline"></span>
+        <span>Users </span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzType="pie-chart"></span>
+        <span>Roles </span>
+      </li>
+    </ul>
+  </nz-sider>
+
+  <nz-layout>
+    <nz-content>
+      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
+
+      <nz-header nzTheme="light">
+        <button nz-button nzType="primary" routerLink="/users/add"><span nz-icon nzType="plus" nzTheme="outline"></span> Add new user</button>
+        <button nz-button nzType="primary" class="search-btn"><span nz-icon nzType="search" nzTheme="outline"></span> Search </button>
+        <button nz-button nzType="primary"><span nz-icon nzType="filter" nzTheme="outline"></span> Filter </button>
+      </nz-header>
+
+      <nz-table #basicTable [nzData]="listOfData">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.email }}</td>
+            <td>{{ data.username }}</td>
+            <td>{{ data.role }}</td>
+            <td>
+              <a>Action 一 {{ data.username }}</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Show</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Edit</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-content>
+  </nz-layout>
+
+</nz-layout>
+
