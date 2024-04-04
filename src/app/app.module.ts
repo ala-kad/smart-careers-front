@@ -15,7 +15,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -27,6 +28,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { RegisterUserFormComponent } from './register-user-form/register-user-form.component';
+import { ModalComponent } from './modal/modal.component';
+import { UsersListingComponent } from './users-listing/users-listing.component';
 
 registerLocaleData(en);
 
@@ -35,7 +38,9 @@ registerLocaleData(en);
     AppComponent,
     LoginComponent,
     AdminDashboardComponent,
-    RegisterUserFormComponent
+    RegisterUserFormComponent,
+    ModalComponent,
+    UsersListingComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,8 @@ registerLocaleData(en);
     NzDividerModule,
     NzIconModule,
     NzSelectModule,
+    NzDrawerModule,
+    NzModalModule,
     ReactiveFormsModule
 
   ],
