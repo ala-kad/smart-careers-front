@@ -24,35 +24,29 @@
         <button nz-button nzType="primary"><span nz-icon nzType="filter" nzTheme="outline"></span> Filter </button>
       </nz-header>
 
-      <nz-table #basicTable [nzData]="listOfData">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Roles</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+      <app-users-listing></app-users-listing>
 
-          <tr *ngFor="let data of basicTable.data">
-            <td>{{ data.email }}</td>
-            <td>{{ data.username }}</td>
-            <td>{{ data.role }}</td>
-            <td>
-              <a>Action 一 {{ data.username }}</a>
-              <nz-divider nzType="vertical"></nz-divider>
-              <a>Show</a>
-              <nz-divider nzType="vertical"></nz-divider>
-              <a>Edit</a>
-              <nz-divider nzType="vertical"></nz-divider>
-              <a>Delete</a>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
     </nz-content>
   </nz-layout>
+
+  <nz-drawer
+    [nzBodyStyle]="{ overflow: 'auto' }"
+    [nzMaskClosable]="false"
+    [nzWidth]="720"
+    [nzVisible]="visible"
+    nzTitle="User Details"
+    nzData=""
+    (nzOnClose)="close()"
+  >
+    <ng-container *nzDrawerContent>
+      <!-- <p>{{userDetails.email}}</p> -->
+      <!-- <p>{{userDetails.username}}</p>
+      <p>{{userDetails.firstname}}</p>
+      <p>{{userDetails.lastname}}</p>
+      <p>{{userDetails.role}}</p> -->
+
+    </ng-container>
+  </nz-drawer>
 
 </nz-layout>
 
