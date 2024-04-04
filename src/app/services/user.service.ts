@@ -12,8 +12,14 @@ export class UserService {
 
   listUsers(): Observable<any> {
     const  users =   this.http.get('http://localhost:3000/users/');
-    console.log(users);
-
     return users ;
+  }
+
+  showUser(id: any): Observable<any>{
+    return this.http.get(`http://localhost:3000/users/${id}`);
+  }
+
+  deleteUser(id: any): Observable<any> {
+    return this.http.delete(`http://localhost:3000/users/${id}`);
   }
 }
