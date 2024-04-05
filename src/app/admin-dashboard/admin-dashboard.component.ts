@@ -3,9 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { UiInteractionsService } from '../services/ui-interactions.service';
 
-import { ModalComponent } from '../modal/modal.component';
-
-
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -21,38 +18,16 @@ export class AdminDashboardComponent implements OnInit{
   userDetails: any;
 
   ngOnInit(): void {
-    // this.list();
   }
-
-  /**
-   * User listing
-   */
-  // list() {
-  //   this.userService.listUsers().subscribe(
-  //     {
-  //       next: (data) =>{
-  //         this.listOfData = data;
-  //         console.log(data);
-  //         console.log(this.listOfData);
-  //       },
-  //       error: (err) =>{
-  //         console.log(err);
-  //       },
-  //     }
-  //   )
-  // }
 
   showUser(id: any) {
     this.userService.showUser(id).subscribe(
       {
         next: (data) => {
           this.userDetails = data;
-          console.log( this.userDetails );
-
         },
         error: (err) => {
           console.log(err);
-
         }
       }
     )
@@ -65,10 +40,6 @@ export class AdminDashboardComponent implements OnInit{
 
   close(): void {
     this.visible = false;
-  }
-
-  openModal(userId: any) {
-    this.ui.openModal(userId);
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { UiInteractionsService } from '../services/ui-interactions.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-users-listing',
@@ -8,7 +10,10 @@ import { UserService } from '../services/user.service';
 })
 export class UsersListingComponent implements OnInit {
 
-  constructor(private userService: UserService) {} ;
+  constructor(
+    private userService: UserService,
+    private ui: UiInteractionsService
+  ) {} ;
 
   listOfData : any ;
 
@@ -24,14 +29,31 @@ export class UsersListingComponent implements OnInit {
       {
         next: (data) =>{
           this.listOfData = data;
-          console.log(data);
-          console.log(this.listOfData);
         },
         error: (err) =>{
           console.log(err);
         },
       }
     )
+  }
+
+  openModal(userId: any): void {
+    this.ui.openModal(userId).subscribe({
+      next: () => {
+        // Update the list of users after successful deletion
+        this.userService.listUsers().subscribe(
+          (users) => {
+            this.listOfData = users;
+          },
+          (error) => {
+            console.error('Error fetching users:', error);
+          }
+        );
+      },
+      error: (err) => {
+        console.error('Error deleting user:', err);
+      }
+    });
   }
 
 }
