@@ -14,26 +14,30 @@ import { Router, ActivatedRoute} from '@angular/router';
   styleUrls: ['./register-user-form.component.css']
 })
 export class RegisterUserFormComponent implements OnInit {
+
   validateForm!: UntypedFormGroup;
+
   // captchaTooltipIcon: NzFormTooltipIcon = {
   //   type: 'info-circle',
   //   theme: 'twotone'
   // };
+
   submitForm(): void {
     if (this.validateForm.valid) {
-      this.authService.register(this.validateForm.value).subscribe(
+      this.authService.registerRecruiter(this.validateForm.value).subscribe(
         {
           next: (data) => {
             console.log(data);
+
             this.router.navigateByUrl("/login").then(() => {
               console.log('login');
 
             }).catch((res) => {
-              console.log(res);
+              console.log(res.message);
             })
           },
           error(err) {
-              console.log(err);
+              console.log(err.message);
           },
         }
       )
@@ -48,7 +52,6 @@ export class RegisterUserFormComponent implements OnInit {
   }
 
   updateConfirmValidator(): void {
-
     /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls['checkPassword'].updateValueAndValidity());
   }
@@ -78,7 +81,6 @@ export class RegisterUserFormComponent implements OnInit {
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      role: [null, [Validators.required]]
       // phoneNumberPrefix: ['+216'],
       // phoneNumber: [null, [Validators.required]],
       // website: [null, [Validators.required]],
