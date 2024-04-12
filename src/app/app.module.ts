@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -33,6 +33,9 @@ import { ModalComponent } from './modal/modal.component';
 import { UsersListingComponent } from './users-listing/users-listing.component';
 import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { LogoutComponent } from './logout/logout.component';
+
+import { JwtInterceptor } from './auth.interceptor';
 
 registerLocaleData(en);
 
@@ -45,7 +48,8 @@ registerLocaleData(en);
     ModalComponent,
     UsersListingComponent,
     UpdateUserFormComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,7 @@ registerLocaleData(en);
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
