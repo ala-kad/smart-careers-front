@@ -14,17 +14,16 @@ export class UiInteractionsService {
     private userService: UserService
   ) { }
 
-
   openModal(userId: any): Observable<void> {
     return new Observable<void>(observer => {
       this.modal.confirm({
-        nzTitle: 'Are you sure you want to delete this user?',
+        nzTitle: 'Are you sure you want to disable this user ?',
         nzOkText: 'Yes',
         nzOkType: 'primary',
         nzOkDanger: true,
         nzCancelText: 'No',
         nzOnOk: () => {
-          this.userService.deleteUser(userId).subscribe({
+          this.userService.disableUser(userId).subscribe({
             next: () => {
               observer.next(); // Notify the observer when deletion is successful
               observer.complete();
