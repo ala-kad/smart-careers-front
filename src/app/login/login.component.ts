@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit{
   pswd = "";
   remember = false;
   validateForm!: UntypedFormGroup;
+  accessToken = 'TOKEN'
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit{
     this.authService.login(email, pass).subscribe(
       (data) => {
         console.log(data);
-        localStorage.setItem('token', data.token);
+        localStorage.setItem(this.accessToken, data.token);
         this.isAuthenticated = true;
         this.router.navigateByUrl('/admin')
       },
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit{
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.accessToken);
     this.isAuthenticated = true;
   }
 }
