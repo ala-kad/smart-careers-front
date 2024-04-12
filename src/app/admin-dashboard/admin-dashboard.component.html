@@ -19,9 +19,13 @@
       <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
 
       <nz-header nzTheme="light">
-        <button nz-button nzType="primary" routerLink="/users/add"><span nz-icon nzType="plus" nzTheme="outline"></span> Add new user</button>
-        <button nz-button nzType="primary" class="search-btn"><span nz-icon nzType="search" nzTheme="outline"></span> Search </button>
-        <button nz-button nzType="primary"><span nz-icon nzType="filter" nzTheme="outline"></span> Filter </button>
+        <div class="btn-wrapper d-flex align-items-center justify-content-center">
+          <button nz-button nzType="primary" routerLink="/users/add"><span nz-icon nzType="plus" nzTheme="outline"></span> Add new user</button>
+          <button nz-button nzType="primary" class="search-btn"><span nz-icon nzType="search" nzTheme="outline"></span> Search </button>
+          <button nz-button nzType="primary"><span nz-icon nzType="filter" nzTheme="outline"></span> Filter </button>
+          <app-logout></app-logout>
+        </div>
+
       </nz-header>
 
       <router-outlet name="userListing"></router-outlet> <!-- Named outlet for UsersListingComponent -->
