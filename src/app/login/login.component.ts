@@ -1,51 +1,51 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  // validateForm: FormGroup<{
-  //   email: FormControl<string>;
-  //   password: FormControl<string>;
-  // }> = this.fb.group({
-  //   email: ['', [Validators.required]],
-  //   password: ['', [Validators.required]],
-  //   remember: [true]
-  // });
+export class LoginComponent implements OnInit{
 
-  // submitForm(): void {
-  //   if (this.validateForm.valid) {
-  //     console.log('submit', this.validateForm.value);
-  //   } else {
-  //     Object.values(this.validateForm.controls).forEach(control => {
-  //       if (control.invalid) {
-  //         control.markAsDirty();
-  //         control.updateValueAndValidity({ onlySelf: true });
-  //       }
-  //     });
-  //   }
-  // }
-  constructor(private authService: AuthService){};
+  constructor(
+    private authService: AuthService,
+    private fb: UntypedFormBuilder,
+    private router: Router
+  ){};
 
-  // constructor(private fb: NonNullableFormBuilder) {}
-
+  isAuthenticated = false;
   email = "";
   pswd = "";
+  remember = false;
+  validateForm!: UntypedFormGroup;
+
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true]
+    });
+  }
 
   login(email: string, pass: string) {
     this.authService.login(email, pass).subscribe(
       (data) => {
         console.log(data);
-
+        localStorage.setItem('token', data.token);
+        this.isAuthenticated = true;
+        this.router.navigateByUrl('/admin')
       },
-      (error) => {
-        console.log(error);
-
+      (err) => {
+        return err.message;
       }
     )
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.isAuthenticated = true;
   }
 }
