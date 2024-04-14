@@ -1,3 +1,30 @@
+/**
+RWD Breakpoints
+  /* xs: '575px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1600px'
+**/
+
+nz-table {
+  width:  100%;
+  background: #fff ;
+}
+
+@media all and (max-width: 576px){
+  nz-table tr th {
+    padding: 8px;
+  }
+  nz-table td {
+    padding: 8px;
+  }
+  nz-table td nz-divider {
+    display: inline;
+  }
+}
+
 @media all and (max-width: 992px){
   nz-table{
     overflow: auto;

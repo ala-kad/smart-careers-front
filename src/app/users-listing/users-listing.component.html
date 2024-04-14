@@ -14,14 +14,9 @@
       <td>{{ data.username }}</td>
       <td>{{ data.role }}</td>
       <td>
-        <a>Action 一 {{ data.username }}</a>
-        <nz-divider nzType="vertical"></nz-divider>
-        <!-- <a (click)="showUser(data._id)">Show</a> -->
-        <!-- <nz-divider nzType="vertical"></nz-divider> -->
+        <!-- <a>Action 一 {{ data.username }}</a> -->
         <a (click)="editUser(data._id)">Edit</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <!-- <a (click)="openModal(data._id)">Delete</a> -->
-        <!-- <nz-divider nzType="vertical"></nz-divider> -->
         <a (click)="openModal(data._id)">Disable</a>
       </td>
     </tr>
