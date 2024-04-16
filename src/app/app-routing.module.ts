@@ -6,6 +6,7 @@ import { RegisterUserFormComponent } from './register-user-form/register-user-fo
 import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersListingComponent } from './users-listing/users-listing.component';
+import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
 
 import { AuthGuard } from './auth.guard';
 
@@ -14,14 +15,16 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'users/add', component: RegisterUserFormComponent },
-  { path: 'admin', component: AdminDashboardComponent,
+  // { path: 'jobs', component: JobsListingComponent},
+  { path: 'dashboard', component: AdminDashboardComponent,
+
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: UsersListingComponent, outlet: 'userListing' },
+      { path: 'admin', component: UsersListingComponent },
       { path: 'users/:id/edit', component: UpdateUserFormComponent, outlet: 'updateUserForm' },
+      { path: 'jobs', component: JobsListingComponent},
     ]
   },
-
 
 ];
 
