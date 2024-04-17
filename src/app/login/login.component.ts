@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit{
         console.log(data);
         localStorage.setItem(this.accessToken, data.token);
         this.isAuthenticated = true;
-        this.router.navigateByUrl('/admin')
+        this.router.navigateByUrl('/dashboard')
       },
       (err) => {
         return err.message;
