@@ -13,9 +13,8 @@
     </ul>
   </nz-sider>
   <nz-layout class="inner-layout">
-    <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
     <nz-header nzTheme="light">
-      <div class="btn-wrapper d-flex align-items-center justify-content-center">
+      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
         <nz-space nzSize="middle">
           <button nz-button nzType="primary" routerLink="/users/add" nzSize="small" *nzSpaceItem>
             <span nz-icon nzType="plus" nzTheme="outline"></span>
@@ -30,12 +29,9 @@
             Filter
           </button>
         </nz-space>
-
-      </div>
       <!-- <app-logout></app-logout> -->
     </nz-header>
     <nz-content>
-
       <router-outlet></router-outlet> <!-- Named outlet for UsersListingComponent -->
       <router-outlet name="updateUserForm" [hidden]="!formVisibile" *ngIf="!formVisibile"></router-outlet> <!-- Named outlet for UpdateUserFormComponent -->
       <router-outlet name="jobsListing"></router-outlet>
