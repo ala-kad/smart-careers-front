@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,7 +19,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -36,6 +39,11 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
 
 import { JwtInterceptor } from './auth.interceptor';
+import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
+import { FormContainerComponent } from './form-container/form-container.component';
+import { JobDetailsFormComponent } from './job-details-form/job-details-form.component';
+import { JobReviewFormComponent } from './job-review-form/job-review-form.component';
+import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
 
 registerLocaleData(en);
 
@@ -49,7 +57,12 @@ registerLocaleData(en);
     UsersListingComponent,
     UpdateUserFormComponent,
     WelcomeComponent,
-    LogoutComponent
+    LogoutComponent,
+    JobsListingComponent,
+    FormContainerComponent,
+    JobDetailsFormComponent,
+    JobReviewFormComponent,
+    StepTwoJobFormComponent
   ],
   imports: [
     BrowserModule,
@@ -70,8 +83,10 @@ registerLocaleData(en);
     NzDrawerModule,
     NzModalModule,
     NzGridModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    NzSpaceModule,
+    NzTypographyModule,
+    NzStepsModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
