@@ -29,10 +29,7 @@ export class RegisterUserFormComponent implements OnInit {
           next: (data) => {
             console.log(data);
 
-            this.router.navigateByUrl("/login").then(() => {
-              console.log('login');
-
-            }).catch((res) => {
+            this.router.navigateByUrl("/dashboard").catch((res) => {
               console.log(res.message);
             })
           },
