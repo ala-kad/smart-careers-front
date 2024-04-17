@@ -84,6 +84,6 @@ export class UsersListingComponent implements OnInit {
   }
 
   editUser(userId: any) {
-    this.router.navigate([{ outlets: { updateUserForm: ['users', userId, 'edit'] } }], { relativeTo: this.route.parent});
+    this.router.navigate(['../users', userId, 'edit'], { relativeTo: this.route});
   }
 }

@@ -13,10 +13,10 @@ export class AdminDashboardComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.router.navigate(['admin'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['users'], { relativeTo: this.activatedRoute });
   }
-  formVisibile: boolean = false;
 
+  formVisibile: boolean = false;
   isCollapsed = false;
   visible = false;
 
@@ -30,7 +30,7 @@ export class AdminDashboardComponent implements OnInit{
   }
 
   navigateToUsersListing (): void {
-    this.router.navigate(['admin'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['users'], { relativeTo: this.activatedRoute });
   }
 
   navigateToJobs(): void {

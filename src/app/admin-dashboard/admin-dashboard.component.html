@@ -32,10 +32,10 @@
       <!-- <app-logout></app-logout> -->
     </nz-header>
     <nz-content>
-      <router-outlet></router-outlet> <!-- Named outlet for UsersListingComponent -->
-      <router-outlet name="updateUserForm" [hidden]="!formVisibile" *ngIf="!formVisibile"></router-outlet> <!-- Named outlet for UpdateUserFormComponent -->
+      <router-outlet></router-outlet> 
+      <!-- <router-outlet name="updateUserForm" [hidden]="!formVisibile" *ngIf="!formVisibile"></router-outlet> -->
+       <!-- Named outlet for UpdateUserFormComponent -->
       <router-outlet name="jobsListing"></router-outlet>
-      <!-- <router-outlet ></router-outlet> -->
     </nz-content>
     <nz-footer>Footer</nz-footer>
   </nz-layout>

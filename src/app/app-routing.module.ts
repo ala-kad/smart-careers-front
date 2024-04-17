@@ -20,8 +20,8 @@ const routes: Routes = [
 
     canActivate: [AuthGuard],
     children: [
-      { path: 'admin', component: UsersListingComponent },
-      { path: 'users/:id/edit', component: UpdateUserFormComponent, outlet: 'updateUserForm' },
+      { path: 'users', component: UsersListingComponent },
+      { path: 'users/:id/edit', component: UpdateUserFormComponent },
       { path: 'jobs', component: JobsListingComponent},
     ]
   },
