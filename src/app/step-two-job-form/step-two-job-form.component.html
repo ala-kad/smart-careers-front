@@ -1,26 +1,47 @@
-<form nz-form nzLayout="vertical">
+<form nz-form nzLayout="vertical" [formGroup]="stepTwoJobForm">
+
   <nz-form-item>
     <nz-form-label>
       Job description
     </nz-form-label>
     <nz-form-control>
-      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize formControlName="jobDescription"></textarea>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label>
       Perfect fit
     </nz-form-label>
     <nz-form-control>
-      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize formControlName="profile"></textarea>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label>
       Benifits
     </nz-form-label>
     <nz-form-control>
-      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize></textarea>
+      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize formControlName="benefits"></textarea>
     </nz-form-control>
   </nz-form-item>
+
+  <ng-container formArrayName="questions">
+    <nz-form-item nzAlign="top" nzJustify="start">
+      <h6 nz-typography>Questions</h6>
+      <a nz-button nzType="link" (click)="addQuestion()"><span nz-icon nzType="plus" nzTheme="outline"></span> Add question</a>
+    </nz-form-item>
+
+    <nz-form-item *ngFor="let question of getQuestions().controls; let i=index;">
+      <nz-form-label nzFor="question-{{i}}">Question {{i+1}}:</nz-form-label>
+      <nz-form-control>
+        <input nz-input type="text" id="question-{{i}}" [formControlName]="i"/>
+      </nz-form-control>
+      <a nz-button nzType="link" (click)="removeQuestion(i)" class="question-link"><span nz-icon nzType="minus" nzTheme="outline"></span> Remove question</a>
+    </nz-form-item>
+
+  </ng-container>
+
+  <!-- <button type="submit">Submit</button> -->
 </form>
