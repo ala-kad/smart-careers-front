@@ -22,6 +22,9 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzCardModule } from 'ng-zorro-antd/card';
+
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -44,6 +47,7 @@ import { FormContainerComponent } from './form-container/form-container.componen
 import { JobDetailsFormComponent } from './job-details-form/job-details-form.component';
 import { JobReviewFormComponent } from './job-review-form/job-review-form.component';
 import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
 
 registerLocaleData(en);
 
@@ -62,7 +66,8 @@ registerLocaleData(en);
     FormContainerComponent,
     JobDetailsFormComponent,
     JobReviewFormComponent,
-    StepTwoJobFormComponent
+    StepTwoJobFormComponent,
+    JobDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +92,8 @@ registerLocaleData(en);
     NzSpaceModule,
     NzTypographyModule,
     NzStepsModule,
+    NzListModule,
+    NzCardModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
