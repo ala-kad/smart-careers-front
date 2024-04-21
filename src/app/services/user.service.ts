@@ -22,8 +22,7 @@ export class UserService {
   editUser(id: any, update: any): Observable<any> {
     console.log(update);
 
-    const res = this.http.patch(`http://localhost:3000/users/${id}`, update);
-    return res;
+    return this.http.patch(`http://localhost:3000/users/${id}`, update, {responseType: 'text'});
   }
 
   deleteUser(id: any): Observable<any> {
@@ -32,6 +31,10 @@ export class UserService {
 
   getEnabledUsers(): Observable<any> {
     return this.http.get(`http://localhost:3000/users/enabled`);
+  }
+
+  getDisabledUSers(): Observable<any> {
+    return this.http.get(`http://localhost:3000/users/disabled`);
   }
 
   disableUser(userId: any): Observable<any> {
