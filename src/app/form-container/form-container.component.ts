@@ -20,11 +20,11 @@ export class FormContainerComponent implements OnInit {
   constructor(private _fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.stepOneFom = this._fb.group({
-      jobTitle: [''],
-      skills: [''],
-      requiredExperience: ['']
-    })
+    // this.stepOneFom = this._fb.group({
+    //   jobTitle: [''],
+    //   skills: [''],
+    //   requiredExperience: ['']
+    // })
   }
 
   subformInitialized(name: string, group: FormGroup) {

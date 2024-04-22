@@ -1,6 +1,5 @@
-<!-- <nz-row nzAlign="top" nzJustify="center">
-  <nz-col nzSpan="12" nzOffset="6"> -->
-    <ng-container [ngSwitch]="currentStep$ | async">
+
+    <!-- <ng-container [ngSwitch]="currentStep$ | async">
       <app-job-details-form
       *ngSwitchCase=" 'step1' "
       [startingForm]="stepOneFom?.get('stepFormOne')?.value"
@@ -16,7 +15,7 @@
         (changeStep)="changeStep('step2', 'back')"
         (submitForm)="submitForm()"
         ></app-job-review-form>
-    </ng-container>
+    </ng-container> -->
 
     <nz-steps [nzCurrent]="current">
       <nz-step nzTitle="Finished"></nz-step>
@@ -29,19 +28,17 @@
        <app-job-details-form *ngIf="current === 0 "></app-job-details-form>
        <app-step-two-job-form *ngIf="current === 1" ></app-step-two-job-form>
        <app-job-review-form *ngIf="current === 2 "></app-job-review-form>
+        <div class="steps-action" class="d-flex align-items-center justify-content-around">
+          <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+            <span>Previous</span>
+          </button>
+          <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+            <span>Next</span>
+          </button>
+          <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
+            <span>Done</span>
+          </button>
+        </div>
     </div>
 
-    <div class="steps-action">
-      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
-        <span>Previous</span>
-      </button>
-      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
-        <span>Next</span>
-      </button>
-      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
-        <span>Done</span>
-      </button>
-    </div>
-<!--
-  </nz-col>
-</nz-row> -->
+
