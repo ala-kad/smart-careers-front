@@ -9,20 +9,22 @@ import { UsersListingComponent } from './users-listing/users-listing.component';
 import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
 
 import { AuthGuard } from './auth.guard';
+import { JobDetailsComponent } from './job-details/job-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
-  { path: 'welcome', component: WelcomeComponent },
+  { path: 'welcome', component: WelcomeComponent, children: [
+    { path: 'jobs', component: JobDetailsComponent }
+  ] },
   { path: 'login', component: LoginComponent },
   { path: 'users/add', component: RegisterUserFormComponent },
-  // { path: 'jobs', component: JobsListingComponent},
   { path: 'dashboard', component: AdminDashboardComponent,
-
     canActivate: [AuthGuard],
     children: [
       { path: 'users', component: UsersListingComponent },
       { path: 'users/:id/edit', component: UpdateUserFormComponent },
       { path: 'jobs', component: JobsListingComponent},
+      { path: 'jobs/:id', component: JobDetailsComponent}
     ]
   },
 
