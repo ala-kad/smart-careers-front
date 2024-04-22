@@ -1,22 +1,12 @@
-:host {
-  width: 100%;
-}
 
 nz-content {
   padding: 10px;
 }
 
 nz-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: inherit;
   margin-bottom: 20px;
-  padding: 0 25px;
-}
-
-nz-sider {
-  height: 100vh ;
+  padding: 10px 20px;
 }
 
 button {
@@ -24,9 +14,42 @@ button {
   align-items: center;
 }
 
+.trigger{
+  width: 20px;
+  height: 20px;
+}
+
+.inner-layout .btn-wrapper {
+  float: right;
+}
+
+.inner-layout .btn-wrapper button{
+  float: left;
+  margin: 0 16px;
+}
+
+.inner-layout .btn-wrapper button::last-child{
+  margin: none;
+}
+
 @media all and (max-width: 576px){
   nz-header{
     padding: 0 25px;
+  }
+
+  nz-space {
+    display: block;
+  }
+
+  .inner-layout .btn-wrapper {
+    float: none;
+  }
+
+  .inner-layout .btn-wrapper button{
+    float: none;
+    justify-content: center;
+    width: 100%;
+    margin: 12px 0;
   }
 }
 
