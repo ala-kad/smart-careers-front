@@ -22,9 +22,9 @@ export class JobDetailsFormComponent implements OnInit{
       this.jobDetailsForm = this.startingForm;
     } else {
       this.jobDetailsForm = this.fb.group({
-        jobTitle: [''],
-        skills: [''],
-        requiredExperience: ['']
+        jobTitle: ['', Validators.required],
+        skills: ['', Validators.required],
+        requiredExperience: ['', Validators.required]
       })
     }
    this.subformInitialized.emit(this.jobDetailsForm);
@@ -34,6 +34,11 @@ export class JobDetailsFormComponent implements OnInit{
 
   doChangeStep(direction: 'forward') {
     this.changeStep.emit(direction);
+  }
+
+  submitForm() {
+    console.log(this.jobDetailsForm.value);
+
   }
 
 }
