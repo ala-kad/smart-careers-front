@@ -1,1 +1,25 @@
-<app-form-container></app-form-container>
+<nz-list nzGrid>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
+      <nz-list-item>
+        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionEdit, actionDelete]" (click)="navigateToJobDetails(job._id)" [routerLink]="['./', job._id]">
+          <p>
+            {{job.description}}
+          </p>
+          <span> {{job.skills}} </span>
+          <span> {{ job.publishedOn | date:'dd-MM-yyyy' }}</span>
+        </nz-card>
+      </nz-list-item>
+    </div>
+  </div>
+</nz-list>
+
+<ng-template #actionEdit>
+  <span nz-icon nzType="edit"></span>
+</ng-template>
+<ng-template #actionDelete>
+  <span nz-icon nzType="delete" nzTheme="outline"></span>
+</ng-template>
+
+
+<app-nz-empty *ngIf="listOfJobs.length<=0"></app-nz-empty>
