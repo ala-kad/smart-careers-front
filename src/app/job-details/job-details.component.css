@@ -1,0 +1,9 @@
+nz-descriptions {
+  padding: 16px 20px;
+}
+
+@media all and (max-width: 576px){
+  nz-descriptions {
+    padding: 0px;
+  }
+}

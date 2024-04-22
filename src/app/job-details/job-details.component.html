@@ -1,1 +1,9 @@
-<p>job-details works!</p>
+<nz-descriptions nzTitle="Job Info" nzBordered [nzColumn]="1">
+  <nz-descriptions-item nzTitle="Job Title"> {{jobDetails?.title}} </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Company"> {{jobDetails?.company}} </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Skills"> {{jobDetails?.skills}} </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Required Experience"> {{jobDetails?.requiredExperience}} </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Description"> {{jobDetails?.description}} </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Location"> {{jobDetails?.location}} </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Publication date"> {{jobDetails?.publishedOn}} </nz-descriptions-item>
+</nz-descriptions>
