@@ -24,7 +24,8 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzCardModule } from 'ng-zorro-antd/card';
-
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -48,6 +49,7 @@ import { JobDetailsFormComponent } from './job-details-form/job-details-form.com
 import { JobReviewFormComponent } from './job-review-form/job-review-form.component';
 import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { NzEmptyComponent } from './nz-empty/nz-empty.component';
 
 registerLocaleData(en);
 
@@ -67,7 +69,8 @@ registerLocaleData(en);
     JobDetailsFormComponent,
     JobReviewFormComponent,
     StepTwoJobFormComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
+    NzEmptyComponent
   ],
   imports: [
     BrowserModule,
@@ -94,11 +97,13 @@ registerLocaleData(en);
     NzStepsModule,
     NzListModule,
     NzCardModule,
+    NzDescriptionsModule,
+    NzEmptyModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     provideHttpClient(),
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
