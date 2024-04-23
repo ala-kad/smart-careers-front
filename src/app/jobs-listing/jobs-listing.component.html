@@ -1,28 +1,44 @@
-<nz-list nzGrid>
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
-      <nz-list-item>
-        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]">
-          <p>
-            {{job.description}}
-          </p>
-          <span> {{job.skills}} </span>
-          <span> {{ job.publishedOn | date:'dd-MM-yyyy' }}</span>
-        </nz-card>
-      </nz-list-item>
-      <ng-template #actionView>
-        <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)"></span>
-      </ng-template>
-      <ng-template #actionEdit>
-        <span nz-icon nzType="edit"></span>
-      </ng-template>
-      <ng-template #actionDelete>
-        <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)"></span>
-      </ng-template>
+<div nz-row  [nzGutter]="[16, 24]" nzJustify="end">
+  <div nz-col>
+    <div nz-row>
+      <div nz-col>
+        <button nz-button nzType="primary" nzSize="small" (click)="navigateToJobForm()">
+        <span nz-icon nzType="plus" nzTheme="outline"></span> Post new job
+      </button>
+      </div>
     </div>
   </div>
-</nz-list>
+
+  <div nz-col>
+    <nz-list nzGrid>
+      <div nz-row [nzGutter]="16">
+        <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
+          <nz-list-item>
+            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]">
+              <p>
+                {{job.description}}
+              </p>
+              <span> {{job.skills}} </span>
+              <span> {{ job.publishedOn | date:'dd-MM-yyyy' }}</span>
+            </nz-card>
+          </nz-list-item>
+          <ng-template #actionView>
+            <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)"></span>
+          </ng-template>
+          <ng-template #actionEdit>
+            <span nz-icon nzType="edit"></span>
+          </ng-template>
+          <ng-template #actionDelete>
+            <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)"></span>
+          </ng-template>
+        </div>
+      </div>
+    </nz-list>
+    <app-nz-empty *ngIf="listJobsLength==0"></app-nz-empty>
+  </div>
+</div>
 
 
 
-<app-nz-empty *ngIf="listJobsLength==0"></app-nz-empty>
+
+

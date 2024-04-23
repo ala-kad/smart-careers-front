@@ -38,6 +38,9 @@ export class JobsListingComponent implements OnInit{
   navigateToJobDetails(id: any) {
     this.router.navigate(['./', id], { relativeTo: this.activatedRoute});
   }
+  navigateToJobForm() {
+    this.router.navigate(['./', 'add'], { relativeTo: this.activatedRoute});
+  }
 
   openModal(jobId: any): void {
     this.uiService.openModal2(jobId).subscribe({
