@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../services/jobs.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UiInteractionsService } from '../services/ui-interactions.service';
 
 @Component({
   selector: 'app-jobs-listing',
@@ -12,18 +13,20 @@ export class JobsListingComponent implements OnInit{
   constructor (
     private jobsService: JobsService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private uiService: UiInteractionsService
   ) {}
 
   listOfJobs: any;
-  jobDetails: any ;
+  jobDetails: any[] = [] ;
+  jobId: any
+  listJobsLength: Number = 0;
 
   ngOnInit(): void{
     this.jobsService.getJobsList().subscribe({
       next: (data) => {
-       this.listOfJobs = data;
-       console.log(this.listOfJobs.length);
-
+        this.listOfJobs = data;
+        this.listJobsLength = data.length;
       },
       error: (err) => {
         console.log(err.message);
@@ -35,4 +38,8 @@ export class JobsListingComponent implements OnInit{
   navigateToJobDetails(id: any) {
     this.router.navigate(['./', id], { relativeTo: this.activatedRoute});
   }
+
+  // openModal(jobId: any): void {
+  //   this.uiService.openModal2(jobId);
+  // }
 }

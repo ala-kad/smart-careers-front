@@ -2,7 +2,7 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
       <nz-list-item>
-        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionEdit, actionDelete]" (click)="navigateToJobDetails(job._id)" [routerLink]="['./', job._id]">
+        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]">
           <p>
             {{job.description}}
           </p>
@@ -10,16 +10,19 @@
           <span> {{ job.publishedOn | date:'dd-MM-yyyy' }}</span>
         </nz-card>
       </nz-list-item>
+      <ng-template #actionView>
+        <span nz-icon nzType="eye" nzTheme="outline" (click)="job?._id && navigateToJobDetails(job._id)"></span>
+      </ng-template>
+      <ng-template #actionEdit>
+        <span nz-icon nzType="edit"></span>
+      </ng-template>
+      <ng-template #actionDelete>
+        <span nz-icon nzType="delete" nzTheme="outline"></span>
+      </ng-template>
     </div>
   </div>
 </nz-list>
 
-<ng-template #actionEdit>
-  <span nz-icon nzType="edit"></span>
-</ng-template>
-<ng-template #actionDelete>
-  <span nz-icon nzType="delete" nzTheme="outline"></span>
-</ng-template>
 
 
-<app-nz-empty *ngIf="listOfJobs.length<=0"></app-nz-empty>
+<app-nz-empty *ngIf="listJobsLength==0"></app-nz-empty>
