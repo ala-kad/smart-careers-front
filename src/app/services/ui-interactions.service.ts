@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService, NZ_MODAL_DATA  } from 'ng-zorro-antd/modal';
 
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
+import { JobsService } from './jobs.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ export class UiInteractionsService {
 
   constructor(
     private modal: NzModalService,
-    private userService: UserService
+    private userService: UserService,
+    private jobService: JobsService
   ) { }
 
   openModal(userId: any): Observable<void> {
+
     return new Observable<void>(observer => {
       this.modal.confirm({
         nzTitle: 'Are you sure you want to disable this user ?',
@@ -40,5 +43,55 @@ export class UiInteractionsService {
     });
   }
 
+  openModal2(jobId: any): Observable<void>  {
+    return new Observable<void>(observer => {
+      this.modal.confirm({
+      nzTitle: 'Are you sure you want to delete this job ?',
+      nzContent: 'Content',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzCancelText: 'No',
+      nzOnOk: () => {
+        this.jobService.deleteJob(jobId).subscribe({
+          next: () => {
+            observer.next();
+            observer.complete();
+            // this.jobService.getJobsList().subscribe({
+            //   next: (data) => {
+            //     console.log(data);
+
+            //   }
+            //   ,
+            //   error: (err) => {
+            //     console.log(err);
+
+            //   }
+            // })
+          }
+          ,
+          error: (err) => {
+            // console.log(err);
+            observer.error(err);
+
+          }
+        })
+      },
+      nzOnCancel: () => {
+        observer.complete();
+      }
+      });
+    });
+  }
 }
 
+// subscribe({
+//   next: (data) => { console.log(data); this.jobService.getJobsList().subscribe({
+//     next: (data) => { console.log(data.length); data.filter((elem: { _id: any; }) => elem._id !== jobId )
+//     },
+//     error: (err) => { console.log(err);
+//     }
+//   }
+//   )},
+//   error: (err) => { console.log(err) }
+// })

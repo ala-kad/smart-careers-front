@@ -20,4 +20,8 @@ export class JobsService {
     return this.http.get(`http://localhost:3000/jobs/${id}`);
   }
 
+  deleteJob(id: any): Observable<any> {
+    return this.http.delete(`http://localhost:3000/jobs/${id}`);
+  }
+
 }

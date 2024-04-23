@@ -11,13 +11,13 @@
         </nz-card>
       </nz-list-item>
       <ng-template #actionView>
-        <span nz-icon nzType="eye" nzTheme="outline" (click)="job?._id && navigateToJobDetails(job._id)"></span>
+        <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)"></span>
       </ng-template>
       <ng-template #actionEdit>
         <span nz-icon nzType="edit"></span>
       </ng-template>
       <ng-template #actionDelete>
-        <span nz-icon nzType="delete" nzTheme="outline"></span>
+        <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)"></span>
       </ng-template>
     </div>
   </div>

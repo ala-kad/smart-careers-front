@@ -39,7 +39,19 @@ export class JobsListingComponent implements OnInit{
     this.router.navigate(['./', id], { relativeTo: this.activatedRoute});
   }
 
-  // openModal(jobId: any): void {
-  //   this.uiService.openModal2(jobId);
-  // }
+  openModal(jobId: any): void {
+    this.uiService.openModal2(jobId).subscribe({
+      next: () => {
+        this.jobsService.getJobsList().subscribe({
+          next: (data) => {
+            this.listOfJobs = data;
+          },
+          error: (err) => {
+            console.log(err);
+
+          }
+        })
+      },
+    })
+  }
 }
