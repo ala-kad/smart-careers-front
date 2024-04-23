@@ -10,6 +10,7 @@ import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
 
 import { AuthGuard } from './auth.guard';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { FormContainerComponent } from './form-container/form-container.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
@@ -23,8 +24,10 @@ const routes: Routes = [
     children: [
       { path: 'users', component: UsersListingComponent },
       { path: 'users/:id/edit', component: UpdateUserFormComponent },
-      { path: 'jobs', component: JobsListingComponent},
-      { path: 'jobs/:id', component: JobDetailsComponent}
+      { path: 'jobs', component: JobsListingComponent },
+      { path: 'jobs/add', component: FormContainerComponent },
+      { path: 'jobs/:id', component: JobDetailsComponent },
+
     ]
   },
 
