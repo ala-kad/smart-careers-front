@@ -14,7 +14,7 @@
       <div nz-row [nzGutter]="16">
         <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
           <nz-list-item>
-            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]" [nzExtra]="publishActionTPl">
+            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]" [nzExtra]="publishActionTPl" [routerLink]="['/jobs', job._id]">
               <p>
                 {{job.description}}
               </p>
@@ -24,7 +24,7 @@
             </nz-card>
           </nz-list-item>
           <ng-template #actionView>
-            <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)"></span>
+            <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)" *ngIf="!isGuest"></span>
           </ng-template>
           <ng-template #actionEdit >
             <span nz-icon nzType="edit" *ngIf="!isGuest"></span>

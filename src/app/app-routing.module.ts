@@ -19,6 +19,7 @@ const routes: Routes = [
   ] },
   { path: 'login', component: LoginComponent },
   { path: 'users/add', component: RegisterUserFormComponent },
+  { path: 'jobs/:id', component: JobDetailsComponent },
   { path: 'dashboard', component: AdminDashboardComponent,
     canActivate: [AuthGuard],
     children: [
