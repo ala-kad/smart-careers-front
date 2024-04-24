@@ -14,22 +14,26 @@
       <div nz-row [nzGutter]="16">
         <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
           <nz-list-item>
-            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]">
+            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]" [nzExtra]="publishActionTPl">
               <p>
                 {{job.description}}
               </p>
               <span> {{job.skills}} </span>
               <span> {{ job.publishedOn | date:'dd-MM-yyyy' }}</span>
+              <span> {{ job.status }}</span>
             </nz-card>
           </nz-list-item>
           <ng-template #actionView>
             <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)"></span>
           </ng-template>
-          <ng-template #actionEdit>
-            <span nz-icon nzType="edit"></span>
+          <ng-template #actionEdit >
+            <span nz-icon nzType="edit" *ngIf="!isGuest"></span>
           </ng-template>
           <ng-template #actionDelete>
-            <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)"></span>
+            <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)" *ngIf="!isGuest"></span>
+          </ng-template>
+          <ng-template #publishActionTPl>
+            <a (click)="publishJobCTA(job._id)" *ngIf="!isGuest">Publish</a>
           </ng-template>
         </div>
       </div>
