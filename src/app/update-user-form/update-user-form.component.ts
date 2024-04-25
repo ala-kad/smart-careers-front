@@ -37,6 +37,10 @@ export class UpdateUserFormComponent implements OnInit {
             this.user = usr ;
             this.userId = usr._id;
             this.listOfSelectedValue = usr.role
+          },
+          error: (err) => {
+            console.log(err);
+
           }
         }
       )
