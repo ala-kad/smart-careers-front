@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,41 +12,48 @@ export class LoginComponent implements OnInit{
 
   constructor(
     private authService: AuthService,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private router: Router
   ){};
 
   isAuthenticated = false;
-  email = "";
-  pswd = "";
-  remember = false;
-  validateForm!: UntypedFormGroup;
+  email = new FormControl('', Validators.required);
+  pswd = new FormControl('', Validators.required);
+  remember = new FormControl('');
+
+  validateForm!: FormGroup;
   accessToken = 'TOKEN'
+  errorMessage = '';
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      email: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true]
+      email: this.email,
+      password: this.pswd,
+      remember: this.remember
     });
   }
 
-  login(email: string, pass: string) {
-    this.authService.login(email, pass).subscribe(
-      (data) => {
-        console.log(data);
-        localStorage.setItem(this.accessToken, data.token);
-        this.isAuthenticated = true;
-        this.router.navigateByUrl('/dashboard')
-      },
-      (err) => {
-        return err.message;
-      }
-    )
+  login() {
+    const { email, password } = this.validateForm.value;
+    if(this.validateForm.valid) { 
+      this.authService.login(email, password).subscribe({
+        next: (data) => {
+          localStorage.setItem(this.accessToken, data.token);
+          this.isAuthenticated = true;
+          console.log(data.token);
+          this.router.navigateByUrl('/dashboard')
+        },
+        error: (err) => {
+          this.errorMessage = err.error;
+        }
+      })
+    }
+
+    
   }
 
   logout() {
     localStorage.removeItem(this.accessToken);
-    this.isAuthenticated = true;
+    this.isAuthenticated = false;
   }
 }
