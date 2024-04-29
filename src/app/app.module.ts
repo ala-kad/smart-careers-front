@@ -26,6 +26,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -50,6 +53,7 @@ import { JobReviewFormComponent } from './job-review-form/job-review-form.compon
 import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { NzEmptyComponent } from './nz-empty/nz-empty.component';
+import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
 
 registerLocaleData(en);
 
@@ -70,7 +74,8 @@ registerLocaleData(en);
     JobReviewFormComponent,
     StepTwoJobFormComponent,
     JobDetailsComponent,
-    NzEmptyComponent
+    NzEmptyComponent,
+    DropDowNmenuComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +104,9 @@ registerLocaleData(en);
     NzCardModule,
     NzDescriptionsModule,
     NzEmptyModule,
+    NzCheckboxModule,
+    NzAvatarModule,
+    NzDropDownModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
