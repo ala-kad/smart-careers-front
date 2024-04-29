@@ -4,9 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
+import { decode } from 'json-web-token';
+import { jwtDecode } from "jwt-decode";
+import { admin } from 'googleapis/build/src/apis/admin';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   constructor(private http: HttpClient) { }
@@ -30,5 +35,44 @@ export class AuthService {
   isAuthenticatedFun(): boolean {
     return !!localStorage.getItem('TOKEN');
   }
+
+  isGuest(): boolean {
+    if(!this.isAuthenticatedFun()){
+      return true;
+    }
+    return false;
+  }
+
+
+  isAdmin(): boolean {
+    if(this.isAuthenticatedFun() && this.getUserRole()==='admin'){
+      return true;
+    }
+    return false;
+  }
+
+  isRecruiter(): boolean {
+    if(this.isAuthenticatedFun() && this.getUserRole()==='recruiter'){
+      return true;
+    }
+    return false;
+  }
+
+  getUserCrendentials (): any {
+    const token = localStorage.getItem('TOKEN');
+    if(token){
+      return jwtDecode(token);
+    }else {
+      return 'Error';
+    }
+  }
+
+  getUserRole (): string {
+    const accessToken = this.getUserCrendentials();
+    if (accessToken.role.length > 1) {
+      return  'recruiter';
+    }
+      return 'admin';
+    }
 
 }
