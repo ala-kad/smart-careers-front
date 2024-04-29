@@ -23,23 +23,50 @@ export class JobsListingComponent implements OnInit{
   jobDetails: any[] = [] ;
   jobId: any
   listJobsLength: Number = 0;
-  isGuest: boolean = true;
+
+  isAdmin = false;
+  isRecruiter = false
+  isGuest: boolean = false;
+  status = '';
 
   ngOnInit(): void{
-    // TO-DO retrieve user from Auth Service
-    const status = this.isGuest ? 'Published' : '' ;
-    this.jobsService.getJobsList(status).subscribe({
-      next: (data) => {
-        this.listOfJobs = data;
-        this.listJobsLength = data.length;
-      },
-      error: (err) => {
-        console.log(err.message);
+    this.isAdmin = this.authService.isAdmin();
+    this.isRecruiter = this.authService.isRecruiter();
+    this.isGuest = this.authService.isGuest();
+    /**
+     * Checking if authenticated user is admin / reruiter, render all jobs (status = 'published, draft)
+     */
+    if(this.isAdmin || this.isRecruiter){
+      this.jobsService.getJobsList(this.status).subscribe({
+        next: (data) => {
+          this.listOfJobs = data;
+          console.log(this.listOfJobs);
 
-      }
-    })
+          this.listJobsLength = data.length;
+        },
+        error: (err) => {
+          console.log(err.message);
+
+        }
+      })
+    }
+    else {
+      /**
+      * If user is not authenticated (Guest), render only Published jobs
+       */
+      this.status = 'Published';
+      this.jobsService.getJobsList(this.status).subscribe({
+        next: (data) => {
+          this.listOfJobs = data;
+          this.listJobsLength = data.length;
+        },
+        error: (err) => {
+          console.log(err.message);
+
+        }
+      })
+    }
   }
-
 
   navigateToJobDetails(id: any) {
     this.router.navigate(['./', id], { relativeTo: this.activatedRoute});

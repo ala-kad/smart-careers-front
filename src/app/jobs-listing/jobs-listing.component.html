@@ -1,8 +1,8 @@
-<div nz-row  [nzGutter]="[16, 24]" nzJustify="end">
+<div nz-row  [nzGutter]="[16, 24]" class="outer-row">
   <div nz-col>
-    <div nz-row>
+    <div nz-row nzJustify="end">
       <div nz-col>
-        <button nz-button nzType="primary" nzSize="small" (click)="navigateToJobForm()">
+        <button nz-button nzType="primary" nzSize="small" (click)="navigateToJobForm()" *ngIf="isRecruiter || isAdmin">
         <span nz-icon nzType="plus" nzTheme="outline"></span> Post new job
       </button>
       </div>
@@ -14,7 +14,7 @@
       <div nz-row [nzGutter]="16">
         <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
           <nz-list-item>
-            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]" [nzExtra]="publishActionTPl" [routerLink]="['/jobs', job._id]">
+            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]" [nzExtra]="publishActionTPl">
               <p>
                 {{job.description}}
               </p>
@@ -24,16 +24,17 @@
             </nz-card>
           </nz-list-item>
           <ng-template #actionView>
-            <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)" *ngIf="!isGuest"></span>
+            <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)" *ngIf="isRecruiter || isAdmin"></span>
+            <span nz-icon nzType="eye" nzTheme="outline" [routerLink]="['./jobs', job._id]" *ngIf="isGuest"></span>
           </ng-template>
           <ng-template #actionEdit >
-            <span nz-icon nzType="edit" *ngIf="!isGuest"></span>
+            <span nz-icon nzType="edit" *ngIf="isRecruiter || isAdmin"></span>
           </ng-template>
           <ng-template #actionDelete>
-            <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)" *ngIf="!isGuest"></span>
+            <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)" *ngIf="isRecruiter || isAdmin"></span>
           </ng-template>
           <ng-template #publishActionTPl>
-            <a (click)="publishJobCTA(job._id)" *ngIf="!isGuest">Publish</a>
+            <a (click)="publishJobCTA(job._id)" *ngIf="isRecruiter || isAdmin &&  job.status === 'Draft' ">Publish</a>
           </ng-template>
         </div>
       </div>

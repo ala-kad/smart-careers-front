@@ -2,3 +2,7 @@
   float: right;
   margin: 10px 0;
 }
+
+.outer-row {
+  flex-direction: column;
+}
