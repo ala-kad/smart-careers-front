@@ -15,10 +15,18 @@
   <nz-layout class="inner-layout">
     <nz-header nzTheme="light">
       <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
-        <!-- <div class="btn-wrapper">
+        <div class="btn-wrapper" nz-dropdown [nzDropdownMenu]="menu">
+          <nz-avatar nzIcon="user" [nzAlt]="userPayload.username"></nz-avatar>
+          <span>{{userPayload.username}}</span>
+        </div>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <app-logout></app-logout>
+          </ul>
+        </nz-dropdown-menu>
 
-        </div> -->
-        <!-- <nz-space nzSize="middle" nzWrap="true" class="btn-wrapper" [nzDirection]="direction">
+
+       <!-- <nz-space nzSize="middle" nzWrap="true" class="btn-wrapper" [nzDirection]="direction">
           <button nz-button nzType="primary" routerLink="/users/add" nzSize="small" *nzSpaceItem>
             <span nz-icon nzType="plus" nzTheme="outline"></span>
             Add new user
@@ -31,10 +39,12 @@
             <span nz-icon nzType="filter" nzTheme="outline"></span>
             Filter
           </button>
-        </nz-space> -->
-      <!-- <app-logout></app-logout> -->
+        </nz-space>  -->
+
     </nz-header>
     <nz-content>
+      <nz-breadcrumb [nzAutoGenerate]="true">
+      </nz-breadcrumb>
       <router-outlet></router-outlet>
     </nz-content>
     <nz-footer>Footer</nz-footer>
