@@ -40,8 +40,6 @@ export class JobsListingComponent implements OnInit{
       this.jobsService.getJobsList(this.status).subscribe({
         next: (data) => {
           this.listOfJobs = data;
-          console.log(this.listOfJobs);
-
           this.listJobsLength = data.length;
         },
         error: (err) => {
@@ -69,11 +67,11 @@ export class JobsListingComponent implements OnInit{
   }
 
   navigateToJobDetails(id: any) {
-    this.router.navigate(['./', id], { relativeTo: this.activatedRoute});
+    this.router.navigate(['./', id], { relativeTo: this.activatedRoute})
   }
 
   navigateToJobForm() {
-    this.router.navigate(['./', 'add'], { relativeTo: this.activatedRoute});
+    this.router.navigate(['add'], { relativeTo: this.activatedRoute});
   }
 
   publishJobCTA(id: any) {
