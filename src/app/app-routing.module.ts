@@ -13,25 +13,55 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormContainerComponent } from './form-container/form-container.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
-  { path: 'welcome', component: WelcomeComponent, children: [
-    { path: 'jobs', component: JobDetailsComponent }
-  ] },
   { path: 'login', component: LoginComponent },
-  { path: 'users/add', component: RegisterUserFormComponent },
-  { path: 'jobs/:id', component: JobDetailsComponent },
-  { path: 'dashboard', component: AdminDashboardComponent,
-    canActivate: [AuthGuard],
+  { path: 'register', component: RegisterUserFormComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'welcome' },
+  {
+    path: 'welcome', component: WelcomeComponent,
     children: [
-      { path: 'users', component: UsersListingComponent },
-      { path: 'users/:id/edit', component: UpdateUserFormComponent },
-      { path: 'jobs', component: JobsListingComponent },
-      { path: 'jobs/add', component: FormContainerComponent },
-      { path: 'jobs/:id', component: JobDetailsComponent },
-
+      { path: '', component: JobsListingComponent },
+      { path: 'jobs/:id', component: JobDetailsComponent }
     ]
   },
 
+  {
+    path: 'dashboard', component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'Home'
+    },
+    children: [
+      { path: 'users', component: UsersListingComponent,
+        data: {
+          breadcrumb: 'Users List'
+        },
+      },
+      {
+        path: 'users/:id/edit', component: UpdateUserFormComponent,
+        data: {
+          breadcrumb: 'User Edit'
+        },
+      },
+      {
+        path: 'jobs', component: JobsListingComponent,
+        data: {
+          breadcrumb: 'Jobs List'
+        }
+      },
+      {
+        path: 'jobs/add', component: FormContainerComponent,
+        data: {
+          breadcrumb: 'Jobs Add'
+        }
+      },
+      {
+        path: 'jobs/:id', component: JobDetailsComponent,
+        data: {
+          breadcrumb: 'Jobs Details'
+        }
+      },
+    ]
+  },
 ];
 
 @NgModule({
