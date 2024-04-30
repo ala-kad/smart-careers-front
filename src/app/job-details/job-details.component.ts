@@ -10,7 +10,7 @@ import { JobsService } from '../services/jobs.service';
 })
 export class JobDetailsComponent implements OnInit {
 
-  jobDetails: any;
+  jobDetails!: any;
   jobId: any
 
   constructor (
@@ -20,6 +20,10 @@ export class JobDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchJobDetails();
+  }
+
+  fetchJobDetails() {
     this.activatedRoute.paramMap.subscribe(
       (params) => {
         this.jobId = params.get("id");
@@ -30,6 +34,8 @@ export class JobDetailsComponent implements OnInit {
 
       next: (data) => {
         this.jobDetails = data;
+        console.log(data);
+
       },
       error: (err) => {
         console.log(err);
@@ -38,7 +44,6 @@ export class JobDetailsComponent implements OnInit {
     })
 
   }
-
 
 
 }
