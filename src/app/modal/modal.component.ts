@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { NzModalRef, NzModalService, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-modal',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
+
+  constructor(private modal: NzModalService, private viewContainerRef: ViewContainerRef) {}
+
+
   isVisible = false;
   isOkLoading = false;
 
