@@ -25,20 +25,22 @@
 
     <div class="steps-content">
        <h3 nz-typography class="title">Post a new career with us</h3>
-       <app-job-details-form *ngIf="current === 0 "></app-job-details-form>
-       <app-step-two-job-form *ngIf="current === 1" ></app-step-two-job-form>
-       <app-job-review-form *ngIf="current === 2 "></app-job-review-form>
+       <app-job-details-form *ngIf="current === 0 " (newItemEvent)="submitFormOne($event)"></app-job-details-form>
+       <app-step-two-job-form *ngIf="current === 1" (formValueEmitter)="submitFormTwo($event)"></app-step-two-job-form>
+       <app-job-review-form *ngIf="current === 2 " [formOneValues]="formOne" [formTwoValues]="formTwoValues"></app-job-review-form>
+
         <div class="steps-action" class="d-flex align-items-center justify-content-around">
           <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
             <span>Previous</span>
           </button>
-          <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+          <button nz-button nzType="default" type="submit" (click)="next()" *ngIf="current < 2">
             <span>Next</span>
           </button>
           <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
-            <span>Done</span>
+            <span>Submit</span>
           </button>
         </div>
+
     </div>
 
 

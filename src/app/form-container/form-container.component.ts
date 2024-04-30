@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { JobsService } from '../services/jobs.service';
 
 type Step = 'step1' | 'step2';
 
@@ -15,16 +16,19 @@ export class FormContainerComponent implements OnInit {
   private currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('step1');
   public currentStep$: Observable<Step> = this.currentStepBs.asObservable();
 
-  public stepOneFom: FormGroup | undefined;
+  public stepOneFom!: FormGroup ;
 
-  constructor(private _fb: FormBuilder) {}
+  formValues = '';
+  formTwo!: FormGroup;
+
+  formOne : any;
+  formTwoValues : any;
+
+
+  constructor(private _fb: FormBuilder, private jobService: JobsService) {}
 
   ngOnInit(): void {
-    // this.stepOneFom = this._fb.group({
-    //   jobTitle: [''],
-    //   skills: [''],
-    //   requiredExperience: ['']
-    // })
+
   }
 
   subformInitialized(name: string, group: FormGroup) {
@@ -34,6 +38,16 @@ export class FormContainerComponent implements OnInit {
   submitForm() {
     const formValues = this.stepOneFom?.value;
     // submit the form with a service
+  }
+
+  submitFormOne(value: string) {
+    this.formValues = value;
+    this.formOne = value;
+  }
+
+  submitFormTwo(formValue: FormGroup) {
+    this.formTwo = formValue.value;
+    this.formTwoValues = formValue.value;
   }
 
   changeStep(currentStep: string, direction: 'forward' | 'back') {
@@ -59,16 +73,20 @@ export class FormContainerComponent implements OnInit {
 
   pre(): void {
     this.current -= 1;
-    this.changeContent();
   }
 
   next(): void {
     this.current += 1;
-    this.changeContent();
+    this.changeContent()
   }
 
   done(): void {
-    console.log('done');
+    const formValues = {...this.formOne, ...this.formTwoValues}
+    this.jobService.postNewJobOffer(formValues).subscribe({
+      next: (data) => { console.log(data); },
+      error: (err) => { console.log(err);
+       }
+    })
   }
 
   changeContent(): void {

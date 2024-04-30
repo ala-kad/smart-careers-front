@@ -7,28 +7,31 @@ import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@ang
   styleUrls: ['./job-details-form.component.css']
 })
 export class JobDetailsFormComponent implements OnInit{
+
   @Input() startingForm: FormGroup | undefined;
   @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() changeStep: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output() newItemEvent = new EventEmitter<string>();
 
   constructor(
     private fb: FormBuilder
   ) {}
 
-  public jobDetailsForm: FormGroup | any ;
+  jobDetailsForm!: FormGroup  ;
 
   ngOnInit(): void {
     if (this.startingForm) {
       this.jobDetailsForm = this.startingForm;
     } else {
       this.jobDetailsForm = this.fb.group({
-        jobTitle: ['', Validators.required],
+        title: ['', Validators.required],
         skills: ['', Validators.required],
         requiredExperience: ['', Validators.required]
       })
     }
    this.subformInitialized.emit(this.jobDetailsForm);
-
+   this.newItemEvent.emit(this.jobDetailsForm.value)
   }
 
 
@@ -38,6 +41,12 @@ export class JobDetailsFormComponent implements OnInit{
 
   submitForm() {
     console.log(this.jobDetailsForm.value);
+
+  }
+
+  addNewItem(formValue: string) {
+    this.newItemEvent.emit(formValue)
+    console.log(formValue);
 
   }
 

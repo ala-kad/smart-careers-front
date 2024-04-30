@@ -1,1 +1,11 @@
-  <p>job-review-form works!</p>
+<span>Job infos</span>
+<p> {{ formOneValues.title }}</p>
+<p> {{ formOneValues.requiredExperience }}</p>
+<p> {{ formOneValues.skills }}</p>
+<p> {{ formOneValues.description }}</p>
+<span>Preselection questions</span>
+<ul>
+  <li *ngFor="let value of formTwoValues.questions; let i=index"> {{value}}</li>
+</ul>
+
+

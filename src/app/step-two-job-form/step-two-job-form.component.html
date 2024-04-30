@@ -1,11 +1,11 @@
-<form nz-form nzLayout="vertical" [formGroup]="stepTwoJobForm">
+<form nz-form nzLayout="vertical" [formGroup]="stepTwoJobForm" (ngSubmit)="submitForm()">
 
   <nz-form-item>
     <nz-form-label>
       Job description
     </nz-form-label>
     <nz-form-control>
-      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize formControlName="jobDescription"></textarea>
+      <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize formControlName="description"></textarea>
     </nz-form-control>
   </nz-form-item>
 
@@ -43,5 +43,5 @@
 
   </ng-container>
 
-  <!-- <button type="submit">Submit</button> -->
+  <button type="submit">Submit</button>
 </form>

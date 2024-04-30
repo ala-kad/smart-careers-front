@@ -1,5 +1,5 @@
-import { Component,  OnInit } from '@angular/core';
-import { FormArray, FormBuilder,  } from '@angular/forms'
+import { Component,  OnInit, Output, EventEmitter } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
 @Component({
   selector: 'app-step-two-job-form',
   templateUrl: './step-two-job-form.component.html',
@@ -10,16 +10,18 @@ export class StepTwoJobFormComponent implements OnInit {
 
   constructor (private _fb: FormBuilder) {} ;
 
-  stepTwoJobForm = this._fb.group({
-        jobDescription: [''],
-        profile: [''],
-        benefits: [''],
-      questions:
-        this._fb.array([this._fb.control('')])
-  })
+  @Output() formValueEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
+  stepTwoJobForm!: FormGroup;
 
   ngOnInit(): void {
-
+    this.stepTwoJobForm = this._fb.group({
+      description: [''],
+      profile: [''],
+      benefits: [''],
+    questions:
+      this._fb.array([this._fb.control('')])
+    })
   }
 
 
@@ -33,5 +35,9 @@ export class StepTwoJobFormComponent implements OnInit {
 
   removeQuestion (index: number) {
     this.getQuestions().removeAt(index);
+  }
+
+  submitForm() {
+   this.formValueEmitter.emit(this.stepTwoJobForm);
   }
 }
