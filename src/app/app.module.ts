@@ -5,35 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgZorroAntdModulesModule } from './shared/modules/ng-zoro-antd-modules/ng-zorro-antd-modules.module';
 
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzSpaceModule } from 'ng-zorro-antd/space';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzStepsModule } from 'ng-zorro-antd/steps';
-import { NzListModule } from 'ng-zorro-antd/list';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-import { NzEmptyModule } from 'ng-zorro-antd/empty';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -55,7 +32,6 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { NzEmptyComponent } from './nz-empty/nz-empty.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
 import { StepQuestionsComponent } from './step-questions/step-questions.component';
-
 registerLocaleData(en);
 
 @NgModule({
@@ -85,30 +61,8 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzFormModule,
-    NzInputModule,
-    NzButtonModule,
-    NzBreadCrumbModule,
-    NzTableModule,
-    NzDividerModule,
-    NzIconModule,
-    NzSelectModule,
-    NzDrawerModule,
-    NzModalModule,
-    NzGridModule,
     ReactiveFormsModule,
-    NzSpaceModule,
-    NzTypographyModule,
-    NzStepsModule,
-    NzListModule,
-    NzCardModule,
-    NzDescriptionsModule,
-    NzEmptyModule,
-    NzCheckboxModule,
-    NzAvatarModule,
-    NzDropDownModule,
+    NgZorroAntdModulesModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
