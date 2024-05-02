@@ -32,6 +32,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { NzEmptyComponent } from './nz-empty/nz-empty.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
 import { StepQuestionsComponent } from './step-questions/step-questions.component';
+import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -53,7 +54,8 @@ registerLocaleData(en);
     JobDetailsComponent,
     NzEmptyComponent,
     DropDowNmenuComponent,
-    StepQuestionsComponent
+    StepQuestionsComponent,
+    AddUserFormComponent
   ],
   imports: [
     BrowserModule,

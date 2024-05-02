@@ -11,6 +11,7 @@ import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
 import { AuthGuard } from './auth.guard';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { FormContainerComponent } from './form-container/form-container.component';
+import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'users/add', component: RegisterUserFormComponent,
+        path: 'users/add', component: AddUserFormComponent,
         data: {
           breadcrumb: 'Users Add'
         },
