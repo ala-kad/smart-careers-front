@@ -31,9 +31,16 @@ const routes: Routes = [
       breadcrumb: 'Home'
     },
     children: [
-      { path: 'users', component: UsersListingComponent,
+      {
+        path: 'users', component: UsersListingComponent,
         data: {
           breadcrumb: 'Users List'
+        },
+      },
+      {
+        path: 'users/add', component: RegisterUserFormComponent,
+        data: {
+          breadcrumb: 'Users Add'
         },
       },
       {
