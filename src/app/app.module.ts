@@ -54,6 +54,7 @@ import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.c
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { NzEmptyComponent } from './nz-empty/nz-empty.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
+import { StepQuestionsComponent } from './step-questions/step-questions.component';
 
 registerLocaleData(en);
 
@@ -75,7 +76,8 @@ registerLocaleData(en);
     StepTwoJobFormComponent,
     JobDetailsComponent,
     NzEmptyComponent,
-    DropDowNmenuComponent
+    DropDowNmenuComponent,
+    StepQuestionsComponent
   ],
   imports: [
     BrowserModule,
@@ -112,6 +114,7 @@ registerLocaleData(en);
     { provide: NZ_I18N, useValue: en_US },
     provideHttpClient(),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    StepQuestionsComponent
   ],
   bootstrap: [AppComponent]
 })
