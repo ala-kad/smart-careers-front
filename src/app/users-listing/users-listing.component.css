@@ -32,6 +32,9 @@ nz-select {
   padding: 4px 11px;
 }
 
+.outer-row {
+  flex-direction: column;
+}
 
 @media all and (max-width: 576px){
   nz-table tr th {
