@@ -8,39 +8,23 @@
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="pie-chart"></span>
-        <span> <a  (click)="navigateToJobs()"> Jobs </a></span>
+        <span> <a (click)="navigateToJobs()"> Jobs </a></span>
       </li>
     </ul>
   </nz-sider>
   <nz-layout class="inner-layout">
     <nz-header nzTheme="light">
-      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></span>
-        <div class="btn-wrapper" nz-dropdown [nzDropdownMenu]="menu">
-          <nz-avatar nzIcon="user" [nzAlt]="userPayload.username"></nz-avatar>
-          <span>{{userPayload.username}}</span>
-        </div>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu>
-            <app-logout></app-logout>
-          </ul>
-        </nz-dropdown-menu>
-
-
-       <!-- <nz-space nzSize="middle" nzWrap="true" class="btn-wrapper" [nzDirection]="direction">
-          <button nz-button nzType="primary" routerLink="/users/add" nzSize="small" *nzSpaceItem>
-            <span nz-icon nzType="plus" nzTheme="outline"></span>
-            Add new user
-          </button>
-          <button nz-button nzType="primary" class="search-btn" nzSize="small" *nzSpaceItem>
-            <span nz-icon nzType="search" nzTheme="outline"></span>
-            Search
-          </button>
-          <button nz-button nzType="primary" nzSize="small" *nzSpaceItem>
-            <span nz-icon nzType="filter" nzTheme="outline"></span>
-            Filter
-          </button>
-        </nz-space>  -->
-
+      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"></span>
+      <div class="btn-wrapper" nz-dropdown [nzDropdownMenu]="menu">
+        <nz-avatar nzIcon="user" [nzAlt]="userPayload.username"></nz-avatar>
+        <span>{{userPayload.username}}</span>
+      </div>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <app-logout></app-logout>
+        </ul>
+      </nz-dropdown-menu>
     </nz-header>
     <nz-content>
       <nz-breadcrumb [nzAutoGenerate]="true">
@@ -50,5 +34,3 @@
     <nz-footer>Footer</nz-footer>
   </nz-layout>
 </nz-layout>
-
-
