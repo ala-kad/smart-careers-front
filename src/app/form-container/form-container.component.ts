@@ -2,13 +2,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JobsService } from '../services/jobs.service';
-
+import { StepQuestionsComponent } from '../step-questions/step-questions.component'
 type Step = 'step1' | 'step2';
 
 @Component({
   selector: 'app-form-container',
   templateUrl: './form-container.component.html',
-  styleUrls: ['./form-container.component.css']
+  styleUrls: ['./form-container.component.css'],
+  providers: [StepQuestionsComponent]
 })
 
 export class FormContainerComponent implements OnInit {
@@ -25,7 +26,9 @@ export class FormContainerComponent implements OnInit {
   formTwoValues : any;
 
 
-  constructor(private _fb: FormBuilder, private jobService: JobsService) {}
+  constructor(private _fb: FormBuilder, private jobService: JobsService,
+    private questionComponent: StepQuestionsComponent
+  ) {}
 
   ngOnInit(): void {
 
@@ -77,6 +80,7 @@ export class FormContainerComponent implements OnInit {
 
   next(): void {
     this.current += 1;
+
     this.changeContent()
   }
 
@@ -93,20 +97,34 @@ export class FormContainerComponent implements OnInit {
     switch (this.current) {
       case 0: {
         this.index = 'First-content';
+        console.log(this.current);
+
         break;
       }
       case 1: {
         this.index = 'Second-content';
+        console.log(this.current);
+
         break;
       }
       case 2: {
         this.index = 'third-content';
+        console.log(this.current);
+
         break;
       }
+
       default: {
         this.index = 'error';
       }
     }
   }
 
+  handleQuestionsFormValues(values: string) {
+    console.log('Received Form Values:', values);
+  }
+
+  triggerEmitQuestions() {
+    this.questionComponent.emitQuestionsFormValues();
+  }
 }
