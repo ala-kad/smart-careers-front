@@ -1,0 +1,848 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>smart-careers-front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">smart-careers-front documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RegisterUserFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/register-user-form/register-user-form.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-register-user-form</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./register-user-form.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./register-user-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#confirmationValidator" >confirmationValidator</a>
+                            </li>
+                            <li>
+                                <a href="#validateForm" >validateForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getCaptcha" >getCaptcha</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#submitForm" >submitForm</a>
+                            </li>
+                            <li>
+                                <a href="#updateConfirmValidator" >updateConfirmValidator</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: UntypedFormBuilder, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:67</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>UntypedFormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCaptcha"></a>
+                    <span class="name">
+                        <span ><b>getCaptcha</b></span>
+                        <a href="#getCaptcha"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCaptcha(e: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitForm"></a>
+                    <span class="name">
+                        <span ><b>submitForm</b></span>
+                        <a href="#submitForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submitForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateConfirmValidator"></a>
+                    <span class="name">
+                        <span ><b>updateConfirmValidator</b></span>
+                        <a href="#updateConfirmValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateConfirmValidator()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationValidator"></a>
+                    <span class="name">
+                        <span ><b>confirmationValidator</b></span>
+                        <a href="#confirmationValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateForm"></a>
+                    <span class="name">
+                        <span ><b>validateForm</b></span>
+                        <a href="#validateForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>UntypedFormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/register-user-form/register-user-form.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from &#x27;@angular/forms&#x27;;
+
+import { NzFormTooltipIcon } from &#x27;ng-zorro-antd/form&#x27;;
+import { AuthService } from &#x27;../services/auth.service&#x27;;
+import { error } from &#x27;@ant-design/icons-angular&#x27;;
+
+import { Router, ActivatedRoute} from &#x27;@angular/router&#x27;;
+
+@Component({
+  selector: &#x27;app-register-user-form&#x27;,
+  templateUrl: &#x27;./register-user-form.component.html&#x27;,
+
+  styleUrls: [&#x27;./register-user-form.component.css&#x27;]
+})
+export class RegisterUserFormComponent implements OnInit {
+
+  validateForm!: UntypedFormGroup;
+
+  // captchaTooltipIcon: NzFormTooltipIcon &#x3D; {
+  //   type: &#x27;info-circle&#x27;,
+  //   theme: &#x27;twotone&#x27;
+  // };
+
+  submitForm(): void {
+    if (this.validateForm.valid) {
+      this.authService.registerRecruiter(this.validateForm.value).subscribe(
+        {
+          next: (data) &#x3D;&gt; {
+            console.log(data);
+
+            this.router.navigateByUrl(&quot;/dashboard&quot;).catch((res) &#x3D;&gt; {
+              console.log(res.message);
+            })
+          },
+          error(err) {
+              console.log(err.message);
+          },
+        }
+      )
+    } else {
+      Object.values(this.validateForm.controls).forEach(control &#x3D;&gt; {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+  updateConfirmValidator(): void {
+    /** wait for refresh value */
+    Promise.resolve().then(() &#x3D;&gt; this.validateForm.controls[&#x27;checkPassword&#x27;].updateValueAndValidity());
+  }
+
+  confirmationValidator &#x3D; (control: UntypedFormControl): { [s: string]: boolean } &#x3D;&gt; {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !&#x3D;&#x3D; this.validateForm.controls[&#x27;password&#x27;].value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  getCaptcha(e: MouseEvent): void {
+    e.preventDefault();
+  }
+
+  constructor(
+    private fb: UntypedFormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.validateForm &#x3D; this.fb.group({
+      email: [null, [Validators.email, Validators.required]],
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      // phoneNumberPrefix: [&#x27;+216&#x27;],
+      // phoneNumber: [null, [Validators.required]],
+      // website: [null, [Validators.required]],
+      // captcha: [null, [Validators.required]],
+      // agree: [false]
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div nz-row nzJustify&#x3D;&quot;center&quot; nzAlign&#x3D;&quot;middle&quot; style&#x3D;&quot;height: 100vh;&quot;&gt;
+  &lt;div nz-col nzSpan&#x3D;&quot;24&quot;&gt;
+    &lt;div nz-row nzJustify&#x3D;&quot;center&quot; nzAlign&#x3D;&quot;middle&quot; style&#x3D;&quot;height: 100%;&quot;&gt;
+      &lt;div nz-col nzSpan&#x3D;&quot;12&quot;&gt;
+        &lt;form nz-form [formGroup]&#x3D;&quot;validateForm&quot; (ngSubmit)&#x3D;&quot;submitForm()&quot;&gt;
+          &lt;nz-form-item&gt;
+            &lt;nz-form-label [nzSm]&#x3D;&quot;6&quot; [nzXs]&#x3D;&quot;24&quot; nzRequired nzFor&#x3D;&quot;email&quot;&gt;E-mail&lt;/nz-form-label&gt;
+            &lt;nz-form-control [nzSm]&#x3D;&quot;14&quot; [nzXs]&#x3D;&quot;24&quot; nzErrorTip&#x3D;&quot;The input is not valid E-mail!&quot;&gt;
+              &lt;input nz-input formControlName&#x3D;&quot;email&quot; id&#x3D;&quot;email&quot; /&gt;
+            &lt;/nz-form-control&gt;
+          &lt;/nz-form-item&gt;
+
+          &lt;nz-form-item&gt;
+            &lt;nz-form-label [nzSm]&#x3D;&quot;6&quot; [nzXs]&#x3D;&quot;24&quot; nzFor&#x3D;&quot;username&quot; nzRequired
+              nzTooltipTitle&#x3D;&quot;What do you want other to call you&quot;&gt;
+              &lt;span&gt;Username&lt;/span&gt;
+            &lt;/nz-form-label&gt;
+            &lt;nz-form-control [nzSm]&#x3D;&quot;14&quot; [nzXs]&#x3D;&quot;24&quot; nzErrorTip&#x3D;&quot;Please input your username!&quot;&gt;
+              &lt;input nz-input id&#x3D;&quot;username&quot; formControlName&#x3D;&quot;username&quot; /&gt;
+            &lt;/nz-form-control&gt;
+          &lt;/nz-form-item&gt;
+
+          &lt;nz-form-item&gt;
+            &lt;nz-form-label [nzSm]&#x3D;&quot;6&quot; [nzXs]&#x3D;&quot;24&quot; nzFor&#x3D;&quot;password&quot; nzRequired&gt;Password&lt;/nz-form-label&gt;
+            &lt;nz-form-control [nzSm]&#x3D;&quot;14&quot; [nzXs]&#x3D;&quot;24&quot; nzErrorTip&#x3D;&quot;Please input your password!&quot;&gt;
+              &lt;input nz-input type&#x3D;&quot;password&quot; id&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot;
+                (ngModelChange)&#x3D;&quot;updateConfirmValidator()&quot; /&gt;
+            &lt;/nz-form-control&gt;
+          &lt;/nz-form-item&gt;
+
+          &lt;nz-form-item&gt;
+            &lt;nz-form-label [nzSm]&#x3D;&quot;6&quot; [nzXs]&#x3D;&quot;24&quot; nzFor&#x3D;&quot;checkPassword&quot; nzRequired&gt;Confirm Password&lt;/nz-form-label&gt;
+            &lt;nz-form-control [nzSm]&#x3D;&quot;14&quot; [nzXs]&#x3D;&quot;24&quot; [nzErrorTip]&#x3D;&quot;errorTpl&quot;&gt;
+              &lt;input nz-input type&#x3D;&quot;password&quot; formControlName&#x3D;&quot;checkPassword&quot; id&#x3D;&quot;checkPassword&quot; /&gt;
+              &lt;ng-template #errorTpl let-control&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;control.hasError(&#x27;required&#x27;)&quot;&gt;Please confirm your password!&lt;/ng-container&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;control.hasError(&#x27;confirm&#x27;)&quot;&gt;
+                  Two passwords that you enter is inconsistent!
+                &lt;/ng-container&gt;
+              &lt;/ng-template&gt;
+            &lt;/nz-form-control&gt;
+          &lt;/nz-form-item&gt;
+
+          &lt;nz-form-item nz-row class&#x3D;&quot;register-area&quot;&gt;
+            &lt;nz-form-control [nzSpan]&#x3D;&quot;14&quot; [nzOffset]&#x3D;&quot;6&quot;&gt;
+              &lt;button nz-button nzType&#x3D;&quot;primary&quot;&gt;Register&lt;/button&gt;
+            &lt;/nz-form-control&gt;
+          &lt;/nz-form-item&gt;
+          &lt;span class&#x3D;&quot;span&quot;&gt;
+            Or
+            &lt;a routerLink&#x3D;&quot;/login&quot;&gt; Login &lt;/a&gt;
+          &lt;/span&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./register-user-form.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">
+      [nz-form] {
+        max-width: 600px;
+      }
+
+      .phone-select {
+        width: 70px;
+      }
+
+      .register-are {
+        margin-bottom: 8px;
+      }
+    </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div nz-row nzJustify="center" nzAlign="middle" style="height: 100vh;">  <div nz-col nzSpan="24">    <div nz-row nzJustify="center" nzAlign="middle" style="height: 100%;">      <div nz-col nzSpan="12">        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">          <nz-form-item>            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">              <input nz-input formControlName="email" id="email" />            </nz-form-control>          </nz-form-item>          <nz-form-item>            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired              nzTooltipTitle="What do you want other to call you">              <span>Username</span>            </nz-form-label>            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your username!">              <input nz-input id="username" formControlName="username" />            </nz-form-control>          </nz-form-item>          <nz-form-item>            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">              <input nz-input type="password" id="password" formControlName="password"                (ngModelChange)="updateConfirmValidator()" />            </nz-form-control>          </nz-form-item>          <nz-form-item>            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>            <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">              <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />              <ng-template #errorTpl let-control>                <ng-container *ngIf="control.hasError(\'required\')">Please confirm your password!</ng-container>                <ng-container *ngIf="control.hasError(\'confirm\')">                  Two passwords that you enter is inconsistent!                </ng-container>              </ng-template>            </nz-form-control>          </nz-form-item>          <nz-form-item nz-row class="register-area">            <nz-form-control [nzSpan]="14" [nzOffset]="6">              <button nz-button nzType="primary">Register</button>            </nz-form-control>          </nz-form-item>          <span class="span">            Or            <a routerLink="/login"> Login </a>          </span>        </form>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddUserFormComponent', 'selector': 'app-add-user-form'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DropDowNmenuComponent', 'selector': 'app-drop-dow-nmenu'},{'name': 'FormContainerComponent', 'selector': 'app-form-container'},{'name': 'JobDetailsComponent', 'selector': 'app-job-details'},{'name': 'JobDetailsFormComponent', 'selector': 'app-job-details-form'},{'name': 'JobReviewFormComponent', 'selector': 'app-job-review-form'},{'name': 'JobsListingComponent', 'selector': 'app-jobs-listing'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutComponent', 'selector': 'app-logout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'NzEmptyComponent', 'selector': 'app-nz-empty'},{'name': 'RegisterUserFormComponent', 'selector': 'app-register-user-form'},{'name': 'StepQuestionsComponent', 'selector': 'app-step-questions'},{'name': 'StepTwoJobFormComponent', 'selector': 'app-step-two-job-form'},{'name': 'UpdateUserFormComponent', 'selector': 'app-update-user-form'},{'name': 'UsersListingComponent', 'selector': 'app-users-listing'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RegisterUserFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RegisterUserFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
