@@ -1,4 +1,5 @@
   <form nz-form [formGroup]="jobDetailsForm" class="job-details-form" nzLayout="vertical" (ngSubmit)="addNewItem(jobDetailsForm.value)">
+
     <nz-form-item>
       <nz-form-label>Job Title</nz-form-label>
       <nz-form-control>
@@ -7,16 +8,37 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label>Skills</nz-form-label>
-      <nz-form-control >
-        <input id="skills" type="text" formControlName="skills" nz-input>
+      <nz-form-label>Job Summary</nz-form-label>
+      <nz-form-control>
+        <input id="jobSummary" type="text" formControlName="jobSummary" nz-input>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label>Experience</nz-form-label>
+      <nz-form-label>Key responsibilities </nz-form-label>
       <nz-form-control>
-        <input id="requiredExperience" type="number" formControlName="requiredExperience" nz-input>
+        <input id="responsibilities" type="text" formControlName="responsibilities" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Qualifications and skills </nz-form-label>
+      <nz-form-control>
+        <input id="qualificationsSkills" type="text" formControlName="qualificationsSkills" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Salary and Benefits </nz-form-label>
+      <nz-form-control>
+        <input id="salaryBenefits" type="text" formControlName="salaryBenefits" nz-input>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>Work Environment </nz-form-label>
+      <nz-form-control>
+        <input id="workEnv" type="text" formControlName="workEnv" nz-input>
       </nz-form-control>
     </nz-form-item>
 

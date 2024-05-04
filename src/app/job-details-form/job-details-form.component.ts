@@ -26,8 +26,11 @@ export class JobDetailsFormComponent implements OnInit{
     } else {
       this.jobDetailsForm = this.fb.group({
         title: ['', Validators.required],
-        skills: ['', Validators.required],
-        requiredExperience: ['', Validators.required]
+        jobSummary: [''],
+        responsibilities: [''],
+        qualificationsSkills: [''],
+        salaryBenefits: [''],
+        workEnv: [''],
       })
     }
    this.subformInitialized.emit(this.jobDetailsForm);
