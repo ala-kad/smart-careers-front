@@ -1,6 +1,5 @@
-
-nz-content {
-  padding: 10px;
+.outer-layout {
+  height: 100%;
 }
 
 nz-header {
@@ -9,12 +8,21 @@ nz-header {
   padding: 10px 20px;
 }
 
+nz-breadcrumb {
+  margin-bottom: 10px;
+}
+
+.main-content {
+  padding: 10px;
+
+}
+
 button {
   display: flex;
   align-items: center;
 }
 
-.trigger{
+.trigger {
   width: 20px;
   height: 20px;
 }
@@ -23,17 +31,17 @@ button {
   float: right;
 }
 
-.inner-layout .btn-wrapper button{
+.inner-layout .btn-wrapper button {
   float: left;
   margin: 0 16px;
 }
 
-.inner-layout .btn-wrapper button::last-child{
+.inner-layout .btn-wrapper button::last-child {
   margin: none;
 }
 
-@media all and (max-width: 576px){
-  nz-header{
+@media all and (max-width: 576px) {
+  nz-header {
     padding: 0 25px;
   }
 
@@ -41,11 +49,7 @@ button {
     display: block;
   }
 
-  .inner-layout .btn-wrapper {
-    float: none;
-  }
-
-  .inner-layout .btn-wrapper button{
+  .inner-layout .btn-wrapper button {
     float: none;
     justify-content: center;
     width: 100%;
@@ -53,8 +57,8 @@ button {
   }
 }
 
-@media all and (max-width: 992px){
-  nz-header{
+@media all and (max-width: 992px) {
+  nz-header {
     padding: 0 25px;
   }
 }
