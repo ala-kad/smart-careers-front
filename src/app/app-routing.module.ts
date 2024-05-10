@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { RegisterUserFormComponent } from './register-user-form/register-user-form.component';
@@ -14,9 +14,10 @@ import { FormContainerComponent } from './form-container/form-container.componen
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterUserFormComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'welcome' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  {
+    path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
   {
     path: 'welcome', component: WelcomeComponent,
     children: [
@@ -24,6 +25,9 @@ const routes: Routes = [
       { path: 'jobs/:id', component: JobDetailsComponent }
     ]
   },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterUserFormComponent },
+
 
   {
     path: 'dashboard', component: AdminDashboardComponent,
@@ -70,6 +74,7 @@ const routes: Routes = [
       },
     ]
   },
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
 ];
 
 @NgModule({
