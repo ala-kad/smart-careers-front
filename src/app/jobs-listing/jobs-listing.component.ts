@@ -22,12 +22,13 @@ export class JobsListingComponent implements OnInit{
   listOfJobs: any;
   jobDetails: any[] = [] ;
   jobId: any
-  listJobsLength: Number = 0;
+  listJobsLength!: Number;
 
   isAdmin = false;
   isRecruiter = false
   isGuest: boolean = false;
   status = '';
+  isLoading = true;
 
   ngOnInit(): void{
     this.isAdmin = this.authService.isAdmin();
@@ -41,6 +42,7 @@ export class JobsListingComponent implements OnInit{
         next: (data) => {
           this.listOfJobs = data;
           this.listJobsLength = data.length;
+          this.isLoading = false
         },
         error: (err) => {
           console.log(err.message);
@@ -101,6 +103,7 @@ export class JobsListingComponent implements OnInit{
         this.jobsService.getJobsList('').subscribe({
           next: (data) => {
             this.listOfJobs = data;
+            this.listJobsLength = data.length;
           },
           error: (err) => {
             console.log(err);

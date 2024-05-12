@@ -10,22 +10,37 @@
   </div>
 
   <div nz-col>
-    <nz-list nzGrid>
+    <nz-list nzGrid [nzLoading]="isLoading">
       <div nz-row [nzGutter]="16">
         <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
           <nz-list-item>
             <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, actionDelete]" [nzExtra]="publishActionTPl">
-              <p>
-                {{job.description}}
+              <span nz-typography>
+                <strong>Key Responsibilites :</strong>
+              </span>
+              <p nz-typography>
+                {{job.responsibilities}}
               </p>
-              <span> {{job.skills}} </span>
-              <span> {{ job.publishedOn | date:'dd-MM-yyyy' }}</span>
-              <span> {{ job.status }}</span>
+              <span nz-typography>
+                <strong>Skills and Qualifications :</strong>
+              </span>
+              <p nz-typography> {{job.skillsQualitfications}} </p>
+              <div class="status-date">
+                <span nz-typography>
+                  <strong nz-typography>
+                   {{ job.status }}
+                  </strong>
+                </span>
+                <span nz-typography>
+                  <strong nz-typography>
+                    {{ job.publishedOn | date:'dd-MM-yyyy' }}
+                  </strong>
+                </span>
+              </div>
             </nz-card>
           </nz-list-item>
           <ng-template #actionView>
             <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)" *ngIf="isRecruiter || isAdmin"></span>
-            <span nz-icon nzType="eye" nzTheme="outline" [routerLink]="['./jobs', job._id]"></span>
           </ng-template>
           <ng-template #actionEdit >
             <span nz-icon nzType="edit" *ngIf="isRecruiter || isAdmin"></span>
@@ -39,7 +54,7 @@
         </div>
       </div>
     </nz-list>
-    <app-nz-empty *ngIf="listJobsLength==0"></app-nz-empty>
+    <app-nz-empty *ngIf="listJobsLength === 0"></app-nz-empty>
   </div>
 </div>
 
