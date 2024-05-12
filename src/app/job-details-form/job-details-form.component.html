@@ -1,46 +1,55 @@
-  <form nz-form [formGroup]="jobDetailsForm" class="job-details-form" nzLayout="vertical" (ngSubmit)="addNewItem(jobDetailsForm.value)">
+<form nz-form [formGroup]="jobDetailsForm" class="job-details-form" nzLayout="vertical">
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="jobTitle">Job Title</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <input id="jobTitle" type="text" formControlName="title" nz-input (blur)="checkControlValidty()">
+      <ng-template #errorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please write something here</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-label>Job Title</nz-form-label>
-      <nz-form-control>
-        <input id="jobTitle" type="text" formControlName="title" nz-input>
-      </nz-form-control>
-    </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired  nzFor="responsibilities">Key responsibilities </nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <input id="responsibilities" type="text" formControlName="responsibilities" nz-input (blur)="checkControlValidty()">
+      <ng-template #errorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please write something here</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-label>Job Summary</nz-form-label>
-      <nz-form-control>
-        <input id="jobSummary" type="text" formControlName="jobSummary" nz-input>
-      </nz-form-control>
-    </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="qualificationsSkills">Qualifications and skills </nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <input id="qualificationsSkills" type="text" formControlName="qualificationsSkills" nz-input (blur)="checkControlValidty()">
+      <ng-template #errorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please write something here</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-label>Key responsibilities </nz-form-label>
-      <nz-form-control>
-        <input id="responsibilities" type="text" formControlName="responsibilities" nz-input>
-      </nz-form-control>
-    </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="salaryBenefits">Salary and Benefits </nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <input id="salaryBenefits" type="text" formControlName="salaryBenefits" nz-input (blur)="checkControlValidty()">
+      <ng-template #errorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">Please write something here</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-label>Qualifications and skills </nz-form-label>
-      <nz-form-control>
-        <input id="qualificationsSkills" type="text" formControlName="qualificationsSkills" nz-input>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-label>Salary and Benefits </nz-form-label>
-      <nz-form-control>
-        <input id="salaryBenefits" type="text" formControlName="salaryBenefits" nz-input>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-label>Work Environment </nz-form-label>
-      <nz-form-control>
-        <input id="workEnv" type="text" formControlName="workEnv" nz-input>
-      </nz-form-control>
-    </nz-form-item>
-
-    <button type="submit">Submit</button>
-  </form>
+  <nz-form-item>
+    <nz-form-label nzRequired>Work Environment </nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <nz-select formGroupName="workEnv" formControlName="workEnv">
+        <nz-option nzValue="Onsite" nzLabel="Onsite"></nz-option>
+        <nz-option nzValue="Hybrid" nzLabel="Hybrid"></nz-option>
+        <nz-option nzValue="Remote" nzLabel="Remote"></nz-option>
+      </nz-select>
+    </nz-form-control>
+    <ng-template #errorTpl let-control>
+      <ng-container *ngIf="control.hasError('required')">Please write something here</ng-container>
+    </ng-template>
+  </nz-form-item>
+</form>
