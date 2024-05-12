@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { NzModalRef, NzModalService, NZ_MODAL_DATA  } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService, NZ_MODAL_DATA, ModalOptions  } from 'ng-zorro-antd/modal';
 
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { JobsService } from './jobs.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class UiInteractionsService {
   constructor(
     private modal: NzModalService,
     private userService: UserService,
-    private jobService: JobsService
+    private jobService: JobsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+
   ) { }
 
   openModal(userId: any): Observable<void> {
@@ -47,7 +51,6 @@ export class UiInteractionsService {
     return new Observable<void>(observer => {
       this.modal.confirm({
       nzTitle: 'Are you sure you want to delete this job ?',
-      nzContent: 'Content',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
@@ -57,23 +60,9 @@ export class UiInteractionsService {
           next: () => {
             observer.next();
             observer.complete();
-            // this.jobService.getJobsList().subscribe({
-            //   next: (data) => {
-            //     console.log(data);
-
-            //   }
-            //   ,
-            //   error: (err) => {
-            //     console.log(err);
-
-            //   }
-            // })
-          }
-          ,
+          },
           error: (err) => {
-            // console.log(err);
             observer.error(err);
-
           }
         })
       },
@@ -83,15 +72,18 @@ export class UiInteractionsService {
       });
     });
   }
+
+  openSuccessModal() {
+    const modalRef = this.modal.success({
+      nzTitle: 'Job successfully created',
+      nzOkType: 'primary',
+      nzOkText: 'Ok',
+      nzOnOk: () => {
+        modalRef.destroy()
+        this.router.navigate(['dashboard','jobs'])
+      }
+    })
+  }
 }
 
-// subscribe({
-//   next: (data) => { console.log(data); this.jobService.getJobsList().subscribe({
-//     next: (data) => { console.log(data.length); data.filter((elem: { _id: any; }) => elem._id !== jobId )
-//     },
-//     error: (err) => { console.log(err);
-//     }
-//   }
-//   )},
-//   error: (err) => { console.log(err) }
-// })
+
