@@ -168,8 +168,6 @@ export class UsersListingComponent implements OnInit {
   }
 
   editUserRoles(id: any, update: any) {
-    console.log(id);
-    console.log(typeof(id));
     this.userService.editUser(id, update).subscribe({
       next: () => {
         // Update the list of users after successful deletion
