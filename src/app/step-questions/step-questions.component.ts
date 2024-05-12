@@ -20,6 +20,13 @@ export class StepQuestionsComponent implements OnInit{
       questions:
       this._fb.array([this._fb.control('')])
     })
+
+    this.questionsForm.valueChanges.subscribe({
+      next: (data) => {
+        this.emitQuestions.emit(data)
+      },
+      error: (err) => {console.log(err)}
+    })
   }
 
   getQuestions () {
@@ -33,10 +40,4 @@ export class StepQuestionsComponent implements OnInit{
   removeQuestion (index: number) {
     this.getQuestions().removeAt(index);
   }
-
-  emitQuestionsFormValues() {
-    this.emitQuestions.emit(this.questionsForm.value);
-
-  }
-
 }
