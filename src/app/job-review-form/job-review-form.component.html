@@ -1,7 +1,5 @@
-<span>Job infos</span>
-<p> {{ formOneValues.title }}</p>
-<p> {{ formOneValues.requiredExperience }}</p>
-<p> {{ formOneValues.skills }}</p>
-<p> {{ formOneValues.description }}</p>
-<span>Preselection questions</span>
+<div [innerHTML]="sanitizedEditor"></div>
 
+<ul>
+  <li *ngFor="let question of formTwoValues.questions; let i = index"> {{ question}} </li>
+</ul>

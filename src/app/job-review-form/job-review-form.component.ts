@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 import { JobsService } from '../services/jobs.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-job-review-form',
@@ -8,33 +9,19 @@ import { JobsService } from '../services/jobs.service';
   styleUrls: ['./job-review-form.component.css']
 })
 export class JobReviewFormComponent {
-  @Input() startingForm: FormGroup | undefined;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<string> = new EventEmitter<string>();
 
-
-  @Input() formOneValues : any;
   @Input() formTwoValues : any;
+  @Input() editor : any;
+
+  sanitizedEditor!: SafeHtml;
+
 
   constructor(
-    private jobService: JobsService
+    private jobService: JobsService,
+    private sanitizer: DomSanitizer
   ) {}
 
-
   ngOnInit(): void {
-
+    this.sanitizedEditor = this.sanitizer.bypassSecurityTrustHtml(this.editor);
   }
-
-
-  submitForms() {
-    const val1 = this.formOneValues;
-    const val2 = this.formTwoValues;
-    const val = {...val1, ...val2}
-    console.log(val)
-    this.jobService.postNewJobOffer(val).subscribe({
-      next: (data) => { console.log(data)},
-      error: (err) => { console.log(err )}
-    })
-  }
-
 }
