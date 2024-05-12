@@ -1,56 +1,54 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { JobsService } from '../services/jobs.service';
 
 @Component({
   selector: 'app-job-details-form',
   templateUrl: './job-details-form.component.html',
   styleUrls: ['./job-details-form.component.css']
 })
+
 export class JobDetailsFormComponent implements OnInit{
 
-  @Input() startingForm: FormGroup | undefined;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<string> = new EventEmitter<string>();
+  @Input() jobDetailsInfos: any;
 
-  @Output() newItemEvent = new EventEmitter<string>();
-
-  constructor(
-    private fb: FormBuilder
-  ) {}
+  @Output() jobDetailsEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() formReady: EventEmitter<FormGroup>  = new EventEmitter<FormGroup>();
 
   jobDetailsForm!: FormGroup  ;
+  selectedOption: any;
+
+  constructor(private fb: FormBuilder) {
+    this.jobDetailsForm = this.fb.group({
+      title: ['', [Validators.required]],
+      responsibilities: ['', [Validators.required]],
+      qualificationsSkills: ['', [Validators.required]],
+      salaryBenefits: ['', [Validators.required]],
+      workEnv: ['', [Validators.required]],
+    })
+  }
 
   ngOnInit(): void {
-    if (this.startingForm) {
-      this.jobDetailsForm = this.startingForm;
-    } else {
-      this.jobDetailsForm = this.fb.group({
-        title: ['', Validators.required],
-        jobSummary: [''],
-        responsibilities: [''],
-        qualificationsSkills: [''],
-        salaryBenefits: [''],
-        workEnv: [''],
-      })
-    }
-   this.subformInitialized.emit(this.jobDetailsForm);
-   this.newItemEvent.emit(this.jobDetailsForm.value)
+    this.formReady.emit(this.jobDetailsForm);
+    this.jobDetailsForm.valueChanges.subscribe({
+      next: (data) => {
+        if (this.jobDetailsForm.valid) {
+          // Emit the form data when all inputs are valid
+          this.jobDetailsEmitter.emit(data);
+
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
-
-  doChangeStep(direction: 'forward') {
-    this.changeStep.emit(direction);
+  checkControlValidty() {
+    Object.values(this.jobDetailsForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+        }
+      });
   }
-
-  submitForm() {
-    console.log(this.jobDetailsForm.value);
-
-  }
-
-  addNewItem(formValue: string) {
-    this.newItemEvent.emit(formValue)
-    console.log(formValue);
-
-  }
-
 }
