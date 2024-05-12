@@ -1,1 +1,9 @@
-<p>job-details works!</p>
+<nz-card [nzTitle]="jobDetails?.title" [nzHoverable]="true" >
+  <p nz-typography>
+    {{jobDetails?.responsibilities}}
+  </p>
+  <p nz-typography> {{jobDetails?.skills}} </p>
+  <p nz-typography> {{ jobDetails?.skillsQualitfications }} </p>
+  <p nz-typography> {{ jobDetails?.location }} </p>
+</nz-card>
+
