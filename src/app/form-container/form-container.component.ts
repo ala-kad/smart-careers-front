@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { JobsService } from '../services/jobs.service';
 import { StepQuestionsComponent } from '../step-questions/step-questions.component'
-type Step = 'step1' | 'step2';
+import { JobDetailsFormComponent } from '../job-details-form/job-details-form.component';
+import { Editor, Toolbar } from 'ngx-editor';
+import { UiInteractionsService } from '../services/ui-interactions.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-container',
@@ -14,65 +16,28 @@ type Step = 'step1' | 'step2';
 
 export class FormContainerComponent implements OnInit {
 
-  private currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('step1');
-  public currentStep$: Observable<Step> = this.currentStepBs.asObservable();
+  @ViewChild('step1') jobDetailsFormRef!: JobDetailsFormComponent;
 
-  public stepOneFom!: FormGroup ;
+  current = 0;
+  formOneData : any;
+  formQuestionData: any;
 
-  formValues = '';
-  formTwo!: FormGroup;
+  genIARes: any;
+  formsData : any ;
 
-  formOne : any;
-  formTwoValues : any;
+  editorContent: any;
+  editorHTMLContent: any;
 
+  jobDetailsForm!: FormGroup;
 
-  constructor(private _fb: FormBuilder, private jobService: JobsService,
-    private questionComponent: StepQuestionsComponent
-  ) {}
+  constructor(
+    private jobService: JobsService,
+    private uiService: UiInteractionsService,
+  ) { }
 
   ngOnInit(): void {
 
   }
-
-  subformInitialized(name: string, group: FormGroup) {
-    this.stepOneFom?.setControl(name, group);
-  }
-
-  submitForm() {
-    const formValues = this.stepOneFom?.value;
-    // submit the form with a service
-  }
-
-  submitFormOne(value: string) {
-    this.formValues = value;
-    this.formOne = value;
-  }
-
-  submitFormTwo(formValue: FormGroup) {
-    this.formTwo = formValue.value;
-    this.formTwoValues = formValue.value;
-  }
-
-  changeStep(currentStep: string, direction: 'forward' | 'back') {
-    switch(currentStep) {
-      case 'step1':
-        if (direction =='forward') {
-          this.currentStepBs.next('step1');
-        }
-        break;
-      case 'step2':
-        if (direction == 'back') {
-          this.currentStepBs.next('step2');
-        }
-        break;
-    }
-  }
-
-
-
-  current = 0;
-
-  index = 'First-content';
 
   pre(): void {
     this.current -= 1;
@@ -80,51 +45,61 @@ export class FormContainerComponent implements OnInit {
 
   next(): void {
     this.current += 1;
-
-    this.changeContent()
+    this.changeContent();
   }
 
   done(): void {
-    const formValues = {...this.formOne, ...this.formTwoValues}
-    this.jobService.postNewJobOffer(formValues).subscribe({
-      next: (data) => { console.log(data); },
-      error: (err) => { console.log(err);
-       }
+    this.formsData = {...this.formOneData, ...this.formQuestionData}
+
+    this.jobService.postNewJobOffer(this.formsData).subscribe({
+      next: (data) => {
+        this.uiService.openSuccessModal();
+      },
+      error: (err) => {
+        console.log(err);
+      }
     })
+  }
+
+  receiveFormDataOne(formData: string): void {
+    this.formOneData = formData;
+    console.log(this.formOneData);
+  }
+
+  handleQuestionsFormValues(values: string) {
+    this.formQuestionData = values
+  }
+
+  recieveJobDetailsForm(form: FormGroup) {
+    this.jobDetailsForm = form
+  }
+
+  setEditor(e: any){
+    this.editorContent = e;
+  }
+
+  handleHtmlEditorContent(content: any) {
+    this.editorHTMLContent = content
+    console.log(this.editorHTMLContent);
   }
 
   changeContent(): void {
     switch (this.current) {
-      case 0: {
-        this.index = 'First-content';
-        console.log(this.current);
-
-        break;
-      }
       case 1: {
-        this.index = 'Second-content';
-        console.log(this.current);
-
-        break;
-      }
-      case 2: {
-        this.index = 'third-content';
-        console.log(this.current);
-
+        this.jobService.generateTextFromGenIA(this.formOneData).subscribe({
+          next: (data) => {
+            this.genIARes = data;
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        })
         break;
       }
 
       default: {
-        this.index = 'error';
+        console.log('error')
       }
     }
-  }
-
-  handleQuestionsFormValues(values: string) {
-    console.log('Received Form Values:', values);
-  }
-
-  triggerEmitQuestions() {
-    this.questionComponent.emitQuestionsFormValues();
   }
 }

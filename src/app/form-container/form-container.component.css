@@ -5,11 +5,16 @@
   background-color: #fafafa;
   min-height: 200px;
   text-align: center;
-  padding: 30px 80px;
+  padding: 16px;
+}
+
+.steps-content{
+  margin-bottom: 12px;
 }
 .steps-content .title {
   text-align: center;
 }
+
 .steps-action {
   margin-top: 24px;
 }
