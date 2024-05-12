@@ -1,43 +1,89 @@
-import { Component,  OnInit, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, OnChanges, SimpleChanges, AfterContentInit } from '@angular/core';
+import { Editor, Toolbar, toHTML  } from 'ngx-editor';
+import { JobsService } from '../services/jobs.service';
+
 @Component({
   selector: 'app-step-two-job-form',
   templateUrl: './step-two-job-form.component.html',
   styleUrls: ['./step-two-job-form.component.css']
 })
 
-export class StepTwoJobFormComponent implements OnInit {
+export class StepTwoJobFormComponent implements OnInit, OnDestroy, OnChanges{
 
-  constructor (private _fb: FormBuilder) {} ;
+  editor!: Editor;
+  html!: any;
 
-  @Output() formValueEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Input() genIaData: any;
+  @Input() jobDetailsInfo: any;
 
-  stepTwoJobForm!: FormGroup;
+  @Output() setEditor: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output() emitHTMLEditorContent: EventEmitter<any> = new EventEmitter<any>();
+
+
+  toolbar: Toolbar = [
+    // default value
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    // or, set options for link:
+    //[{ link: { showOpenInNewTab: false } }, 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+    ['horizontal_rule', 'format_clear'],
+  ];
+
+  constructor(
+    private jobService: JobsService,
+  ){
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Listen for changes in genIaData and update the editor content accordingly
+    if (changes['genIaData'] && !changes['genIaData'].firstChange) {
+      this.updateEditorContent();
+    }
+
+
+  }
 
   ngOnInit(): void {
-    this.stepTwoJobForm = this._fb.group({
-      description: [''],
-      profile: [''],
-      benefits: [''],
-    questions:
-      this._fb.array([this._fb.control('')])
+    this.editor = new Editor({
+      content: 'loading'
+    });
+    this.editor.valueChanges.subscribe({
+      next: (data) => {
+        this.setEditor.emit(data)
+        console.log(data);
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
     })
   }
 
-
-  getQuestions () {
-    return this.stepTwoJobForm.get('questions') as FormArray;
+  // make sure to destory the editor
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
-  addQuestion() {
-    this.getQuestions().push(this._fb.control(''));
+  private updateEditorContent(): void {
+    // Set the editor content with the new data
+    this.editor.setContent(this.genIaData);
   }
 
-  removeQuestion (index: number) {
-    this.getQuestions().removeAt(index);
+  newMessage() {
+    //this.jobService.changeMessage(this.editor.getContent(this.))
   }
 
-  submitForm() {
-   this.formValueEmitter.emit(this.stepTwoJobForm);
+  editorChange(event: any){
+    const htmlTexEditor = toHTML(this.html);
+    console.log(htmlTexEditor);
+    this.emitHTMLEditorContent.emit(htmlTexEditor)
   }
 }
