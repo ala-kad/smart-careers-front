@@ -1,0 +1,26 @@
+<nz-steps [nzCurrent]="current">
+  <nz-step></nz-step>
+  <nz-step></nz-step>
+  <nz-step></nz-step>
+  <nz-step></nz-step>
+</nz-steps>
+
+<div class="steps-content">
+  <app-step-one *ngIf="current === 0"></app-step-one>
+</div>
+
+<div class="d-flex align-items-center justify-content-around">
+
+  <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+    <span>Previous</span>
+  </button>
+
+  <button nz-button nzType="default" type="submit" (click)="next()" *ngIf="current  < 3">
+    <span>Next</span>
+  </button>
+
+  <button nz-button nzType="primary" (click)="done()" *ngIf="current === 3">
+    <span>Submit</span>
+  </button>
+</div>
+
