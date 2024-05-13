@@ -7,6 +7,7 @@ import { HttpClientModule, provideHttpClient, HTTP_INTERCEPTORS } from '@angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModulesModule } from './shared/modules/ng-zoro-antd-modules/ng-zorro-antd-modules.module';
 import { NgxEditorModule } from 'ngx-editor';
+import { CandidateModule } from './candidate/candidate.module';
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -66,7 +67,8 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgZorroAntdModulesModule,
-    NgxEditorModule
+    NgxEditorModule,
+    CandidateModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
