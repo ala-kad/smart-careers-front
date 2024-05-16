@@ -84,6 +84,18 @@ export class UiInteractionsService {
       }
     })
   }
+
+  openSuccessJobModal() {
+    let modalRef = this.modal.success({
+      nzTitle: 'Application successfully submitted',
+      nzOkType: 'primary',
+      nzOkText: 'Ok',
+      nzOnOk: () => {
+        modalRef.destroy()
+        this.router.navigate(['dashboard', 'candidate'])
+      }
+    })
+  }
 }
 
 
