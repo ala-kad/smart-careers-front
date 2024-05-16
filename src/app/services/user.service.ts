@@ -20,8 +20,6 @@ export class UserService {
   }
 
   editUser(id: any, update: any): Observable<any> {
-    console.log(update);
-
     return this.http.patch(`http://localhost:3000/users/${id}`, update, {responseType: 'text'});
   }
 
