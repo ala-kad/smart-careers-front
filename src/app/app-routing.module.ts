@@ -19,7 +19,6 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   {
     path: 'welcome', component: WelcomeComponent,
     children: [
@@ -73,8 +72,10 @@ const routes: Routes = [
           breadcrumb: 'Jobs Details'
         }
       },
-      { path: 'candidate', loadChildren: () => import('./candidate/candidate.module').then(m => m.CandidateModule) },
-
+      {
+        path: 'candidate',
+        loadChildren: () => import('./candidate/candidate.module').then(m => m.CandidateModule)
+      },
     ]
   },
 ];
