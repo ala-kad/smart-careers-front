@@ -1,0 +1,10 @@
+<form nz-form [formGroup]="stepTwoForm" nzLayout="vertical">
+
+  <nz-form-item *ngFor="let question of questions; let i = index">
+    <nz-form-label nzRequired>{{question}}</nz-form-label>
+    <nz-form-control>
+      <input nz-input type="text" formControlName="responses">
+    </nz-form-control>
+  </nz-form-item>
+
+</form>
