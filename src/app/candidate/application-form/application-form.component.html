@@ -1,12 +1,13 @@
 <nz-steps [nzCurrent]="current">
-  <nz-step></nz-step>
-  <nz-step></nz-step>
+  <nz-step nzTitle="Personal infos"></nz-step>
+  <nz-step nzTitle="Preselection questions"></nz-step>
   <nz-step></nz-step>
   <nz-step></nz-step>
 </nz-steps>
 
 <div class="steps-content">
-  <app-step-one *ngIf="current === 0"></app-step-one>
+  <app-step-one *ngIf="current === 0" (formEmitter)="recieveStepOneForm($event)"></app-step-one>
+  <app-step-two *ngIf="current === 1"></app-step-two>
 </div>
 
 <div class="d-flex align-items-center justify-content-around">
@@ -15,7 +16,7 @@
     <span>Previous</span>
   </button>
 
-  <button nz-button nzType="default" type="submit" (click)="next()" *ngIf="current  < 3">
+  <button nz-button nzType="default" type="submit" (click)="next()" *ngIf="current  < 3" [disabled]="stepOneForm.invalid">
     <span>Next</span>
   </button>
 
