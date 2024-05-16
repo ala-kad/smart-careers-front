@@ -68,7 +68,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NgZorroAntdModulesModule,
     NgxEditorModule,
-    CandidateModule
+    CandidateModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
