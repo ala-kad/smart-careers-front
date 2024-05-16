@@ -16,16 +16,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<any>{
-    return this.http.post('http://localhost:3000/users/login', {email, password});
-  }
 
-  register(User: any): Observable<any> {
-    return this.http.post('http://localhost:3000/users/', User);
+
+  registerCandidate(User: any): Observable<any> {
+    return this.http.post('http://localhost:3000/users/candidate', User);
   }
 
   registerRecruiter(Recruiter: any): Observable<any> {
     return this.http.post('http://localhost:3000/users/recruiter', Recruiter);
+  }
+
+  login(email: string, password: string): Observable<any>{
+    return this.http.post('http://localhost:3000/users/login', {email, password});
   }
 
   logout() {
@@ -36,13 +38,26 @@ export class AuthService {
     return !!localStorage.getItem('TOKEN');
   }
 
+  getUserCrendentials (): any {
+    const token = localStorage.getItem('TOKEN');
+    if(token){
+      return jwtDecode(token);
+    }else {
+      return 'Error';
+    }
+  }
+
+  getUserRole (): any {
+    const accessToken = this.getUserCrendentials();
+    return accessToken.role;
+  }
+
   isGuest(): boolean {
     if(!this.isAuthenticatedFun()){
       return true;
     }
     return false;
   }
-
 
   isAdmin(): boolean {
     if(this.isAuthenticatedFun() && this.getUserRole()==='admin'){
@@ -58,21 +73,12 @@ export class AuthService {
     return false;
   }
 
-  getUserCrendentials (): any {
-    const token = localStorage.getItem('TOKEN');
-    if(token){
-      return jwtDecode(token);
-    }else {
-      return 'Error';
+  isCandidate(): boolean {
+    if(this.isAuthenticatedFun() && this.getUserRole()==='candidate'){
+      return true;
     }
+    return false;
   }
 
-  getUserRole (): string {
-    const accessToken = this.getUserCrendentials();
-    if (accessToken.role.length > 1) {
-      return  'recruiter';
-    }
-      return 'admin';
-    }
 
 }
