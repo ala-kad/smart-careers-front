@@ -10,13 +10,15 @@ import { CandidateRoutingModule } from './candidate-routing.module';
 import { CandidateComponent } from './candidate.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { StepOneComponent } from './step-one/step-one.component';
+import { StepTwoComponent } from './step-two/step-two.component';
 
 
 @NgModule({
   declarations: [
     CandidateComponent,
     ApplicationFormComponent,
-    StepOneComponent
+    StepOneComponent,
+    StepTwoComponent
   ],
   imports: [
     CommonModule,
