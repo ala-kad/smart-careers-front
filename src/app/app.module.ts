@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +35,7 @@ import { NzEmptyComponent } from './nz-empty/nz-empty.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
 import { StepQuestionsComponent } from './step-questions/step-questions.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 registerLocaleData(en);
 
 @NgModule({
@@ -69,6 +70,12 @@ registerLocaleData(en);
     NgZorroAntdModulesModule,
     NgxEditorModule,
     CandidateModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
