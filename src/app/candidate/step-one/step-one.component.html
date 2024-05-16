@@ -1,63 +1,62 @@
 <form nz-form [formGroup]="formInfos" nzLayout="vertical">
-
   <nz-form-item nzGutter="[16, 16]">
-    <nz-form-label nzRequired=""></nz-form-label>
-    <nz-form-control nzSpan="6">
+    <nz-form-label nzSpan="12" nzOffset="6"></nz-form-label>
+    <nz-form-control nzSpan="12" nzSpan="12" nzOffset="6">
       <input nz-input type="file" accept=".bmp,.gif,.jfif,.jpeg,.jpg,.png,.tif,.tiff,.webp" formControlName="avatar" />
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item nzGutter="[16, 16]" >
-    <nz-form-label nzFor="firstname" nzRequired [nzSpan]="6">
+  <nz-form-item nzGutter="[16, 16]">
+    <nz-form-label nzFor="firstname" nzRequired nzSpan="12" nzOffset="6">
       Firstname
     </nz-form-label>
-    <nz-form-control [nzSpan]="6">
+    <nz-form-control nzSpan="12" nzOffset="6" [nzErrorTip]="errorTpl">
       <input type="text" nz-input formControlName="firstname" id="firstname" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label nzFor="lastname" nzRequired [nzSpan]="6">
+    <nz-form-label nzFor="lastname" nzRequired nzSpan="12" nzOffset="6">
       Lastname
     </nz-form-label>
-    <nz-form-control [nzSpan]="6">
+    <nz-form-control nzSpan="12" nzSpan="12" nzOffset="6">
       <input type="text" nz-input formControlName="lastname" id="lastname" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item nzGutter="[16, 16]">
-    <nz-form-label nzFor="email" nzRequired [nzSpan]="6">
+    <nz-form-label nzFor="email" nzRequired nzSpan="12" nzOffset="6">
       Email
     </nz-form-label>
-    <nz-form-control [nzSpan]="6">
+    <nz-form-control nzSpan="12" nzOffset="6" [nzErrorTip]="errorTpl">
       <input type="email" nz-input formControlName="email" id="email" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label nzFor="confirmEmail" nzRequired [nzSpan]="6">
+    <nz-form-label nzFor="confirmEmail" nzSpan="12" nzOffset="6" nzRequired>
       Confirm your Email
     </nz-form-label>
-    <nz-form-control [nzSpan]="6">
-      <input type="email" nz-input formControlName="confirmEmail" id="confirmEmail"/>
+    <nz-form-control nzSpan="12" nzOffset="6" [nzErrorTip]="errorTpl">
+      <input type="email" nz-input formControlName="confirmEmail" id="confirmEmail" (ngModelChange)="updateConfirmValidator()"/>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item nzGutter="[16, 16]">
-    <nz-form-label nzFor="adress" nzRequired [nzSpan]="6">
+    <nz-form-label nzFor="adress" nzRequired nzSpan="12" nzOffset="6">
       Adress
     </nz-form-label>
-    <nz-form-control [nzSpan]="6">
+    <nz-form-control nzSpan="12" nzOffset="6">
       <input type="text" nz-input formControlName="adress" id="adress" />
     </nz-form-control>
 
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label nzFor="adress" nzRequired [nzSpan]="6">
+    <nz-form-label nzFor="adress" nzRequired nzSpan="12" nzOffset="6">
       Phone number
     </nz-form-label>
-    <nz-form-control [nzSpan]="6">
+    <nz-form-control nzSpan="12" nzOffset="6" [nzErrorTip]="errorTpl">
       <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
         <ng-template #addOnBeforeTemplate>
           <nz-select formControlName="phoneNumberPrefix" class="phone-select">
@@ -65,10 +64,20 @@
             <nz-option nzLabel="+33" nzValue="+33"></nz-option>
           </nz-select>
         </ng-template>
-        <input type="number" nz-input formControlName="phone" id="phone" />
+        <input type="number" nz-input formControlName="phone" id="phone" placeholder="00 000 000"/>
       </nz-input-group>
-
     </nz-form-control>
   </nz-form-item>
 
+  <nz-form-item nzGutter="[16, 16]">
+    <nz-form-label nzRequired nzSpan="12" nzOffset="6">Resume </nz-form-label>
+    <nz-form-control nzSpan="12" nzSpan="12" nzOffset="6" [nzErrorTip]="errorTpl">
+      <input nz-input type="file" accept=".docx,.pdf,.html, .htm" formControlName="cv" placeholder="Import your CV"/>
+    </nz-form-control>
+  </nz-form-item>
 </form>
+
+<ng-template #errorTpl let-control>
+  <ng-container *ngIf="control.hasError('required')"> This field is required! </ng-container>
+  <ng-container *ngIf="control.hasError('confirm')"> Two emails that you enter is inconsistent! </ng-container>
+</ng-template>
