@@ -5,7 +5,7 @@ import { ApplicationFormComponent } from './application-form/application-form.co
 
 const routes: Routes = [
   { path: '', component: CandidateComponent },
-  { path: 'application/job', component: ApplicationFormComponent }
+  { path: ':userId/application/job/:id', component: ApplicationFormComponent }
 ];
 
 @NgModule({
