@@ -1,7 +1,6 @@
-import { Component, OnInit, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {FormGroup, FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,103 +8,100 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './step-one.component.html',
   styleUrls: ['./step-one.component.css']
 })
-export class StepOneComponent implements OnInit, OnChanges {
+export class StepOneComponent implements OnInit{
 
-  @Output() formEmitter: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  formInfos!: FormGroup;
+  @Output() cvUploadEmitter: EventEmitter<FormData> = new EventEmitter<FormData>();
+
+  @Output() value: EventEmitter<any> =  new EventEmitter<any>();
+
+  public formInfos!: FormGroup;
   candidateInfos!: any;
   candidateId: any;
-
   constructor (
     private fb: FormBuilder,
-    private authService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
   ) 
   { 
-    this.formInfos = this.fb.group({
-      avatar: ['',],
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required, Validators.email, this.confirmationValidator]],
-      adress: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-      phoneNumberPrefix: ['+216'],
-      cv: ['', [Validators.required]]
+    this.formInfos = this.fb.group({   
+      cv: ['', Validators.required]
     })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['formEmitter']) { 
-      console.log('changed');
-      
-    }
-  }
-
   ngOnInit(): void {    
-    this.formEmitter.emit(this.formInfos)
+    let formData: any = new FormData();
+    Object.values(this.formInfos.controls).forEach(formControlName  => {
+      formData.append(formControlName, this.formInfos.get(formControlName.value));  
+    }) 
+    
+    this.formInfos.valueChanges.subscribe({
+      next: (data) => { 
+        this.value.emit(data);    
+        this.cvUploadEmitter.emit(formData);    
+        console.log(data)
+        console.log(formData.values)
+
+      },
+      error: (err) => { 
+        console.log(err);
+      }
+    })
+
+    this.formInfos.valueChanges.subscribe({
+      next: (data) => {
+        this.cvUploadEmitter.emit(formData);
+      },
+      error: (err) => { 
+
+      }
+    })
+
     this.activatedRoute.paramMap.subscribe(
       (params) => {
         this.candidateId = params.get('userId'); 
         this.fetchCandidateInfos();
       }
     )
+
+   
   }
 
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { required: true };
-    } else if (control.value !== this.formInfos.controls['email'].value) {
-      return { confirm: true, error: true };
-    }
-    return {};
-  };
+  uploadFile(event: Event, fileType: string) {
+    this.updateFile(event, fileType); 
+    // Process the selected file
+  }
 
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.formInfos.controls['confirmEmail'].updateValueAndValidity());
+  updateFile(event: Event, formControlName: string) {
+    const input = event.target as HTMLInputElement;
+    if (input && input.files && input.files.length > 0) {
+      const selectedFile = input.files[0];
+      const control = this.formInfos.controls[formControlName]
+      if (control) {
+        control.patchValue(selectedFile);
+        control.updateValueAndValidity();
+      }
+    }
   }
 
   fetchCandidateInfos() {
     this.userService.showUser(this.candidateId).subscribe({
       next: (data) => {
         this.candidateInfos = data
-        this.initForm();
       },
       error: (err) => {
         console.log(err);
-
       }
     })
   }
 
-  initForm() {
-    this.formInfos = this.fb.group({
-      avatar: ['',],
-      firstname: [this.candidateInfos.firstname, [Validators.required]],
-      lastname: [this.candidateInfos.lastname, [Validators.required]],
-      email: [this.authService.getUserCrendentials().email , [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required, Validators.email, this.confirmationValidator]],
-      adress: [this.candidateInfos.adress, [Validators.required]],
-      phone: [this.candidateInfos.phone, [Validators.required]],
-      phoneNumberPrefix: ['+216'],
-      cv: ['', [Validators.required]]
-    })
-    this.formEmitter.emit(this.formInfos);
+  submitForm() { 
+    Object.values(this.formInfos.controls).forEach(control => {
+      if (control.invalid) {
+        control.markAsDirty();
+        control.updateValueAndValidity({ onlySelf: true });
+      }
+    });
+
   }
 
-  submitForm() { 
-    if(this.formInfos.valid) {
-      console.log('valid');
-    }
-    else {
-      Object.values(this.formInfos.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
-  }
 }
