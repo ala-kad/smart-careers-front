@@ -6,11 +6,14 @@ import { IconsProviderModule } from '../shared/modules/ng-zoro-antd-modules/icon
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidateRoutingModule } from './candidate-routing.module';
+import { SharedModule } from '../shared/modules/shared.module';
 
 import { CandidateComponent } from './candidate.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { StepOneComponent } from './step-one/step-one.component';
 import { StepTwoComponent } from './step-two/step-two.component';
+import { ApplicationsListingComponent } from './applications-listing/applications-listing.component';
+import { EmptyComponent } from './empty/empty.component';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { StepTwoComponent } from './step-two/step-two.component';
     CandidateComponent,
     ApplicationFormComponent,
     StepOneComponent,
-    StepTwoComponent
+    StepTwoComponent,
+    ApplicationsListingComponent,
+    EmptyComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +31,9 @@ import { StepTwoComponent } from './step-two/step-two.component';
     NgZorroAntdModulesModule,
     IconsProviderModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,    
+    SharedModule
+
   ]
 })
 export class CandidateModule { }

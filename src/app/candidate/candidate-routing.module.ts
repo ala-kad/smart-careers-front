@@ -2,10 +2,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CandidateComponent } from './candidate.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
+import { ApplicationsListingComponent } from './applications-listing/applications-listing.component';
 
 const routes: Routes = [
-  { path: '', component: CandidateComponent },
-  { path: ':userId/application/job/:id', component: ApplicationFormComponent }
+  { 
+    path: '', 
+    data: {
+      breadcrumb: 'Candidate'
+    },
+    component: CandidateComponent,
+    children: [
+      {
+        path: '', component: ApplicationsListingComponent,
+        data: {
+          breadcrumb: 'Applications List'
+        },
+      }
+    ]
+  },
+  { 
+    path: ':userId/application/job/:jobId', 
+    component: ApplicationFormComponent 
+  }
 ];
 
 @NgModule({
@@ -13,3 +31,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class CandidateRoutingModule { }
+ 
