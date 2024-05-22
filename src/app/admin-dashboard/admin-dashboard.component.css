@@ -9,8 +9,9 @@ nz-breadcrumb {
 }
 
 .main-content {
+  background-color: #fff;
   padding: 10px;
-
+  margin: 10px;
 }
 
 button {

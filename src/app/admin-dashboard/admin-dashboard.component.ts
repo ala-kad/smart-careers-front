@@ -23,7 +23,6 @@ export class AdminDashboardComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.navigateToUsersListing();
     this.userPayload = this.authService.getUserCrendentials();
   }
 
