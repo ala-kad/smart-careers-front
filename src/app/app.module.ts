@@ -7,7 +7,6 @@ import { HttpClientModule, provideHttpClient, HTTP_INTERCEPTORS } from '@angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModulesModule } from './shared/modules/ng-zoro-antd-modules/ng-zorro-antd-modules.module';
 import { NgxEditorModule } from 'ngx-editor';
-import { CandidateModule } from './candidate/candidate.module';
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -23,7 +22,7 @@ import { UsersListingComponent } from './users-listing/users-listing.component';
 import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
-
+import { NzEmptyComponent } from './nz-empty/nz-empty.component'
 import { JwtInterceptor } from './auth.interceptor';
 import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
 import { FormContainerComponent } from './form-container/form-container.component';
@@ -31,11 +30,11 @@ import { JobDetailsFormComponent } from './job-details-form/job-details-form.com
 import { JobReviewFormComponent } from './job-review-form/job-review-form.component';
 import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { NzEmptyComponent } from './nz-empty/nz-empty.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
 import { StepQuestionsComponent } from './step-questions/step-questions.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { StoreModule } from '@ngrx/store';
 registerLocaleData(en);
 
 @NgModule({
@@ -55,10 +54,10 @@ registerLocaleData(en);
     JobReviewFormComponent,
     StepTwoJobFormComponent,
     JobDetailsComponent,
-    NzEmptyComponent,
     DropDowNmenuComponent,
     StepQuestionsComponent,
-    AddUserFormComponent
+    AddUserFormComponent,
+    NzEmptyComponent
   ],
   imports: [
     BrowserModule,
@@ -69,13 +68,13 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NgZorroAntdModulesModule,
     NgxEditorModule,
-    CandidateModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    StoreModule.forRoot({}, {}),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

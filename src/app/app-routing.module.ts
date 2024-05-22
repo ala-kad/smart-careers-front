@@ -74,7 +74,10 @@ const routes: Routes = [
       },
       {
         path: 'candidate',
-        loadChildren: () => import('./candidate/candidate.module').then(m => m.CandidateModule)
+        loadChildren: () => import('./candidate/candidate.module').then(m => m.CandidateModule),
+        data: {
+          breadcrumb: 'Candidate'
+        },
       },
     ]
   },
