@@ -1,0 +1,47 @@
+<div nz-row  [nzGutter]="[16, 24]" class="outer-row">
+    <div nz-col>
+      <div nz-row nzJustify="end" nzAlign="bottom">
+        <div nz-col>
+          <button nz-button nzType="primary" nzSize="small" nz-row nzAlign="middle" routerLink="/home">
+            Apply now !
+        </button>
+        </div>
+      </div>
+    </div>
+  
+    <div nz-col>
+        <nz-list nzGrid [nzLoading]="isLoading">
+            <div nz-row [nzGutter]="16">
+                <div nz-col nzSpan="24" *ngFor="let application of applicationsList">
+                    <nz-list-item>
+                        <nz-card [nzTitle]="application.jobId.title" [nzHoverable]="true" [nzExtra]="extraTpl" [nzActions]="[footerTpl]">
+                            <p nz-typography>
+                                {{application.jobId.responsibilities}}
+                            </p>
+                            <p nz-typography>
+                                {{application.jobId.skillsQualitfications}}
+                            </p>
+                        </nz-card>
+                    </nz-list-item>
+                    <ng-template #extraTpl>
+                        <strong nz-typography>Applied on: </strong> 
+                        <span nz-typography>{{application.appplicationDate | date: 'dd-MM-YYYY'}}</span>
+                        <p nz-typography> {{application.status}} </p>
+                    </ng-template>
+                    <ng-template #footerTpl>
+                        <strong nz-typography>
+                            <span>
+
+                            </span>
+                            <span>
+
+                            </span>
+                        </strong>
+                    </ng-template>
+                </div>
+            </div>
+            <app-empty *ngIf="listLength === 0"></app-empty>
+        </nz-list>
+    </div>
+</div>
+
