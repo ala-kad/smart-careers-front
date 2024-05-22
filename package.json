@@ -23,6 +23,7 @@
     "@angular/service-worker": "^15.2.0",
     "@ant-design/icons-angular": "^17.0.0",
     "@compodoc/compodoc": "^1.1.24",
+    "@ngrx/store": "^15.4.0",
     "@types/jsonwebtoken": "^9.0.6",
     "crypto": "^1.0.1",
     "g": "^2.0.1",
