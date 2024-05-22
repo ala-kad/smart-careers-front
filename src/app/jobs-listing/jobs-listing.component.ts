@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { JobsService } from '../services/jobs.service';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { JobsService } from '../services/jobs.service';
 import { UiInteractionsService } from '../services/ui-interactions.service';
 import { AuthService } from '../services/auth.service';
 
@@ -20,8 +21,6 @@ export class JobsListingComponent implements OnInit{
   ) {}
 
   listOfJobs: any;
-  jobDetails: any[] = [] ;
-  jobId: any
   listJobsLength!: Number;
 
   isAdmin = false;
@@ -30,19 +29,47 @@ export class JobsListingComponent implements OnInit{
   status = '';
   isLoading = true;
 
+  userRoles: any ;
+  userRole: any
   ngOnInit(): void{
-    this.isAdmin = this.authService.isAdmin();
-    this.isRecruiter = this.authService.isRecruiter();
-    this.isGuest = this.authService.isGuest();
+
+    this.userRoles = this.authService.getUserRole();
+
+    this.userRoles.forEach((element: any) => {
+      this.userRole = element;
+    });
+
+    console.log(this.userRole);
+
+    // console.log('Loading 1:', this.isLoading);
+
+    // console.log('Admin:', this.isAdmin);
+
+    // console.log('Recruiter:', this.isRecruiter);
+
+    // console.log('Guest:', this.isGuest);
+
+    // console.log('User role 1:', this.authService.getUserRole());
+
+
+    // console.log('User role 2:', this.authService.getUserRole());
+
+    // console.log('');
+
+
+
+
     /**
      * Checking if authenticated user is admin / reruiter, render all jobs (status = 'published, draft)
      */
-    if(this.isAdmin || this.isRecruiter){
+    if(this.userRole == 'admin'){
       this.jobsService.getJobsList(this.status).subscribe({
         next: (data) => {
           this.listOfJobs = data;
           this.listJobsLength = data.length;
           this.isLoading = false
+          console.log('Loading 2:', this.isLoading);
+
         },
         error: (err) => {
           console.log(err.message);

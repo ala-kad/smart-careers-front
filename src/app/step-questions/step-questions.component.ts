@@ -13,16 +13,20 @@ export class StepQuestionsComponent implements OnInit{
 
   constructor (
     private _fb: FormBuilder,
-  ) { }
+  ) {
+     this.questionsForm = this._fb.group({
+      questions:
+        this._fb.array([this._fb.control('')])
+    })
+  }
 
   ngOnInit(): void {
-    this.questionsForm = this._fb.group({
-      questions:
-      this._fb.array([this._fb.control('')])
-    })
+
 
     this.questionsForm.valueChanges.subscribe({
       next: (data) => {
+        console.log(data);
+
         this.emitQuestions.emit(data)
       },
       error: (err) => {console.log(err)}

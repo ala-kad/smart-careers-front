@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user-form',
@@ -14,6 +15,7 @@ export class AddUserFormComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private authService: AuthService,
+    private router: Router
   ) {};
 
   ngOnInit(): void {
@@ -41,15 +43,12 @@ export class AddUserFormComponent implements OnInit {
   }
 
   submitForm(values: string) {
-      console.log(values)
-
-      this.authService.registerRecruiter(values).subscribe({
-        next: (data) => { console.log(data);
-        },
-        error: (err) => { console.log(err);
-        }
-      })
-
-
+    this.authService.registerRecruiter(values).subscribe({
+      next: (data) => {
+        this.router.navigateByUrl("/dashboard/users")
+      },
+      error: (err) => { console.log(err);
+      }
+    })
   }
 }

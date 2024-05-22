@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
+import { UiInteractionsService } from '../services/ui-interactions.service';
 import { JobsService } from '../services/jobs.service';
+
 import { StepQuestionsComponent } from '../step-questions/step-questions.component'
 import { JobDetailsFormComponent } from '../job-details-form/job-details-form.component';
-import { Editor, Toolbar } from 'ngx-editor';
-import { UiInteractionsService } from '../services/ui-interactions.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-container',
@@ -50,9 +50,10 @@ export class FormContainerComponent implements OnInit {
 
   done(): void {
     this.formsData = {...this.formOneData, ...this.formQuestionData}
-
     this.jobService.postNewJobOffer(this.formsData).subscribe({
       next: (data) => {
+        console.log(this.genIARes)
+
         this.uiService.openSuccessModal();
       },
       error: (err) => {
@@ -67,7 +68,8 @@ export class FormContainerComponent implements OnInit {
   }
 
   handleQuestionsFormValues(values: string) {
-    this.formQuestionData = values
+    this.formQuestionData = values;
+    console.log(this.formQuestionData);
   }
 
   recieveJobDetailsForm(form: FormGroup) {
@@ -80,7 +82,6 @@ export class FormContainerComponent implements OnInit {
 
   handleHtmlEditorContent(content: any) {
     this.editorHTMLContent = content
-    console.log(this.editorHTMLContent);
   }
 
   changeContent(): void {
@@ -97,9 +98,6 @@ export class FormContainerComponent implements OnInit {
         break;
       }
 
-      default: {
-        console.log('error')
-      }
     }
   }
 }

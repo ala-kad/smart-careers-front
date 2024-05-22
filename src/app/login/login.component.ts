@@ -35,21 +35,23 @@ export class LoginComponent implements OnInit{
 
   login() {
     const { email, password } = this.validateForm.value;
-    if(this.validateForm.valid) { 
+    if(this.validateForm.valid) {
       this.authService.login(email, password).subscribe({
         next: (data) => {
           localStorage.setItem(this.accessToken, data.token);
           this.isAuthenticated = true;
-          console.log(data.token);
-          this.router.navigateByUrl('/dashboard')
+          this.router.navigate(['dashboard', 'candidate']).then(
+            () => { console.log('Candidate')}
+          ).catch(
+            (err) => { console.log(err);
+            }
+          )
         },
         error: (err) => {
           this.errorMessage = err.error;
         }
       })
     }
-
-    
   }
 
   logout() {
