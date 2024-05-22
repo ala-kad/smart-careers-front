@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormArrayName } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class StepTwoComponent implements OnInit {
   stepTwoForm!: FormGroup;
   questions: [] = [];
   jobId!: any;
+  @Output() responsesEmitter: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor (
     private jobService: JobsService,
@@ -28,7 +29,7 @@ export class StepTwoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe({
       next: (params) => {
-        this.jobId = params.get('id');
+        this.jobId = params.get('jobId');
         },
       }
     )
@@ -41,6 +42,15 @@ export class StepTwoComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+      }
+    })
+
+    this.stepTwoForm.valueChanges.subscribe({
+      next: (data) => {
+        this.responsesEmitter.emit(data);
+      },
+      error: (err) => { 
+        console.log(err)
       }
     })
   }
