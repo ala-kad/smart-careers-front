@@ -1,9 +1,11 @@
-<nz-card [nzTitle]="jobDetails?.title" [nzHoverable]="true" >
+<nz-card [nzTitle]="jobDetails?.title" [nzHoverable]="false" >
   <p nz-typography>
     {{jobDetails?.responsibilities}}
   </p>
   <p nz-typography> {{jobDetails?.skills}} </p>
   <p nz-typography> {{ jobDetails?.skillsQualitfications }} </p>
   <p nz-typography> {{ jobDetails?.location }} </p>
+  <button nz-button nzType="primary" (click)="navigateToApplicationForm()">Apply</button>
+
 </nz-card>
 

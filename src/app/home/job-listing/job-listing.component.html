@@ -2,7 +2,7 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24" *ngFor="let job of jobList">
       <nz-list-item>
-        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [routerLink]="['./', 'jobs', job._id]">
+        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [routerLink]="['./', 'jobs', job._id]" >
           <span nz-typography>
             <strong>Key Responsibilites :</strong>
           </span>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { JobsService } from 'src/app/services/jobs.service';
 
 @Component({
@@ -11,10 +12,13 @@ export class JobDetailsComponent implements OnInit {
 
   jobId!: any;
   jobDetails!: any;
+  candidateId : any;
 
   constructor (
     private activatedRoute: ActivatedRoute,
-    private jobService: JobsService
+    private jobService: JobsService,
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +28,6 @@ export class JobDetailsComponent implements OnInit {
       },
        error: (err) =>{
         console.log(err);
-
       }
     })
     this.fetchJobDetails();
@@ -34,13 +37,20 @@ export class JobDetailsComponent implements OnInit {
     this.jobService.getJobDetails(this.jobId).subscribe({
       next: (data) => {
         this.jobDetails = data;
-        console.log(data);
-
       },
       error: (err) => {
         console.log(err);
       }
     })
+  }
+
+  navigateToApplicationForm() {
+    if(this.authService.isAuthenticatedFun() ){
+      this.candidateId = this.authService.getUserCrendentials()._id;
+      this.router.navigate(['dashboard', 'candidate', this.candidateId, 'application', 'job', this.jobId]);
+    } else {
+      this.router.navigateByUrl('/login')
+    }
   }
 
 }

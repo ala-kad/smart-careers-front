@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { JobsService } from '../../services/jobs.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-job-listing',
@@ -12,13 +15,12 @@ export class JobListingComponent implements OnInit{
   status = 'Published';
 
   constructor(
-    private jobService: JobsService
+    private jobService: JobsService,
   ) {}
 
   ngOnInit(): void {
     this.getPublishedJobs()
   }
-
 
   getPublishedJobs() {
     this.jobService.getJobsList(this.status).subscribe({
@@ -30,4 +32,5 @@ export class JobListingComponent implements OnInit{
       }
     })
   }
+
 }
