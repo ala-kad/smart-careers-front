@@ -42,10 +42,10 @@ export class JobsService {
     return this.http.patch(`http://localhost:3000/jobs/publish/${id}`, {});
   }
 
-  postNewJobOffer (body: any): Observable<any> {
-    console.log(body);
-
-    return this.http.post(`http://localhost:3000/jobs/`, body);
+  postNewJobOffer (body: any, recruiterId: any): Observable<any> {
+    let params = new HttpParams(); 
+    params = params.append('recruiterId', recruiterId);
+    return this.http.post(`http://localhost:3000/jobs/`, body, { params: params });
   }
 
   generateTextFromGenIA(body: any): Observable<any> {

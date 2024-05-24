@@ -61,7 +61,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'jobs/add', component: FormContainerComponent,
+        path: 'jobs/add/recruiter/:id', component: FormContainerComponent,
         data: {
           breadcrumb: 'Jobs Add'
         }
