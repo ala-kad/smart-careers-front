@@ -6,6 +6,7 @@ import { JobsService } from '../services/jobs.service';
 
 import { StepQuestionsComponent } from '../step-questions/step-questions.component'
 import { JobDetailsFormComponent } from '../job-details-form/job-details-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form-container',
@@ -30,13 +31,20 @@ export class FormContainerComponent implements OnInit {
 
   jobDetailsForm!: FormGroup;
 
+  recruiterId: any;
+
   constructor(
     private jobService: JobsService,
     private uiService: UiInteractionsService,
+    private activatedRout: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-
+    this.activatedRout.paramMap.subscribe(
+      (params) => {
+        this.recruiterId = params.get('id');
+      }
+    )
   }
 
   pre(): void {
@@ -50,7 +58,7 @@ export class FormContainerComponent implements OnInit {
 
   done(): void {
     this.formsData = {...this.formOneData, ...this.formQuestionData}
-    this.jobService.postNewJobOffer(this.formsData).subscribe({
+    this.jobService.postNewJobOffer(this.formsData, this.recruiterId).subscribe({
       next: (data) => {
         console.log(this.genIARes)
 

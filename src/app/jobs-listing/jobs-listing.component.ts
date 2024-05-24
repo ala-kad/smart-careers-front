@@ -31,6 +31,9 @@ export class JobsListingComponent implements OnInit{
 
   userRoles: any ;
   userRole: any
+  userPayload: any;
+
+  recruiterId: any; 
   ngOnInit(): void{
 
     this.userRoles = this.authService.getUserRole();
@@ -39,30 +42,14 @@ export class JobsListingComponent implements OnInit{
       this.userRole = element;
     });
 
-    console.log(this.userRole);
-
-    // console.log('Loading 1:', this.isLoading);
-
-    // console.log('Admin:', this.isAdmin);
-
-    // console.log('Recruiter:', this.isRecruiter);
-
-    // console.log('Guest:', this.isGuest);
-
-    // console.log('User role 1:', this.authService.getUserRole());
-
-
-    // console.log('User role 2:', this.authService.getUserRole());
-
-    // console.log('');
-
-
-
-
+    this.userPayload = this.authService.getUserCrendentials();
+    this.recruiterId = this.userPayload._id;
+ 
+    
     /**
      * Checking if authenticated user is admin / reruiter, render all jobs (status = 'published, draft)
      */
-    if(this.userRole == 'admin'){
+    if(this.userRole == 'recruiter' ){
       this.jobsService.getJobsList(this.status).subscribe({
         next: (data) => {
           this.listOfJobs = data;
@@ -100,7 +87,7 @@ export class JobsListingComponent implements OnInit{
   }
 
   navigateToJobForm() {
-    this.router.navigate(['add'], { relativeTo: this.activatedRoute});
+    this.router.navigate(['add','recruiter', this.recruiterId ], { relativeTo: this.activatedRoute});
   }
 
   publishJobCTA(id: any) {
