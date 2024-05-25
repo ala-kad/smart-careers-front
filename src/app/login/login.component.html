@@ -6,17 +6,23 @@
           <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Email!">
               <nz-input-group nzPrefixIcon="user">
-                <input type="email" nz-input formControlName="email" placeholder="exemple@email.com" name="email" class="form-control" [class.is-invalid]="email.invalid" [class.is-valid]="email.valid" />
+                <input type="email" nz-input formControlName="email" placeholder="exemple@email.com" name="email" class="form-control" [class.is-invalid]="validateForm.get('email')?.invalid" [class.is-valid]="validateForm.get('email')?.valid" />
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
 
-
           <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Password!">
-              <nz-input-group nzPrefixIcon="lock">
-                <input type="password" nz-input formControlName="password" id="password" placeholder="Password" name="pswd" class="form-control" [class.is-invalid]="pswd.invalid" [class.is-valid]="pswd.valid"/>
+              <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+                <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" id="password" placeholder="Password" name="password" class="form-control" [class.is-invalid]="validateForm.get('password')?.invalid" [class.is-valid]="validateForm.get('password')?.valid" />
               </nz-input-group>
+              <ng-template #suffixTemplate>
+                <span
+                  nz-icon
+                  [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                  (click)="passwordVisible = !passwordVisible"
+                ></span>
+              </ng-template>
             </nz-form-control>
           </nz-form-item>
 
@@ -45,5 +51,3 @@
     </div>
   </div>
 </div>
-
-

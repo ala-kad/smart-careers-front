@@ -1,56 +1,67 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
+
+  isAuthenticated = false;
+  validateForm!: FormGroup;
+  accessToken = 'TOKEN';
+  errorMessage = '';
+  passwordVisible = false;
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router
-  ){};
-
-  isAuthenticated = false;
-  email = new FormControl('', Validators.required);
-  pswd = new FormControl('', Validators.required);
-  remember = new FormControl('');
-
-  validateForm!: FormGroup;
-  accessToken = 'TOKEN'
-  errorMessage = '';
-
-  ngOnInit(): void {
+  ) {
     this.validateForm = this.fb.group({
-      email: this.email,
-      password: this.pswd,
-      remember: this.remember
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      remember: new FormControl(false),
     });
   }
 
+  ngOnInit(): void {}
+
   login() {
     const { email, password } = this.validateForm.value;
-    if(this.validateForm.valid) {
+    if (this.validateForm.valid) {
       this.authService.login(email, password).subscribe({
         next: (data) => {
-          localStorage.setItem(this.accessToken, data.token);
+          this.authService.setLocalStorageToken(data.token);
           this.isAuthenticated = true;
-          this.router.navigate(['dashboard', 'candidate']).then(
-            () => { console.log('Candidate')}
-          ).catch(
-            (err) => { console.log(err);
-            }
-          )
+          if(this.authService.isAuthenticatedFun() && this.authService.isCandidate()){
+            this.router.navigate(['dashboard', 'candidate']).then(
+            () => { console.log('Candidate') }
+            ).catch(
+              (err) => { console.log(err); }
+            );
+          }else if(this.authService.isAuthenticatedFun() && this.authService.isAdmin()){
+            this.router.navigate(['dashboard', 'users']).then(
+              () => { console.log('admin') }
+              ).catch(
+                (err) => { console.log(err); }
+              );
+          }else { 
+            this.router.navigate(['dashboard', 'jobs']).then(
+              () => { console.log('recruiter') }
+              ).catch(
+                (err) => { console.log(err); }
+              );
+          }
+          
         },
         error: (err) => {
           this.errorMessage = err.error;
         }
-      })
+      });
     }
   }
 

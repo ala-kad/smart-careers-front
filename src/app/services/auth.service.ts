@@ -14,9 +14,8 @@ import { admin } from 'googleapis/build/src/apis/admin';
 
 export class AuthService {
 
+
   constructor(private http: HttpClient) { }
-
-
 
   registerCandidate(User: any): Observable<any> {
     return this.http.post('http://localhost:3000/users/candidate', User);
@@ -27,9 +26,14 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any>{
+   
     return this.http.post('http://localhost:3000/users/login', {email, password});
   }
 
+  setLocalStorageToken(value:  any) { 
+    localStorage.setItem('TOKEN', value);
+
+  }
   logout() {
     localStorage.removeItem('TOKEN');
   }
@@ -60,21 +64,21 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    if(this.isAuthenticatedFun() && this.getUserRole()==='admin'){
+    if(this.isAuthenticatedFun() && this.getUserRole().includes('admin')){
       return true;
     }
     return false;
   }
 
   isRecruiter(): boolean {
-    if(this.isAuthenticatedFun() && this.getUserRole()==='recruiter'){
+    if(this.isAuthenticatedFun() && this.getUserRole().includes('recruiter')){
       return true;
     }
     return false;
   }
 
   isCandidate(): boolean {
-    if(this.isAuthenticatedFun() && this.getUserRole()==='candidate'){
+    if(this.isAuthenticatedFun() && this.getUserRole().includes('candidate')){
       return true;
     }
     return false;
