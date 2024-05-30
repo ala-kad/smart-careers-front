@@ -35,12 +35,15 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "util": "^0.12.5",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.12.0",
+    "@ngx-formly/core": "^6.0.0",
+    "@ngx-formly/ng-zorro-antd": "^6.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.5",
     "@angular/cli": "~15.2.5",
     "@angular/compiler-cli": "^15.2.0",
+    "@ngx-formly/schematics": "^6.3.2",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",

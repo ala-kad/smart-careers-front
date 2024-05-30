@@ -7,6 +7,7 @@ import { UpdateUserFormComponent } from './update-user-form/update-user-form.com
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersListingComponent } from './users-listing/users-listing.component';
 import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
+import { DynamicQuestionsStepComponent } from './dynamic-questions-step/dynamic-questions-step.component';
 
 import { AuthGuard } from './auth.guard';
 import { JobDetailsComponent } from './job-details/job-details.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'questions',
+    component: DynamicQuestionsStepComponent
   },
   {
     path: 'welcome', component: WelcomeComponent,

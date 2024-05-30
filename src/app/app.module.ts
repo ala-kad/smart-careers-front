@@ -35,6 +35,9 @@ import { StepQuestionsComponent } from './step-questions/step-questions.componen
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
+import { DynamicQuestionsStepComponent } from './dynamic-questions-step/dynamic-questions-step.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -57,7 +60,8 @@ registerLocaleData(en);
     DropDowNmenuComponent,
     StepQuestionsComponent,
     AddUserFormComponent,
-    NzEmptyComponent
+    NzEmptyComponent,
+    DynamicQuestionsStepComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,8 @@ registerLocaleData(en);
       registrationStrategy: 'registerWhenStable:30000'
     }),
     StoreModule.forRoot({}, {}),
+    FormlyModule.forRoot(),
+    FormlyNgZorroAntdModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
