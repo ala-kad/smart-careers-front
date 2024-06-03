@@ -60,8 +60,7 @@ export class FormContainerComponent implements OnInit {
     this.formsData = {...this.formOneData, ...this.formQuestionData}
     this.jobService.postNewJobOffer(this.formsData, this.recruiterId).subscribe({
       next: (data) => {
-        console.log(this.genIARes)
-
+       
         this.uiService.openSuccessModal();
       },
       error: (err) => {
@@ -75,9 +74,8 @@ export class FormContainerComponent implements OnInit {
     console.log(this.formOneData);
   }
 
-  handleQuestionsFormValues(values: string) {
+  handleQuestionsFormValues(values: string[]) {
     this.formQuestionData = values;
-    console.log(this.formQuestionData);
   }
 
   recieveJobDetailsForm(form: FormGroup) {
@@ -104,6 +102,9 @@ export class FormContainerComponent implements OnInit {
           }
         })
         break;
+      }
+      case 2: { 
+        
       }
 
     }

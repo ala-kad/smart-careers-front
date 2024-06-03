@@ -12,7 +12,7 @@
 
   <app-step-two-job-form *ngIf="current === 1" [genIaData]="genIARes" [jobDetailsInfo]="formOneData" (emitHTMLEditorContent)="handleHtmlEditorContent($event)"></app-step-two-job-form>
 
-  <app-step-questions *ngIf="current === 2" (emitQuestions)="handleQuestionsFormValues($event)" (setEditor)="setEditor($event)" ></app-step-questions>
+  <app-step-questions *ngIf="current === 2" (emitQuestions)="handleQuestionsFormValues($event)"></app-step-questions>
 
   <app-job-review-form *ngIf="current === 3"  [editor]="editorHTMLContent" [formTwoValues]="formQuestionData"></app-job-review-form>
 
