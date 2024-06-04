@@ -96,6 +96,19 @@ export class UiInteractionsService {
       }
     })
   }
+
+  openDangerJobModal() {
+    let modalRef = this.modal.error({
+      nzTitle: 'You have already applied for this job',
+      nzOkType: 'default',
+      nzOkText: 'Ok',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        modalRef.destroy()
+      }
+    })
+  }
+
 }
 
 

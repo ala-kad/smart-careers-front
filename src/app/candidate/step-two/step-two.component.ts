@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormArrayName } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormArrayName, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ApplicationService } from 'src/app/services/application.service';
 
 import { JobsService } from 'src/app/services/jobs.service';
 
@@ -12,8 +13,10 @@ import { JobsService } from 'src/app/services/jobs.service';
 export class StepTwoComponent implements OnInit {
 
   stepTwoForm!: FormGroup;
-  questions: [] = [];
+  questions: any;
   jobId!: any;
+  candidateId: any;
+
   @Output() responsesEmitter: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor (
@@ -22,32 +25,24 @@ export class StepTwoComponent implements OnInit {
     private _fb: FormBuilder,
   ) {
     this.stepTwoForm = this._fb.group({
-      responses: this._fb.control(''),
+      responses: this._fb.array([]),
     })
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe({
       next: (params) => {
-        this.jobId = params.get('jobId');
+          this.jobId = params.get('jobId');
+          this.candidateId = params.get('userId');
         },
       }
     )
 
-    this.jobService.getJobQuestions(this.jobId).subscribe({
-      next: (res) => {
-        console.log(res);
-
-        this.questions = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    this.fetchQuestionsJob();
 
     this.stepTwoForm.valueChanges.subscribe({
       next: (data) => {
-        this.responsesEmitter.emit(data);
+        this.responsesEmitter.emit(data);        
       },
       error: (err) => { 
         console.log(err)
@@ -55,5 +50,26 @@ export class StepTwoComponent implements OnInit {
     })
   }
 
+  fetchQuestionsJob() { 
+     this.jobService.getJobQuestions(this.jobId).subscribe({
+      next: (res) => {
+        this.questions = res;
+        this.initFormArray();
+        
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 
+  initFormArray(): void { 
+    const formArray = this.stepTwoForm.get('responses') as FormArray;
+    this.questions.forEach(question => {
+      const group = this._fb.group({
+        answer: ['', [Validators.required]]
+      })
+      formArray.push(group)
+    });
+  }
 }

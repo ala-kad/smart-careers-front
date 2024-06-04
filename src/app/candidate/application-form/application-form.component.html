@@ -6,7 +6,7 @@
 </nz-steps>
 
 <div class="steps-content">
-  <app-step-one *ngIf="current === 0" (cvUploadEmitter)="recieveStepOneForm($event)" (value)="recieveStepOneFormValue($event)"></app-step-one>
+  <app-step-one *ngIf="current === 0" (cvUploadEmitter)="recieveStepOneFormData($event)" (value)="recieveStepOneFormValue($event)"></app-step-one>
   <app-step-two *ngIf="current === 1" (responsesEmitter)="receiveStepTwoResponses($event)"></app-step-two>
 </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import {FormGroup, FormBuilder, FormArray, Validators, FormControl} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,12 +11,14 @@ import { UserService } from 'src/app/services/user.service';
 export class StepOneComponent implements OnInit{
 
   @Output() cvUploadEmitter: EventEmitter<FormData> = new EventEmitter<FormData>();
-
   @Output() value: EventEmitter<any> =  new EventEmitter<any>();
 
   public formInfos!: FormGroup;
   candidateInfos!: any;
   candidateId: any;
+  jobId: any;
+  formData!: FormData;
+
   constructor (
     private fb: FormBuilder,
     private userService: UserService,
@@ -29,58 +31,21 @@ export class StepOneComponent implements OnInit{
   }
 
   ngOnInit(): void {    
-    let formData: any = new FormData();
-    Object.values(this.formInfos.controls).forEach(formControlName  => {
-      formData.append(formControlName, this.formInfos.get(formControlName.value));  
-    }) 
-    
-    this.formInfos.valueChanges.subscribe({
-      next: (data) => { 
-        this.value.emit(data);    
-        this.cvUploadEmitter.emit(formData);    
-        console.log(data)
-        console.log(formData.values)
-
-      },
-      error: (err) => { 
-        console.log(err);
-      }
-    })
-
-    this.formInfos.valueChanges.subscribe({
-      next: (data) => {
-        this.cvUploadEmitter.emit(formData);
-      },
-      error: (err) => { 
-
-      }
-    })
-
     this.activatedRoute.paramMap.subscribe(
       (params) => {
         this.candidateId = params.get('userId'); 
+        this.jobId = params.get('jobId');
         this.fetchCandidateInfos();
       }
     )
 
-   
-  }
-
-  uploadFile(event: Event, fileType: string) {
-    this.updateFile(event, fileType); 
-    // Process the selected file
-  }
-
-  updateFile(event: Event, formControlName: string) {
-    const input = event.target as HTMLInputElement;
-    if (input && input.files && input.files.length > 0) {
-      const selectedFile = input.files[0];
-      const control = this.formInfos.controls[formControlName]
-      if (control) {
-        control.patchValue(selectedFile);
-        control.updateValueAndValidity();
+    this.formInfos.valueChanges.subscribe({
+      next: (data) => { 
+        this.formData = new FormData();
+        this.formData.append('cv', this.formInfos.get('cv').value);
+        this.cvUploadEmitter.emit(this.formData);
       }
-    }
+    })
   }
 
   fetchCandidateInfos() {
@@ -94,14 +59,12 @@ export class StepOneComponent implements OnInit{
     })
   }
 
-  submitForm() { 
-    Object.values(this.formInfos.controls).forEach(control => {
-      if (control.invalid) {
-        control.markAsDirty();
-        control.updateValueAndValidity({ onlySelf: true });
-      }
+  uploadCV(event){
+    const file = (event.target).files[0];
+    this.formInfos.patchValue({
+      cv: file,
     });
-
+    this.formInfos.get('cv').updateValueAndValidity();
   }
 
 }

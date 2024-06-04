@@ -1,10 +1,22 @@
 <form nz-form [formGroup]="stepTwoForm" nzLayout="vertical">
-
-  <nz-form-item *ngFor="let question of questions; let i = index">
-    <nz-form-label nzRequired>{{question}}</nz-form-label>
-    <nz-form-control>
-      <input nz-input type="text" formControlName="responses">
-    </nz-form-control>
-  </nz-form-item>
-
+  <ng-contaiener formArrayName="responses">
+    <nz-form-item *ngFor="let question of questions; let i = index" >
+        <nz-form-label nzRequired>{{question.title}}</nz-form-label>
+        <nz-form-control [formGroupName]="i">
+          <ng-container [ngSwitch]="question.type">
+            <input *ngSwitchCase="'number_min'" nz-input type="number" formControlName="answer">
+            <input *ngSwitchCase="'number_max'" nz-input type="number" formControlName="answer">
+            <ng-container *ngSwitchCase="'boolean'">
+              <label nz-radio nzValue="true">
+                <input nz-input type="radio" formControlName="answer" value="true" /> Yes
+              </label>
+              <label nz-radio nzValue="false">
+                <input nz-input type="radio" formControlName="answer" value="false" /> No
+              </label>
+             
+            </ng-container>
+          </ng-container>
+        </nz-form-control>
+    </nz-form-item>
+  </ng-contaiener>
 </form>

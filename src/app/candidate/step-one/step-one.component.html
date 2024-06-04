@@ -3,9 +3,11 @@
   <nz-form-item nzGutter="[16, 16]">
     <nz-form-label nzRequired nzSpan="12" nzOffset="6">Resume </nz-form-label>
     <nz-form-control nzSpan="12" nzSpan="12" nzOffset="6" [nzErrorTip]="errorTpl">
-      <input nz-input type="file" accept=".docx,.pdf,.html, .htm, .doc" formControlName="cv" name="cv" placeholder="Import your CV" />
+      <input nz-input type="file" accept=".docx, .pdf, .html, .htm, .doc" name="cv" placeholder="Import your CV" (change)="uploadCV($event)" />
     </nz-form-control>
   </nz-form-item>
+
+  <button type="submit"> Submit</button>
 </form>
 
 <ng-template #errorTpl let-control>

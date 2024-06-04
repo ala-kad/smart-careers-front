@@ -22,6 +22,8 @@ export class ApplicationFormComponent implements OnInit {
 
   stepOneFormValue: any ;
 
+  status = 'Confirmed';
+
   constructor (
     private ui: UiInteractionsService ,
     private applicationService: ApplicationService,
@@ -29,18 +31,24 @@ export class ApplicationFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe({
-      next: (params) => {
+    this.activatedRoute.paramMap.subscribe(
+      (params) => { 
         this.candidateId = params.get('userId');
         this.jobId = params.get('jobId');
-      },
       }
     )
   }
 
   recieveStepOneFormValue(value: String) {
     this.stepOneFormValue = value;
-    console.log(this.stepOneFormValue);
+  }
+
+  recieveStepOneFormData(form: FormData) {
+    this.stepOneFormData = form;
+  }
+
+  receiveStepTwoResponses(responses: string[]){
+    this.responsesStepTWo = responses;      
   }
 
   pre(): void {
@@ -51,66 +59,50 @@ export class ApplicationFormComponent implements OnInit {
     this.current += 1;
     switch (this.current) {
       case 0:
-        console.log(this.current);
         
       break;
 
       case 1:
-        console.log(this.current);
-
+        this.applicationService.applyForJob(this.stepOneFormData, this.candidateId, this.jobId).subscribe({
+          next: (data) => {
+            console.log('API res front:', data);
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       break;
 
       case 2:
-        console.log(this.current);
-        
+        this.applicationService.sendReposnses(this.responsesStepTWo, this.candidateId, this.jobId).subscribe({
+          next: (data) => {
+            console.log('Step Two Form value', this.responsesStepTWo);
+            console.log('Service API Response', data);
+          },
+          error: (err) => { 
+            console.log(err);
+          }
+        })
       break;
 
       case 3:
-        console.log(this.current);
-        
       break;
 
       default:
-        console.log(this.current);
-
       break;
     }
   }
 
-  recieveStepOneForm(form: FormData) {
-    this.stepOneFormData = form;
-    console.log(this.stepOneFormData);
-  }
-
-  receiveStepTwoResponses(responses: string[]){
-    this.responsesStepTWo = responses;
-  }
-
   done() {
-    this.applicationFormValues =  {...this.stepOneFormValue, ...this.responsesStepTWo}
-    this.applicationService.sendJobApplication(this.stepOneFormData, this.applicationFormValues, this.candidateId, this.jobId).subscribe({
-      next: (res) =>{ 
-        this.ui.openSuccessJobModal()
-        console.log('Values String Input', this.applicationFormValues);
-        console.log('Form Data', this.stepOneFormData)
-        
+    this.applicationService.submitJobApplication(this.candidateId, this.jobId).subscribe({
+      next: () => { 
+        this.ui.openSuccessJobModal();
       },
       error: (err) => { 
         console.log(err);
+        
       }
     })
-
-    // this.applicationService.sendApplication(this.stepOneFormData, '5', this.candidateId, this.jobId).subscribe({
-    //   next: (data) => { 
-    //     console.log(this.stepOneFormData);
-    //     console.log(data);
-    //   },
-    //   error: (err) => { 
-    //     console.log(err);
-        
-    //   }
-    // })
   }
-
  
 }

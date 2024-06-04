@@ -1,21 +1,11 @@
-import { Injectable, Input, Output, EventEmitter  } from '@angular/core';
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
-
-  @Output() dataEmitter = new EventEmitter<string>();
-
-  private formOneValueSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  public formOneValue$: Observable<any> = this.formOneValueSubject.asObservable();
-
-  private messageSource = new BehaviorSubject('');
-  currentMessage = this.messageSource.asObservable();
-
-  public eventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private http: HttpClient
@@ -49,27 +39,7 @@ export class JobsService {
   }
 
   generateTextFromGenIA(body: any): Observable<any> {
-    console.log(body);
-
     return this.http.post(`http://localhost:3000/jobs/genIA`, body, {responseType: 'json'});
-  }
-
-  shareData(data: string) {
-    this.dataEmitter.emit(data);
-  }
-
-  triggerSubmit() {
-
-  }
-
-  submitFormOne(value: any): void {
-    console.log(value);
-
-    this.formOneValueSubject.next(value);
-  }
-
-  changeMessage(message: string) {
-    this.messageSource.next(message)
   }
 
 }
