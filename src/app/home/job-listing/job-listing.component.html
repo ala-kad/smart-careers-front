@@ -2,7 +2,7 @@
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24" *ngFor="let job of jobList">
       <nz-list-item>
-        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [routerLink]="['./', 'jobs', job._id]" >
+        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [routerLink]="['./', 'jobs', job._id]" [nzExtra]="extraTpl">
           <span nz-typography>
             <strong>Key Responsibilites :</strong>
           </span>
@@ -13,20 +13,23 @@
             <strong>Skills and Qualifications :</strong>
           </span>
           <p nz-typography> {{job.skillsQualitfications}} </p>
-          <div class="status-date">
-            <span nz-typography>
-              <strong nz-typography>
-               {{ job.status }}
-              </strong>
-            </span>
-            <span nz-typography>
-              <strong nz-typography>
+          <ng-template #extraTpl>
+              <span nz-typography>
+                <strong nz-typography>
+                  Published on:  
+                </strong>
                 {{ job.publishedOn | date:'dd-MM-yyyy' }}
-              </strong>
-            </span>
-          </div>
+              </span>
+              <div>
+                <span nz-typography nzType="success">
+                  <em>Reviewing Applications</em>
+                </span>
+              </div>
+          </ng-template>
         </nz-card>
       </nz-list-item>
     </div>
+
   </div>
+
 </nz-list>
