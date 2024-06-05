@@ -29,9 +29,9 @@ export class ApplicationsListingComponent implements OnInit {
   fetchApplicationByCandidateId(){
     this.applicationService.getApplicationsByCandidateId(this.candidate._id).subscribe({
       next: (data) => { 
+        this.isLoading = false;
         this.applicationsList = data;
         this.listLength = this.applicationsList.length;
-        this.isLoading = false;
       },
       error: (err) => {
         console.log(err)

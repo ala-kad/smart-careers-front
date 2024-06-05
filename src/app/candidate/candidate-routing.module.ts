@@ -8,7 +8,7 @@ const routes: Routes = [
   { 
     path: '', 
     data: {
-      breadcrumb: 'Candidate'
+      breadcrumb: 'Candidate Dashboard'
     },
     component: CandidateComponent,
     children: [
@@ -22,7 +22,10 @@ const routes: Routes = [
   },
   { 
     path: ':userId/application/job/:jobId', 
-    component: ApplicationFormComponent 
+    component: ApplicationFormComponent,
+    data: {
+      breadcrumb: 'Applications Form'
+    },
   }
 ];
 

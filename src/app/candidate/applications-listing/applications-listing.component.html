@@ -26,7 +26,11 @@
                     <ng-template #extraTpl>
                         <strong nz-typography>Applied on: </strong> 
                         <span nz-typography>{{application.appplicationDate | date: 'dd-MM-YYYY'}}</span>
-                        <p nz-typography> {{application.status}} </p>
+                        <div>
+                            <span nz-typography nzType="success">
+                              <em>Preselection</em>
+                            </span>
+                        </div>
                     </ng-template>
                     <ng-template #footerTpl>
                         <strong nz-typography>
