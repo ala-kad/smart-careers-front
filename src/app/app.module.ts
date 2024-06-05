@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgZorroAntdModulesModule } from './shared/modules/ng-zoro-antd-modules/ng-zorro-antd-modules.module';
-import { NgxEditorModule } from 'ngx-editor';
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -24,14 +23,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NzEmptyComponent } from './nz-empty/nz-empty.component'
 import { JwtInterceptor } from './auth.interceptor';
-import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
-import { FormContainerComponent } from './form-container/form-container.component';
-import { JobDetailsFormComponent } from './job-details-form/job-details-form.component';
-import { JobReviewFormComponent } from './job-review-form/job-review-form.component';
-import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
-import { StepQuestionsComponent } from './step-questions/step-questions.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
@@ -50,14 +43,8 @@ registerLocaleData(en);
     UpdateUserFormComponent,
     WelcomeComponent,
     LogoutComponent,
-    JobsListingComponent,
-    FormContainerComponent,
-    JobDetailsFormComponent,
-    JobReviewFormComponent,
-    StepTwoJobFormComponent,
     JobDetailsComponent,
     DropDowNmenuComponent,
-    StepQuestionsComponent,
     AddUserFormComponent,
     NzEmptyComponent,
  ],
@@ -69,7 +56,6 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgZorroAntdModulesModule,
-    NgxEditorModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -84,7 +70,6 @@ registerLocaleData(en);
     { provide: NZ_I18N, useValue: en_US },
     provideHttpClient(),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    StepQuestionsComponent
   ],
   bootstrap: [AppComponent]
 })

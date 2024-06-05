@@ -7,11 +7,10 @@ import { RegisterUserFormComponent } from './register-user-form/register-user-fo
 import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersListingComponent } from './users-listing/users-listing.component';
-import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
+import { JobsListingComponent } from './recruiter/jobs-listing/jobs-listing.component';
 
 import { AuthGuard } from './auth.guard';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { FormContainerComponent } from './form-container/form-container.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 
 const routes: Routes = [
@@ -61,12 +60,7 @@ const routes: Routes = [
           breadcrumb: 'Jobs List'
         }
       },
-      {
-        path: 'jobs/add/recruiter/:id', component: FormContainerComponent,
-        data: {
-          breadcrumb: 'Jobs Add'
-        }
-      },
+     
       {
         path: 'jobs/:id', component: JobDetailsComponent,
         data: {
