@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-
-import { decode } from 'json-web-token';
+import { Observable } from 'rxjs';
 import { jwtDecode } from "jwt-decode";
-import { admin } from 'googleapis/build/src/apis/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +28,11 @@ export class AuthService {
 
   setLocalStorageToken(value:  any) { 
     localStorage.setItem('TOKEN', value);
-
   }
+  
   logout() {
     localStorage.removeItem('TOKEN');
+    localStorage.clear();
   }
 
   isAuthenticatedFun(): boolean {
@@ -71,7 +68,7 @@ export class AuthService {
   }
 
   isRecruiter(): boolean {
-    if(this.isAuthenticatedFun() && this.getUserRole().includes('recruiter')){
+    if(this.isAuthenticatedFun() && this.getUserRole().includes('recruiter' ,'technique', 'rh')){
       return true;
     }
     return false;

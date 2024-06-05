@@ -4,7 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { UiInteractionsService } from '../services/ui-interactions.service';
 import { JobsService } from '../services/jobs.service';
 
-import { StepQuestionsComponent } from '../step-questions/step-questions.component'
 import { JobDetailsFormComponent } from '../job-details-form/job-details-form.component';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-form-container',
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.css'],
-  providers: [StepQuestionsComponent]
 })
 
 export class FormContainerComponent implements OnInit {

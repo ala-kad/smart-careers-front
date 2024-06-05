@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       this.authService.login(email, password).subscribe({
         next: (data) => {
+          console.log('Response', data)
           this.authService.setLocalStorageToken(data.token);
           this.isAuthenticated = true;
           if(this.authService.isAuthenticatedFun() && this.authService.isCandidate()){

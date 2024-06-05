@@ -5,6 +5,7 @@ import { UiInteractionsService } from '../services/ui-interactions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
+import { AuthService } from '../services/auth.service';
 
 interface DataItem {
   email: string;
@@ -29,15 +30,7 @@ interface ColumnItem {
 })
 
 export class UsersListingComponent implements OnInit {
-
-  constructor(
-    private userService: UserService,
-    private ui: UiInteractionsService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { };
-
-  listOfData: any;
+ listOfData: any;
   userDetails: any;
   showUpdateForm = false;
 
@@ -52,6 +45,16 @@ export class UsersListingComponent implements OnInit {
   listOfOption: string[] = [];
   listOfSelectedValue: string[] = [];
 
+  constructor(
+    private userService: UserService,
+    private ui: UiInteractionsService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) { };
+
+ 
+
   listOfColumns: ColumnItem[] = [
     {
       name: 'Email',
@@ -65,22 +68,25 @@ export class UsersListingComponent implements OnInit {
       // ],
       // filterFn: (list: string[], item: DataItem) => list.some(name => item.name.indexOf(name) !== -1)
     },
-    {
-      name: 'Username',
-      sortOrder: null,
-      sortFn: (a: DataItem, b: DataItem) => a.username.localeCompare(b.username),
-      sortDirections: ['ascend', 'descend', null],
-      filterMultiple: true,
-      // listOfFilter: [
-      //   { text: 'Joe', value: 'Joe' },
-      //   { text: 'Jim', value: 'Jim', byDefault: true }
-      // ],
-      // filterFn: (list: string[], item: DataItem) => list.some(name => item.name.indexOf(name) !== -1)
-    },
+    // {
+    //   name: 'Username',
+    //   sortOrder: null,
+    //   sortFn: (a: DataItem, b: DataItem) => a.username.localeCompare(b.username),
+    //   sortDirections: ['ascend', 'descend', null],
+    //   filterMultiple: true,
+    //   // listOfFilter: [
+    //   //   { text: 'Joe', value: 'Joe' },
+    //   //   { text: 'Jim', value: 'Jim', byDefault: true }
+    //   // ],
+    //   // filterFn: (list: string[], item: DataItem) => list.some(name => item.name.indexOf(name) !== -1)
+    // },
   ]
 
   ngOnInit(): void {
     this.list();
+    const payload = this.authService.getUserCrendentials()
+    console.log(payload);
+    
   }
 
   /**
@@ -180,9 +186,9 @@ export class UsersListingComponent implements OnInit {
           }
         );
       },
-      // error: (err) => {
-      //   console.error(err);
-      // }
+      error: (err) => {
+        console.error(err);
+      }
     });
 
   }

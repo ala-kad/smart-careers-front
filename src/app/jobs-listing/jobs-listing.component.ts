@@ -12,6 +12,18 @@ import { AuthService } from '../services/auth.service';
 })
 export class JobsListingComponent implements OnInit{
 
+  listOfJobs: any;
+  listJobsLength!: Number;
+  isAdmin = false;
+  isRecruiter = false
+  isGuest: boolean = false;
+  status = '';
+  isLoading = true;
+  userRoles: any ;
+  userRole: any
+  userPayload: any;
+  recruiterId: any; 
+
   constructor (
     private jobsService: JobsService,
     private router: Router,
@@ -20,54 +32,46 @@ export class JobsListingComponent implements OnInit{
     private authService: AuthService
   ) {}
 
-  listOfJobs: any;
-  listJobsLength!: Number;
-
-  isAdmin = false;
-  isRecruiter = false
-  isGuest: boolean = false;
-  status = '';
-  isLoading = true;
-
-  userRoles: any ;
-  userRole: any
-  userPayload: any;
-
-  recruiterId: any; 
+  
   ngOnInit(): void{
 
     this.userRoles = this.authService.getUserRole();
-
+    console.log('Roles', this.userRoles)
     this.userRoles.forEach((element: any) => {
       this.userRole = element;
     });
 
+    console.log('Role', this.userRole)
+
     this.userPayload = this.authService.getUserCrendentials();
     this.recruiterId = this.userPayload._id;
  
+    this.isRecruiter = this.authService.isRecruiter();
+    console.log('Recruiter Role:',this.isRecruiter);
     
+    this.fetchJobListing()
+  }
+
+  fetchJobListing() { 
     /**
-     * Checking if authenticated user is admin / reruiter, render all jobs (status = 'published, draft)
-     */
-    if(this.userRole == 'recruiter' ){
-      this.jobsService.getJobsList(this.status).subscribe({
+   * Checking if authenticated user is admin / reruiter, render all jobs (status = 'published, draft)
+   */
+    if(this.authService.isAuthenticatedFun() && this.authService.isRecruiter()){
+       this.jobsService.getJobsList(this.status).subscribe({
         next: (data) => {
           this.listOfJobs = data;
           this.listJobsLength = data.length;
           this.isLoading = false
-          console.log('Loading 2:', this.isLoading);
-
         },
         error: (err) => {
           console.log(err.message);
 
         }
       })
-    }
-    else {
+    }else { 
       /**
       * If user is not authenticated (Guest), render only Published jobs
-       */
+        */
       this.status = 'Published';
       this.jobsService.getJobsList(this.status).subscribe({
         next: (data) => {
@@ -76,12 +80,10 @@ export class JobsListingComponent implements OnInit{
         },
         error: (err) => {
           console.log(err.message);
-
         }
       })
     }
   }
-
   navigateToJobDetails(id: any) {
     this.router.navigate(['./', id], { relativeTo: this.activatedRoute})
   }
@@ -127,4 +129,5 @@ export class JobsListingComponent implements OnInit{
       },
     })
   }
+
 }

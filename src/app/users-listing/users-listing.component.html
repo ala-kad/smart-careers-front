@@ -26,7 +26,6 @@
 
             <tr *ngFor="let data of editRowTable.data" class="editable-row">
               <td>{{ data.email }}</td>
-              <td>{{ data.username }}</td>
               <td>
                 <!-- {{ data.role }} -->
                 <div class="editable-cell" [hidden]="editId === data._id" (click)="startEdit(data._id)">
