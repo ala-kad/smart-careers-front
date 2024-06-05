@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ConsoleSqlOutline } from '@ant-design/icons-angular/icons';
 
 @Component({
   selector: 'app-add-user-form',
@@ -21,7 +22,6 @@ export class AddUserFormComponent implements OnInit {
   ngOnInit(): void {
     this.userAddForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
     })
@@ -45,6 +45,7 @@ export class AddUserFormComponent implements OnInit {
   submitForm(values: string) {
     this.authService.registerRecruiter(values).subscribe({
       next: (data) => {
+        console.log(data)
         this.router.navigateByUrl("/dashboard/users")
       },
       error: (err) => { console.log(err);
