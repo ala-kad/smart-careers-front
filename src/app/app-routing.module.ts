@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { RegisterUserFormComponent } from './register-user-form/register-user-form.component';
@@ -7,7 +8,6 @@ import { UpdateUserFormComponent } from './update-user-form/update-user-form.com
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersListingComponent } from './users-listing/users-listing.component';
 import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
-import { DynamicQuestionsStepComponent } from './dynamic-questions-step/dynamic-questions-step.component';
 
 import { AuthGuard } from './auth.guard';
 import { JobDetailsComponent } from './job-details/job-details.component';
@@ -19,10 +19,6 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-  },
-  {
-    path: 'questions',
-    component: DynamicQuestionsStepComponent
   },
   {
     path: 'welcome', component: WelcomeComponent,
@@ -82,6 +78,13 @@ const routes: Routes = [
         loadChildren: () => import('./candidate/candidate.module').then(m => m.CandidateModule),
         data: {
           breadcrumb: 'Candidate'
+        },
+      },
+      {
+        path: 'recruiter',
+        loadChildren: () => import('./recruiter/recruiter.module').then(m => m.RecruiterModule),
+        data: {
+          breadcrumb: 'Recruiter'
         },
       },
     ]

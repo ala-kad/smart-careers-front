@@ -37,7 +37,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
-import { DynamicQuestionsStepComponent } from './dynamic-questions-step/dynamic-questions-step.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -61,8 +60,7 @@ registerLocaleData(en);
     StepQuestionsComponent,
     AddUserFormComponent,
     NzEmptyComponent,
-    DynamicQuestionsStepComponent
-  ],
+ ],
   imports: [
     BrowserModule,
     AppRoutingModule,
