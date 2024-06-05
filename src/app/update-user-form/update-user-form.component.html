@@ -1,0 +1,12 @@
+<form nz-form nzLayout="inline" #f="ngForm" (ngSubmit)="editUser(userId, listOfSelectedValue)">
+  <nz-select
+    [nzMaxTagCount]="3"
+    [nzMaxTagPlaceholder]="tagPlaceHolder"
+    nzMode="multiple"
+    nzPlaceHolder="Please select roles"
+    [(ngModel)]="listOfSelectedValue" name="selectedRoles">
+    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item" [nzValue]="item"></nz-option>
+  </nz-select>
+  <button nz-button nzType="primary" type="submit" nzSize="small"> Send </button>
+</form>
+<ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>

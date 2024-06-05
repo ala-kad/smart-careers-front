@@ -1,0 +1,9 @@
+
+form {
+  align-items: center;
+}
+nz-select {
+  max-width: 250px;
+  width: 100%;
+  margin-right: 10px;
+}

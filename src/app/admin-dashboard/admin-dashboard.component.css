@@ -1,25 +1,17 @@
-:host {
-  width: 100%;
-}
-nz-content {
-  padding: 10px;
-}
-
 nz-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   background-color: inherit;
   margin-bottom: 20px;
-
+  padding: 10px 20px;
 }
 
-.search-btn {
-  margin: 0 10px;
+nz-breadcrumb {
+  margin-bottom: 10px;
 }
 
-nz-sider {
-  height: 100vh ;
+.main-content {
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px;
 }
 
 button {
@@ -27,8 +19,43 @@ button {
   align-items: center;
 }
 
-@media all and (max-width: 992px){
-  nz-table{
-    overflow: auto;
+.trigger {
+  width: 20px;
+  height: 20px;
+}
+
+.inner-layout .btn-wrapper {
+  float: right;
+}
+
+.inner-layout .btn-wrapper button {
+  float: left;
+  margin: 0 16px;
+}
+
+.inner-layout .btn-wrapper button::last-child {
+  margin: none;
+}
+
+@media all and (max-width: 576px) {
+  nz-header {
+    padding: 0 25px;
+  }
+
+  nz-space {
+    display: block;
+  }
+
+  .inner-layout .btn-wrapper button {
+    float: none;
+    justify-content: center;
+    width: 100%;
+    margin: 12px 0;
+  }
+}
+
+@media all and (max-width: 992px) {
+  nz-header {
+    padding: 0 25px;
   }
 }

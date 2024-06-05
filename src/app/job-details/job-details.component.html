@@ -1,0 +1,8 @@
+<nz-card [nzTitle]="jobDetails?.title" [nzHoverable]="true" >
+  <p>
+    {{jobDetails?.description}}
+  </p>
+  <span> {{jobDetails?.skills}} </span>
+  <span> {{ jobDetails?.publishedOn | date:'dd-MM-yyyy' }}</span>
+  <span> {{ jobDetails?.status }}</span>
+</nz-card>

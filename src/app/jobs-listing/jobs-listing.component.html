@@ -1,0 +1,77 @@
+<div nz-row  [nzGutter]="[16, 24]" class="outer-row">
+  <div nz-col>
+    <div nz-row nzJustify="end">
+      <div nz-col>
+        <button nz-button nzType="primary" nzSize="small" (click)="navigateToJobForm()" nz-row nzAlign="middle">
+        <span nz-icon nzType="plus" nzTheme="outline"></span> Post new job
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <div nz-col>
+    <nz-list nzGrid [nzLoading]="isLoading">
+      <div nz-row [nzGutter]="16">
+        <div nz-col nzSpan="24" *ngFor="let job of listOfJobs">
+          <nz-list-item>
+            <nz-card [nzTitle]="job.title" [nzHoverable]="true" [nzActions]="[actionView, actionEdit, job.status === 'Draft' ? actionDelete : null]" [nzExtra]="job.status === 'Draft' ? publishActionTPl : extraTpl">
+              <span nz-typography>
+                <strong>Key Responsibilites :</strong>
+              </span>
+              <p nz-typography>
+                {{job.responsibilities}}
+              </p>
+              <span nz-typography>
+                <strong>Skills and Qualifications :</strong>
+              </span>
+              <p nz-typography> {{job.skillsQualitfications}} </p>
+              <div class="status-date">
+                <span nz-typography>
+                  <strong nz-typography>
+                   {{ job.status }}
+                  </strong>
+                </span>
+                <span nz-typography>
+                  <strong nz-typography>
+                    {{ job.publishedOn | date:'dd-MM-yyyy' }}
+                  </strong>
+                </span>
+              </div>
+            </nz-card>
+          </nz-list-item>
+          <ng-template #actionView>
+            <span nz-icon nzType="eye" nzTheme="outline" (click)="navigateToJobDetails(job._id)" *ngIf="isRecruiter || isAdmin"></span>
+          </ng-template>
+          <ng-template #actionEdit >
+            <span nz-icon nzType="edit" *ngIf="isRecruiter || isAdmin"></span>
+          </ng-template>
+          <ng-template #actionDelete>
+            <span nz-icon nzType="delete" nzTheme="outline" (click)="openModal(job._id)" *ngIf="isRecruiter || isAdmin"></span>
+          </ng-template>
+          <ng-template #publishActionTPl>
+            <a (click)="publishJobCTA(job._id)" *ngIf="isRecruiter &&  job.status === 'Draft' ">Publish</a>
+          </ng-template>
+          <ng-template #extraTpl>
+            <span nz-typography>
+              <strong nz-typography>
+                Published on:  
+              </strong>
+              {{ job.publishedOn | date:'dd-MM-yyyy' }}
+            </span>
+            <div>
+              <span nz-typography nzType="success">
+                <em>Preselection</em>
+              </span>
+            </div>
+        </ng-template>
+        </div>
+      </div>
+    </nz-list>
+    <app-nz-empty *ngIf="listJobsLength === 0"></app-nz-empty>
+  </div>
+</div>
+
+
+
+
+

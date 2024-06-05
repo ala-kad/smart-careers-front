@@ -1,0 +1,60 @@
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .question-group {
+    margin-bottom: 20px;
+  }
+  
+  nz-form-item {
+    margin-bottom: 20px;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .dynamic-delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #999;
+    transition: all 0.3s;
+    width: 100%;
+  }
+  
+  .dynamic-delete-button:hover {
+    color: #777;
+  }
+  
+  .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    width: 100%;
+    transition: all 0.3s;
+    margin-bottom: 8px;
+  }
+  
+  .add-button:hover {
+    color: #777;
+  }
+  
+  @media (max-width: 768px) {
+    .form-container {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dynamic-delete-button,
+    .add-button,
+    .submit-button {
+      width: 100%;
+    }
+  }
+  

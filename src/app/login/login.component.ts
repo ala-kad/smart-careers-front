@@ -1,51 +1,73 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  // validateForm: FormGroup<{
-  //   email: FormControl<string>;
-  //   password: FormControl<string>;
-  // }> = this.fb.group({
-  //   email: ['', [Validators.required]],
-  //   password: ['', [Validators.required]],
-  //   remember: [true]
-  // });
+export class LoginComponent implements OnInit {
 
-  // submitForm(): void {
-  //   if (this.validateForm.valid) {
-  //     console.log('submit', this.validateForm.value);
-  //   } else {
-  //     Object.values(this.validateForm.controls).forEach(control => {
-  //       if (control.invalid) {
-  //         control.markAsDirty();
-  //         control.updateValueAndValidity({ onlySelf: true });
-  //       }
-  //     });
-  //   }
-  // }
-  constructor(private authService: AuthService){};
+  isAuthenticated = false;
+  validateForm!: FormGroup;
+  accessToken = 'TOKEN';
+  errorMessage = '';
+  passwordVisible = false;
 
-  // constructor(private fb: NonNullableFormBuilder) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.validateForm = this.fb.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      remember: new FormControl(false),
+    });
+  }
 
-  email = "";
-  pswd = "";
+  ngOnInit(): void {}
 
-  login(email: string, pass: string) {
-    this.authService.login(email, pass).subscribe(
-      (data) => {
-        console.log(data);
+  login() {
+    const { email, password } = this.validateForm.value;
+    if (this.validateForm.valid) {
+      this.authService.login(email, password).subscribe({
+        next: (data) => {
+          console.log('Response', data)
+          this.authService.setLocalStorageToken(data.token);
+          this.isAuthenticated = true;
+          if(this.authService.isAuthenticatedFun() && this.authService.isCandidate()){
+            this.router.navigate(['dashboard', 'candidate']).then(
+            () => { console.log('Candidate') }
+            ).catch(
+              (err) => { console.log(err); }
+            );
+          }else if(this.authService.isAuthenticatedFun() && this.authService.isAdmin()){
+            this.router.navigate(['dashboard', 'users']).then(
+              () => { console.log('admin') }
+              ).catch(
+                (err) => { console.log(err); }
+              );
+          }else { 
+            this.router.navigate(['dashboard', 'jobs']).then(
+              () => { console.log('recruiter') }
+              ).catch(
+                (err) => { console.log(err); }
+              );
+          }
+          
+        },
+        error: (err) => {
+          this.errorMessage = err.error;
+        }
+      });
+    }
+  }
 
-      },
-      (error) => {
-        console.log(error);
-
-      }
-    )
+  logout() {
+    localStorage.removeItem(this.accessToken);
+    this.isAuthenticated = false;
   }
 }

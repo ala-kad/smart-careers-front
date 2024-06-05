@@ -1,0 +1,35 @@
+<nz-list nzGrid>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24" *ngFor="let job of jobList">
+      <nz-list-item>
+        <nz-card [nzTitle]="job.title" [nzHoverable]="true" [routerLink]="['./', 'jobs', job._id]" [nzExtra]="extraTpl">
+          <span nz-typography>
+            <strong>Key Responsibilites :</strong>
+          </span>
+          <p nz-typography>
+            {{job.responsibilities}}
+          </p>
+          <span nz-typography>
+            <strong>Skills and Qualifications :</strong>
+          </span>
+          <p nz-typography> {{job.skillsQualitfications}} </p>
+          <ng-template #extraTpl>
+              <span nz-typography>
+                <strong nz-typography>
+                  Published on:  
+                </strong>
+                {{ job.publishedOn | date:'dd-MM-yyyy' }}
+              </span>
+              <div>
+                <span nz-typography nzType="success">
+                  <em>Reviewing Applications</em>
+                </span>
+              </div>
+          </ng-template>
+        </nz-card>
+      </nz-list-item>
+    </div>
+
+  </div>
+
+</nz-list>

@@ -1,42 +1,53 @@
-<!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-  <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your username!">
-      <nz-input-group nzPrefixIcon="user">
-        <input type="text" nz-input formControlName="userName" placeholder="Username" />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control nzErrorTip="Please input your Password!">
-      <nz-input-group nzPrefixIcon="lock">
-        <input type="password" nz-input formControlName="password" placeholder="Password" />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <div nz-row class="login-form-margin">
-    <div nz-col [nzSpan]="12">
-      <label nz-checkbox formControlName="remember">
-        <span>Remember me</span>
-      </label>
-    </div>
-    <div nz-col [nzSpan]="12">
-      <a class="login-form-forgot">Forgot password</a>
-    </div>
-  </div>
-  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
-  Or
-  <a>register now!</a>
-</form> -->
+<div nz-row nzJustify="center" nzAlign="middle" style="height: 100vh;">
+  <div nz-col nzSpan="24">
+    <div nz-row nzJustify="center" nzAlign="middle" style="height: 100%;">
+      <div nz-col nzSpan="12">
+        <form (ngSubmit)="login()" nz-form [formGroup]="validateForm" class="login-form">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Email!">
+              <nz-input-group nzPrefixIcon="user">
+                <input type="email" nz-input formControlName="email" placeholder="exemple@email.com" name="email" class="form-control" [class.is-invalid]="validateForm.get('email')?.invalid" [class.is-valid]="validateForm.get('email')?.valid" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
 
-<form (ngSubmit)="login(email.value, pswd.value)">
-  <div>
-    <label for="email"> Email </label>
-    <input type="email" placeholder="exemple@email.com" name="email" #email>
-  </div>
-  <div>
-    <label for="pswd"> Password </label>
-    <input type="password" placeholder="password" name="pswd" #pswd>
-  </div>
-  <button type="submit" > Login </button>
- </form>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Password!">
+              <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+                <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" id="password" placeholder="Password" name="password" class="form-control" [class.is-invalid]="validateForm.get('password')?.invalid" [class.is-valid]="validateForm.get('password')?.valid" />
+              </nz-input-group>
+              <ng-template #suffixTemplate>
+                <span
+                  nz-icon
+                  [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                  (click)="passwordVisible = !passwordVisible"
+                ></span>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
 
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+
+          <div nz-row class="login-form-margin">
+            <div nz-col [nzSpan]="12">
+              <label nz-checkbox formControlName="remember" name="remember">
+                <span>Remember me</span>
+              </label>
+            </div>
+            <div nz-col [nzSpan]="12">
+              <a class="login-form-forgot">Forgot password</a>
+            </div>
+          </div>
+
+          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+          <span class="span">
+            Or
+            <a routerLink="/register">register now!</a>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

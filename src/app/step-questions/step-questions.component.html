@@ -1,0 +1,101 @@
+<form nz-form [formGroup]="questionsForm" (ngSubmit)="onSubmit()" class="form-container">
+  <ng-container formArrayName="questions">
+    <div *ngFor="let question of getQuestions().controls; let i = index" [formGroupName]="i" class="question-group">
+      <nz-row nzGutter="[16, 16]">
+        <nz-col nzSpan="24">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="8" nzFor="title" nzRequired>Question title</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+              <input nz-input formControlName="title" placeholder="Enter question title" required />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+      </nz-row>
+
+      <nz-row nzGutter="[16, 16]">
+        <nz-col nzSpan="24">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="8" nzFor="type" nzRequired>Question type</nz-form-label>
+            <nz-form-control [nzSpan]="16">
+              <nz-select formControlName="type" (ngModelChange)="onTypeChange($event, i)">
+                <nz-option nzValue="number_min" nzLabel="Number(Min)"></nz-option>
+                <nz-option nzValue="number_max" nzLabel="Number(Max)"></nz-option>
+                <nz-option nzValue="boolean" nzLabel="Yes/No"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+      </nz-row>
+
+      <div *ngIf="question.get('type').value === 'number_min'">
+        <nz-row nzGutter="[16, 16]">
+          <nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="8" nzFor="minValue" nzRequired>Minimum value</nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <input nz-input formControlName="minValue" placeholder="Enter minimum value" type="number" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+        </nz-row>
+      </div>
+
+      <div *ngIf="question.get('type').value === 'number_max'">
+        <nz-row nzGutter="[16, 16]">
+          <nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="8" nzFor="maxValue" nzRequired>Maximum value</nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                <input nz-input formControlName="maxValue" placeholder="Enter maximum value" type="number" />
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+        </nz-row>
+      </div>
+
+      <div *ngIf="question.get('type').value === 'boolean'">
+        <nz-row nzGutter="[16, 16]">
+          <nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="8">Boolean value</nz-form-label>
+              <nz-form-control [nzSpan]="16">
+                  <nz-radio-group formControlName="booleanValue">
+                    <label nz-radio nzValue="true">
+                      <input type="radio" formControlName="booleanValue" value="true" /> Yes
+                    </label>
+                    <label nz-radio nzValue="false">
+                      <input type="radio" formControlName="booleanValue" value="false" /> No
+                    </label>
+                  </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+        </nz-row>
+      </div>
+
+      <nz-row nzGutter="[16, 16]">
+        <nz-col nzSpan="24" class="text-center">
+          <button type="button" nz-button nzType="dashed" nzDanger class="dynamic-delete-button" (click)="removeQuestion(i)">
+            <span nz-icon nzType="minus"></span>
+            Remove field
+          </button>
+        </nz-col>
+      </nz-row>
+    </div>
+  </ng-container>
+
+  <nz-row [nzGutter]="[16, 16]">
+    <nz-col nzSpan="24" class="text-center">
+      <button type="button" nz-button nzType="dashed" class="add-button" (click)="addQuestion()">
+        <span nz-icon nzType="plus"></span>
+        Add field
+      </button>
+    </nz-col>
+  </nz-row>
+
+  <nz-row nzGutter="[16, 16]" nzAlign="bottom" nzJustify="end">
+    <nz-col nzSpan="24" class="text-center">
+      <button type="submit" nz-button nzType="primary" class="submit-button">Submit</button>
+    </nz-col>
+  </nz-row>
+</form>

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { AuthService } from '../services/auth.service';
-import { error } from '@ant-design/icons-angular';
 
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-user-form',
@@ -14,26 +12,43 @@ import { Router, ActivatedRoute} from '@angular/router';
   styleUrls: ['./register-user-form.component.css']
 })
 export class RegisterUserFormComponent implements OnInit {
+
   validateForm!: UntypedFormGroup;
+
   // captchaTooltipIcon: NzFormTooltipIcon = {
   //   type: 'info-circle',
   //   theme: 'twotone'
   // };
+
+  constructor(
+    private fb: UntypedFormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+      this.validateForm = this.fb.group({
+        email: [null, [Validators.email, Validators.required]],
+        firstname: [null, [Validators.required]],
+        lastname: [null, [Validators.required]],
+        password: [null, [Validators.required]],
+        checkPassword: [null, [Validators.required, this.confirmationValidator]],
+        // captcha: [null, [Validators.required]],
+        // agree: [false]
+      })
+  }
+
+  ngOnInit(): void {
+   
+  }
+
   submitForm(): void {
     if (this.validateForm.valid) {
-      this.authService.register(this.validateForm.value).subscribe(
+      this.authService.registerCandidate(this.validateForm.value).subscribe(
         {
           next: (data) => {
-            console.log(data);
-            this.router.navigateByUrl("/login").then(() => {
-              console.log('login');
-
-            }).catch((res) => {
-              console.log(res);
-            })
+            this.router.navigateByUrl("/login")
           },
           error(err) {
-              console.log(err);
+            console.log(err.message);
           },
         }
       )
@@ -48,7 +63,6 @@ export class RegisterUserFormComponent implements OnInit {
   }
 
   updateConfirmValidator(): void {
-
     /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls['checkPassword'].updateValueAndValidity());
   }
@@ -64,26 +78,5 @@ export class RegisterUserFormComponent implements OnInit {
 
   getCaptcha(e: MouseEvent): void {
     e.preventDefault();
-  }
-
-  constructor(
-    private fb: UntypedFormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      role: [null, [Validators.required]]
-      // phoneNumberPrefix: ['+216'],
-      // phoneNumber: [null, [Validators.required]],
-      // website: [null, [Validators.required]],
-      // captcha: [null, [Validators.required]],
-      // agree: [false]
-    });
   }
 }
