@@ -23,7 +23,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NzEmptyComponent } from './nz-empty/nz-empty.component'
 import { JwtInterceptor } from './auth.interceptor';
-import { JobDetailsComponent } from './job-details/job-details.component';
 import { DropDowNmenuComponent } from './drop-dow-nmenu/drop-dow-nmenu.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -43,7 +42,6 @@ registerLocaleData(en);
     UpdateUserFormComponent,
     WelcomeComponent,
     LogoutComponent,
-    JobDetailsComponent,
     DropDowNmenuComponent,
     AddUserFormComponent,
     NzEmptyComponent,

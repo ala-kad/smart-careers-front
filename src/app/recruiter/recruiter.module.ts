@@ -13,7 +13,7 @@ import { JobDetailsFormComponent } from './job-details-form/job-details-form.com
 import { StepTwoJobFormComponent } from './step-two-job-form/step-two-job-form.component';
 import { StepQuestionsComponent } from './step-questions/step-questions.component';
 import { JobReviewFormComponent } from './job-review-form/job-review-form.component';
-
+import { JobDetailsComponent } from './job-details/job-details.component';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import { JobReviewFormComponent } from './job-review-form/job-review-form.compon
     JobDetailsFormComponent,
     StepTwoJobFormComponent,
     StepQuestionsComponent,
-    JobReviewFormComponent
+    JobReviewFormComponent,
+    JobDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormContainerComponent } from './form-container/form-container.component';
 import { JobsListingComponent } from './jobs-listing/jobs-listing.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
 import { RecruiterComponent } from './recruiter.component';
 
 const routes: Routes = [
@@ -14,6 +15,13 @@ const routes: Routes = [
         component: JobsListingComponent,
         data: {
           breadcrumb: 'Jobs List'
+        }
+      },
+      {
+        path: 'jobs/:id',
+        component: JobDetailsComponent,
+        data: {
+          breadcrumb: 'Job Details'
         }
       },
       {

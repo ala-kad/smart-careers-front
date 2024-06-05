@@ -10,7 +10,7 @@ import { UsersListingComponent } from './users-listing/users-listing.component';
 import { JobsListingComponent } from './recruiter/jobs-listing/jobs-listing.component';
 
 import { AuthGuard } from './auth.guard';
-import { JobDetailsComponent } from './job-details/job-details.component';
+import { JobDetailsComponent } from './recruiter/job-details/job-details.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 
 const routes: Routes = [
@@ -53,19 +53,6 @@ const routes: Routes = [
         data: {
           breadcrumb: 'User Edit'
         },
-      },
-      {
-        path: 'jobs', component: JobsListingComponent,
-        data: {
-          breadcrumb: 'Jobs List'
-        }
-      },
-     
-      {
-        path: 'jobs/:id', component: JobDetailsComponent,
-        data: {
-          breadcrumb: 'Jobs Details'
-        }
       },
       {
         path: 'candidate',
