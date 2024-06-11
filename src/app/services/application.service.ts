@@ -44,4 +44,10 @@ export class ApplicationService {
     params = params.append('candidateId', candidateId);
     return this.http.get(`http://localhost:3000/applications/check-if-applied`, { params: params });
   }
+
+  getApplicationsByJobId(jobId: any) { 
+    let params = new HttpParams() ; 
+    params = params.append('jobId', jobId);
+    return this.http.get(`http://localhost:3000/applications/list-applications`, { params: params })
+  }
 }
