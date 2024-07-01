@@ -1,0 +1,40 @@
+.user-add-form {
+  padding: 24px;  /* Padding for spacing inside the form */
+  max-width: 600px; /* Limit form width */
+  width: 100%;
+  margin: auto; /* Center form horizontally */
+  background-color: #f0f0f0; /* Gray background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for depth */
+  border: 1px solid #ccc;    /* Bordered outline */
+  border-radius: 8px;    
+}
+
+nz-form-item {
+  margin-bottom: 16px; /* Bottom margin for form items */
+}
+
+nz-form-label {
+  font-weight: normal; /* Normal font weight for labels */
+}
+
+nz-form-control {
+  width: 100%; /* Full width for form controls */
+}
+
+button[nz-button] {
+  width: 100%; /* Full width for the submit button */
+  margin-top: 16px; /* Top margin for the button */
+}
+
+@media screen and (max-width: 768px) {
+  .user-add-form {
+    padding: 16px; /* Reduce padding for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .user-add-form {
+    padding: 12px; /* Further reduce padding for very small screens */
+  }
+}
+  
