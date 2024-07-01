@@ -39,19 +39,19 @@ const routes: Routes = [
       {
         path: 'users', component: UsersListingComponent,
         data: {
-          breadcrumb: 'Users List'
+          breadcrumb: 'Recruiter Listing'
         },
       },
       {
         path: 'users/add', component: AddUserFormComponent,
         data: {
-          breadcrumb: 'Users Add'
+          breadcrumb: 'Add Recruiter'
         },
       },
       {
         path: 'users/:id/edit', component: UpdateUserFormComponent,
         data: {
-          breadcrumb: 'User Edit'
+          breadcrumb: 'Recruiter Edit'
         },
       },
       {
