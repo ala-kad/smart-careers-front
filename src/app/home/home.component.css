@@ -1,0 +1,45 @@
+/* home.component.css */
+.header-container {
+    position: sticky;
+    width: 100%;
+    z-index: 1000;
+}
+
+nz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+nav ul {
+    background-color: transparent;
+}
+.logo { 
+    display: block;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.hero-container {
+    background: url('../../assets/images/hero_1.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.nz-input-group {
+    width: 100%;
+}
