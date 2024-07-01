@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { JobsService } from '../services/jobs.service';
+import { JobsService } from '../../services/jobs.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 

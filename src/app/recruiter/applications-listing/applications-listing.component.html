@@ -1,0 +1,23 @@
+<nz-table #basicTable [nzData]="applications">
+    <thead>
+        <tr>
+            <th *ngFor="let column of listOfColumns" [nzSortOrder]="column.sortOrder" [nzSortFn]="column.sortFn"
+                [nzSortDirections]="column.sortDirections" [nzFilterMultiple]="column.filterMultiple"
+                [nzFilters]="column.listOfFilter" [nzFilterFn]="column.filterFn">
+                {{ column.name }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data; let i = index">
+            <td> {{ data.candidateId.email }} </td>
+            <td> {{ data.appplicationDate | date: 'short' }} </td>
+            <td *ngIf="applicationValidities[i]">
+                <span nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></span>
+            </td>
+            <td *ngIf="!applicationValidities[i]">
+                <span nz-icon nzType="close-circle" nzTheme="twotone" [nzTwotoneColor]="'#bb2124'"></span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

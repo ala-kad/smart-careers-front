@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { UiInteractionsService } from '../services/ui-interactions.service';
-import { JobsService } from '../services/jobs.service';
+import { UiInteractionsService } from '../../services/ui-interactions.service';
+import { JobsService } from '../../services/jobs.service';
 
 import { JobDetailsFormComponent } from '../job-details-form/job-details-form.component';
 import { ActivatedRoute } from '@angular/router';

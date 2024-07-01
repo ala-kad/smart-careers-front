@@ -1,0 +1,8 @@
+.job-details-form { 
+    max-width:  800px; 
+    width: 100%;
+    margin: auto
+}
+nz-form-item { 
+    text-align: left 
+}

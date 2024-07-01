@@ -1,13 +1,32 @@
+.register-form {
+  background-color: #f0f0f0; /* Gray background */
+  border: 1px solid #ccc;    /* Bordered outline */
+  border-radius: 8px;        /* Rounded corners */
+  padding: 24px;             /* Padding for spacing */
+  max-width: 600px;          /* Limit form width */
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for depth */
+  margin: auto; /* Center form horizontally */
+}
 
-      [nz-form] {
-        max-width: 600px;
-      }
+.nz-form-item {
+  padding: 8px 0; /* Add padding to space inputs from container */
+}
 
-      .phone-select {
-        width: 70px;
-      }
+.register-area {
+  margin-bottom: 8px;
+}
 
-      .register-are {
-        margin-bottom: 8px;
-      }
-    
+@media screen and (max-width: 768px) {
+  .register-form {
+    padding: 16px; /* Reduce padding for smaller screens */
+    border-radius: 6px; /* Slightly reduce border radius */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .register-form {
+    padding: 12px; /* Further reduce padding for very small screens */
+    border-radius: 4px; /* Further reduce border radius */
+  }
+}

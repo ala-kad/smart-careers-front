@@ -1,7 +1,6 @@
-import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormArrayName, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationService } from 'src/app/services/application.service';
 
 import { JobsService } from 'src/app/services/jobs.service';
 

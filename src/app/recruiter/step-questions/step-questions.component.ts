@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
-import { QuestionService } from '../services/question.service';
+import { QuestionService } from '../../services/question.service';
 
 
 @Component({

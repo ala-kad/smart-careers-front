@@ -1,3 +1,13 @@
+.login-form {
+  background-color: #f0f0f0; /* Gray background */
+  border: 1px solid #ccc;    /* Bordered outline */
+  border-radius: 8px;        /* Rounded corners */
+  padding: 24px;             /* Padding for spacing */
+  max-width: 400px;          /* Limit form width */
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for depth */
+  margin: auto; /* Center form horizontally */
+}
 
 .login-form-margin {
   margin-bottom: 16px;
@@ -11,12 +21,16 @@
   width: 100%;
 }
 
-/* Media queries for responsive design */
 @media screen and (max-width: 768px) {
-  
+  .login-form {
+    padding: 16px; /* Reduce padding for smaller screens */
+    border-radius: 6px; /* Slightly reduce border radius */
+  }
 }
 
 @media screen and (max-width: 480px) {
- 
+  .login-form {
+    padding: 12px; /* Further reduce padding for very small screens */
+    border-radius: 4px; /* Further reduce border radius */
+  }
 }
-

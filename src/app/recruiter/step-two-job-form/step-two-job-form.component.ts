@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy, Input, OnChanges, SimpleChanges, AfterContentInit } from '@angular/core';
 import { Editor, Toolbar, toHTML  } from 'ngx-editor';
-import { JobsService } from '../services/jobs.service';
+import { JobsService } from '../../services/jobs.service';
 
 @Component({
   selector: 'app-step-two-job-form',
