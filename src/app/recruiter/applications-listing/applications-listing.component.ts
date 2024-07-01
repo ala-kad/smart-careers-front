@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 
 interface DataItem {
+  _id: string,
   candidateId: {
     firstname: string;
     email: string;
@@ -33,25 +34,21 @@ export class ApplicationsListingComponent implements OnInit{
   jobId: any;
   applications: any;
   isValid: boolean;
+  applicationValidities: boolean[] = [];
 
   listOfColumns: ColumnItem[] = [
     {
       name: 'Email',
-      sortOrder: null,
+      sortOrder: 'ascend',
       sortFn: (a: DataItem, b: DataItem) => a.candidateId.email.localeCompare(b.candidateId.email),
       sortDirections: ['ascend', 'descend', null],
       filterMultiple: false,
       listOfFilter: [],
       filterFn: null,
-      // listOfFilter: [
-      //   { text: 'Joe', value: 'Joe' },
-      //   { text: 'Jim', value: 'Jim', byDefault: true }
-      // ],
-      // filterFn: (list: string[], item: DataItem) => list.some(name => item.candidateId.firstname.indexOf(name) !== -1)
     },
     {
       name: 'Application Date',
-      sortOrder: 'descend',
+      sortOrder: 'ascend',
       sortFn: (a: DataItem, b: DataItem) => new Date(a.appplicationDate).getTime() - new Date(b.appplicationDate).getTime(),
       sortDirections: ['ascend', 'descend', null],
       listOfFilter: [],
@@ -60,16 +57,22 @@ export class ApplicationsListingComponent implements OnInit{
     },
     {
       name: 'Fit',
-      sortOrder: 'descend',
-      sortFn: (a: DataItem, b: DataItem) => new Date(a.appplicationDate).getTime() - new Date(b.appplicationDate).getTime(),
+      sortOrder: null,
+      sortFn: null,
       sortDirections: ['ascend', 'descend', null],
-      listOfFilter: [],
-      filterFn: null,
-      filterMultiple: false
+      filterMultiple: true,
+      listOfFilter: [
+        { text: 'Fit', value: true },
+        { text: 'Not a fit', value: false }
+      ],
+      filterFn: (filterValues: boolean[], item: DataItem) => {
+        const applicationIndex = this.applications.findIndex(app => app._id === item._id);
+        if (applicationIndex === -1) return false; // handle case when application is not found
+        const isValid = this.applicationValidities[applicationIndex];
+        return filterValues.includes(isValid);
+      }
     }
   ];
-
-  applicationValidities: boolean[] = [];
   
   constructor(
     private as: ApplicationService,
@@ -85,67 +88,34 @@ export class ApplicationsListingComponent implements OnInit{
     this.fetchApplicationsByJobId();
   }
   
-  fetchApplicationsByJobId(): void { 
+  fetchApplicationsByJobId(): void {
     this.as.getApplicationsByJobId(this.jobId).subscribe({
       next: (data: any) => {
         console.log(data);
         this.applications = data;
-        this.applications.forEach(application => {
-          let valid = true; 
-          // let isValid = true; // Assume application is valid by default
-          application.responses.forEach(response => {        
-            console.log('Data', typeof(response.questionId.booleanValue));
-
+        this.applicationValidities = this.applications.map(application => {
+          let valid = true;
+          application.responses.forEach(response => {
             let responseIsValid = false;
-            if(response.questionId.type === "number_min") {
-              responseIsValid = response.answer >= response.questionId.minValue ? true : false;
-              // console.log('Validity', this.isValid);
-              
-            }
-            else if(response.questionId.type === "number_max") {
-              responseIsValid = response.answer <= response.questionId.maxValue ? true : false;
-              // console.log('Validity', this.isValid);
-
-            }
-            else if(response.questionId.type === "boolean") {
-             
-              responseIsValid = response.answer === response.questionId.booleanValue ? true : false;
-              console.log('Boolean Validity', responseIsValid);
-
+            if (response.questionId.type === "number_min") {
+              responseIsValid = response.answer >= response.questionId.minValue;
+            } else if (response.questionId.type === "number_max") {
+              responseIsValid = response.answer <= response.questionId.maxValue;
+            } else if (response.questionId.type === "boolean") {
+              responseIsValid = response.answer === response.questionId.booleanValue;
             }
             if (!responseIsValid) {
-              valid = false; // If any response is invalid, the entire application is invalid
+              valid = false;
             }
-            // console.log(`Response "${response.questionId.title}" validity:`, responseIsValid);  
           });
-          // console.log('Overall application validity:', valid);
-          this.isValid = valid
-          this.applicationValidities.push(valid);
-          console.log('isValid:' ,this.isValid);
-          
+          return valid;
         });
       },
       error: (err) => {
-        console.log((err));
+        console.log(err);
       }
-    })
-  } 
-
+    });
+  }
 }
 
- // let responseIsValid = false; // Assume response is not valid by default
-              // if (response.questionId.type == 'boolean') {
-              //   responseIsValid = (application.answer == response.questionId.booleanValue);
-              //   console.log(`Response "${response.questionId.title}" validity:`, responseIsValid);
-              // } else if (response.questionId.type == 'number_min') { 
-              //   responseIsValid = (application.answer >= response.questionId.minValue);
-              //   console.log(`Response "${response.questionId.title}" validity:`, responseIsValid);
-
-              // } else if (response.questionId.type == 'number_max') { 
-              //   responseIsValid = (application.answer <= response.questionId.maxValue);
-              //   console.log(`Response "${response.questionId.title}" validity:`, responseIsValid);
-              // }
-              // console.log(`Response "${response.questionId.title}" validity:`, responseIsValid);
-              // isValid = isValid && responseIsValid;
-
-                        // console.log('Overall application validity:', isValid);
+ 
