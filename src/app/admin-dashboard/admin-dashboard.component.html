@@ -8,10 +8,6 @@
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="pie-chart"></span>
-        <span> <a (click)="navigateToJobs()"> Jobs </a></span>
-      </li>
-      <li nz-menu-item>
-        <span nz-icon nzType="pie-chart"></span>
         <span> <a [routerLink]="['./', 'recruiter']"> Recruiter </a></span>
       </li>
       <li nz-menu-item>
@@ -26,7 +22,7 @@
         (click)="isCollapsed = !isCollapsed"></span>
       <div class="btn-wrapper" nz-dropdown [nzDropdownMenu]="menu">
         <nz-avatar nzIcon="user" [nzAlt]="userPayload.username"></nz-avatar>
-        <span>{{userPayload.email}}</span>
+        <!-- <span>{{userPayload.email}}</span> -->
       </div>
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>

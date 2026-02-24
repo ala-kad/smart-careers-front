@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
                 (err) => { console.log(err); }
               );
           }else { 
-            this.router.navigate(['dashboard', 'jobs']).then(
+            this.router.navigate(['dashboard', 'recruiter']).then(
               () => { console.log('recruiter') }
               ).catch(
                 (err) => { console.log(err); }
