@@ -1,8 +1,7 @@
 <nz-steps [nzCurrent]="current">
   <nz-step nzTitle="Personal infos"></nz-step>
   <nz-step nzTitle="Preselection questions"></nz-step>
-  <nz-step></nz-step>
-  <nz-step></nz-step>
+  
 </nz-steps>
 
 <div class="steps-content">
@@ -16,11 +15,11 @@
     <span>Previous</span>
   </button>
 
-  <button nz-button nzType="default" type="submit" (click)="next()" *ngIf="current  < 3" >
+  <button nz-button nzType="default" type="submit" (click)="next()" *ngIf="current  < 1" >
     <span>Next</span>
   </button>
 
-  <button nz-button nzType="primary" (click)="done()" *ngIf="current === 3">
+  <button nz-button nzType="primary" (click)="done()" *ngIf="current === 1">
     <span>Submit</span>
   </button>
 </div>

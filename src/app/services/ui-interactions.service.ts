@@ -80,7 +80,7 @@ export class UiInteractionsService {
       nzOkText: 'Ok',
       nzOnOk: () => {
         modalRef.destroy()
-        this.router.navigate(['dashboard','jobs'])
+        this.router.navigate(['dashboard','recruiter'])
       }
     })
   }

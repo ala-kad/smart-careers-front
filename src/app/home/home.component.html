@@ -1,1 +1,55 @@
+<!-- home.component.html -->
+<section style="margin-bottom: 24px;">
+    <nz-layout>
+        <div class="header-container">
+            <nz-header>
+                <a class="logo" routerLink="/home">
+                    <h6 nz-typography style="color: white;">Smart</h6>
+                    <h6 nz-typography style="color: orange;">Careers</h6>
+                </a>
+                <nav>
+                    <ul nz-menu nzMode="horizontal">
+                        <li nz-menu-item>
+                            <a routerLink="/home">
+                                Home
+                            </a>
+                        </li>
+                        <li nz-menu-item>
+                            <a href="#job-listing">
+                                Job Listing
+                            </a>
+                        </li>
+                        <li nz-menu-item>
+                            <a routerLink="/register">
+                                Sign In
+                            </a>
+                        </li>
+                        <li nz-menu-item>
+                            <a routerLink="/login">
+                                Log In
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </nz-header>
+        </div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Find Your Dream Job</h1>
+                <nz-input-group nzSize="large" [nzSuffix]="suffixIconSearch">
+                    <input type="text" nz-input placeholder="Search jobs by title or date" />
+                </nz-input-group>
+                <ng-template #suffixIconSearch>
+                    <i nz-icon nzType="search"></i>
+                </ng-template>
+            </div>
+        </div>
+    </nz-layout>
+</section>
 <router-outlet></router-outlet>
+<footer style="height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px; background-color: orange;">
+    <p nz-typography style="color: #fff;"> All rights are reserved @ Ala Kaddechi</p>
+    <br/>
+    <p nz-typography style="color: #fff;"> Smart Careers @ 2024.</p>
+</footer>

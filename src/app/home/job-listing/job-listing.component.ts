@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { JobsService } from '../../services/jobs.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class JobListingComponent implements OnInit{
 
   constructor(
     private jobService: JobsService,
+    private router: Router,
+    private ar: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +32,17 @@ export class JobListingComponent implements OnInit{
       error: (err) => {
         console.log(err);
       }
+    })
+  }
+
+  navigateToJobDetails(id: any) { 
+    this.router.navigate(['./', 'jobs', id], { relativeTo: this.ar }).then(
+      (val) => { 
+        console.log(val);
+        
+      },
+      
+    ).catch((err) => { console.log(err);
     })
   }
 

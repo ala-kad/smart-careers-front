@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { JobsService } from '../services/jobs.service';
-import { UiInteractionsService } from '../services/ui-interactions.service';
-import { AuthService } from '../services/auth.service';
+import { JobsService } from '../../services/jobs.service';
+import { UiInteractionsService } from '../../services/ui-interactions.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-jobs-listing',
